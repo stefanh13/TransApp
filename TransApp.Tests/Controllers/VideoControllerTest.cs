@@ -36,5 +36,16 @@ namespace TransApp.Tests.Controllers
             Assert.IsTrue(model.Count == 1);
         }
 
+        [TestMethod]
+        public void TestAddingManyVideosInTheTable()
+        {
+            // Arrange:
+            List<Video> videos = new List<Video>();
+
+            // Act:
+
+            // Assert:
+        }
+
     }
 }
