@@ -84,7 +84,7 @@ namespace TransApp.Controllers
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("FrontPage", "Video");////////////
+                    return RedirectToAction("FrontPage", "Video");
                 }
                 else
                 {
