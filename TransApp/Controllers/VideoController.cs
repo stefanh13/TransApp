@@ -11,11 +11,12 @@ namespace TransApp.Controllers
     {
 
         private readonly IVideoRepository repo;
-
+        /*
         public VideoController(IVideoRepository rep)
         {
             repo = rep;
         }
+         */
         
         
         //

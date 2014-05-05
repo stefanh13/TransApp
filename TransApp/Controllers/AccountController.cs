@@ -78,12 +78,13 @@ namespace TransApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { UserName = model.UserName,
+                email = model.email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("FrontPage", "Video");
                 }
                 else
                 {
@@ -290,7 +291,7 @@ namespace TransApp.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("FrontPage", "Video");
         }
 
         //
@@ -372,7 +373,7 @@ namespace TransApp.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("FrontPage", "Video");
             }
         }
 
