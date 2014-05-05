@@ -161,5 +161,11 @@ namespace TransApp.Tests.Controllers
                 Assert.IsTrue(model[i].translationTime >= model[i + 1].translationTime);
             }
         }
+
+        [TestMethod]
+        public void TestIfVideosAreOrderedByName()
+        {
+
+        }
     }
 }
