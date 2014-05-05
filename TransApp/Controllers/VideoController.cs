@@ -45,5 +45,13 @@ namespace TransApp.Controllers
             
             return View(model);
         }
+
+        public ActionResult OrderByName()
+        {
+            var model = (from t in repo.GetVideos()
+                         orderby t.videoName ascending
+                         select t).Take(10);
+            return View(model);
+        }
 	}
 }
