@@ -86,6 +86,26 @@ namespace TransApp.Tests.Controllers
 
             var mockRepo = new Mocks.MockTranslationRepository(translations);
             var controller = new VideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetTranslations();
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
+
+            Assert.IsTrue(model.Count == 10);
+        }
+
+        [TestMethod]
+        public void TryToGetLessThan10Translations()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+
+            // Act:
+            // Assert:
         }
 
     }

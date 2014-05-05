@@ -36,5 +36,13 @@ namespace TransApp.Controllers
                         select t;
             return View(model);
         }
+
+        public ActionResult GetTranslations()
+        {
+            var model = (from t in repo2.GetTranslations()
+                         select t).Take(10);
+            
+            return View(model);
+        }
 	}
 }
