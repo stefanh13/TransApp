@@ -10,7 +10,7 @@ namespace TransApp.Controllers
     {
         //
         // GET: /Video/
-        public ActionResult Index()
+        public ActionResult FrontPage()
         {
             return View();
         }
