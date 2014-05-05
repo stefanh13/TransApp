@@ -24,5 +24,12 @@ namespace TransApp.Controllers
         {
             return View();
         }
+
+        public ActionResult AddTranslation()
+        {
+            var model = from t in repo.GetVideos()
+                        select t;
+            return View(model);
+        }
 	}
 }
