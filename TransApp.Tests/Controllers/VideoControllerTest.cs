@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TransApp.Models;
 using System.Collections.Generic;
 using TransApp.Controllers;
+using System.Web.Mvc;
+using System.Linq;
 
 namespace TransApp.Tests.Controllers
 {
@@ -23,9 +25,15 @@ namespace TransApp.Tests.Controllers
 
             var mockRepo = new Mocks.MockVideoRepository(video);
             var controller = new VideoController(mockRepo);
+            
             // Act:
+            var result = controller.AddTranslation();
 
             // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+            Assert.IsTrue(model.Count == 1);
         }
+
     }
 }
