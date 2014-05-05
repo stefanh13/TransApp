@@ -128,7 +128,7 @@ namespace TransApp.Tests.Controllers
         }
 
         [TestMethod]
-        public void TestIfOrderedByDateAndCheckIfExactly10()
+        public void TestIfTranslationsAreOrderedByDateAndCheckIfExactly10()
         {
             // Arrange:
             List<Translation> translations = new List<Translation>();
@@ -163,7 +163,7 @@ namespace TransApp.Tests.Controllers
         }
 
         [TestMethod]
-        public void TestIfVideosAreOrderedByName()
+        public void TestIfVideosAreOrderedByNameDescending()
         {
             List<Video> videos = new List<Video>();
 
@@ -187,11 +187,45 @@ namespace TransApp.Tests.Controllers
             var viewResult = (ViewResult)result;
             List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
 
-            for(int i = 0; i < model.Count -1; i++)
+            for(int i = 0; i < model.Count - 1; i++)
+            {
+                int c = string.Compare(model[i].videoName, model[i + 1].videoName);
+                Assert.IsTrue(c >= 0);
+            }
+        }
+
+        [TestMethod]
+        public void TestIfVideosAreOrderedByNameAscending()
+        {
+            List<Video> videos = new List<Video>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                videos.Add(new Video
+                {
+                    vID = i,
+                    catID = i,
+                    videoName = "Video " + (i % 3).ToString()
+                });
+            }
+
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new VideoController(mockRepo);
+
+            // Act:
+            var result = controller.OrderByName();
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            for (int i = 0; i < model.Count - 1; i++)
             {
                 int c = string.Compare(model[i].videoName, model[i + 1].videoName);
                 Assert.IsTrue(c <= 0);
-            }
+            }        
         }
+
+
     }
 }

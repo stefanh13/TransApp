@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TransApp.Models;
 using TransApp.Repositories;
 
 namespace TransApp.Controllers
@@ -48,10 +49,37 @@ namespace TransApp.Controllers
 
         public ActionResult OrderByName()
         {
-            var model = (from t in repo.GetVideos()
-                         orderby t.videoName ascending
-                         select t).Take(10);
-            return View(model);
+            if(IsNameAscending())
+            {
+                var model = (from t in repo.GetVideos()
+                             orderby t.videoName descending
+                             select t).Take(10);
+                return View(model);
+            }
+            else
+            {
+                var model = (from t in repo.GetVideos()
+                             orderby t.videoName ascending
+                             select t).Take(10);
+                return View(model);
+            }
+            
+        }
+
+        public bool IsNameAscending()
+        {
+            var videos = (repo.GetVideos()).ToList();
+
+            for(int i = 0; i < videos.Count - 1; i++)
+            {
+                int c = string.Compare(videos[i].videoName, videos[i + 1].videoName);
+                if(c > 0)
+                {
+                    return false;
+                }
+            }
+            
+            return true;
         }
 	}
 }
