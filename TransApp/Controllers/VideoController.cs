@@ -40,6 +40,7 @@ namespace TransApp.Controllers
         public ActionResult GetTranslations()
         {
             var model = (from t in repo2.GetTranslations()
+                         orderby t.translationTime descending
                          select t).Take(10);
             
             return View(model);

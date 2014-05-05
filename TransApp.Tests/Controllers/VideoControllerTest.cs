@@ -103,10 +103,63 @@ namespace TransApp.Tests.Controllers
             // Arrange:
             List<Translation> translations = new List<Translation>();
 
-
+            for(int i = 0; i < 7; i++)
+            {
+                translations.Add(new Translation
+                {
+                    tID = i,
+                    vID = i,
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English",
+                    translationText = "Lorem ipsum",
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new VideoController(mockRepo);
             // Act:
+            var result = controller.GetTranslations();
+            
             // Assert:
+            var viewResult = (ViewResult)result;
+            List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
+
+            Assert.IsTrue(model.Count == 7);
         }
 
+        [TestMethod]
+        public void TestIfOrderedByDateAndCheckIfExactly10()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                translations.Add(new Translation
+                {
+                    tID = i,
+                    vID = i,
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English",
+                    translationText = "Lorem ipsum",
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new VideoController(mockRepo);
+        
+            // Act:
+            var result = controller.GetTranslations();
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
+
+            Assert.IsTrue(model.Count == 10);
+            for(int i = 0; i < model.Count - 1; i++)
+            {
+                Assert.IsTrue(model[i].translationTime >= model[i + 1].translationTime);
+            }
+        }
     }
 }
