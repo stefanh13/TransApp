@@ -66,6 +66,25 @@ namespace TransApp.Controllers
             
         }
 
+        public ActionResult OrderByDate()
+        {
+            if(IsDateAscending())
+            {
+                var model = (from t in repo.GetVideos()
+                             orderby t.videoTime descending
+                             select t).Take(10);
+                return View(model);
+            }
+            else
+            {
+                var model = (from t in repo.GetVideos()
+                             orderby t.videoTime ascending
+                             select t).Take(10);
+                return View(model);
+            }
+            
+        }
+
         public bool IsNameAscending()
         {
             var videos = (repo.GetVideos()).ToList();
