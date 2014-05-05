@@ -32,6 +32,7 @@ namespace TransApp.Tests.Controllers
             // Assert:
             var viewResult = (ViewResult)result;
             List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+            
             Assert.IsTrue(model.Count == 1);
         }
 
