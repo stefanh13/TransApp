@@ -65,5 +65,28 @@ namespace TransApp.Tests.Controllers
             Assert.IsTrue(model.Count == 10);
         }
 
+        [TestMethod]
+        public void TryToGetMoreThan10Translations()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for(int i = 0; i < 13; i++)
+            {
+                translations.Add(new Translation
+                {
+                    tID = i,
+                    vID = i,
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English",
+                    translationText = "Lorem ipsum",
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new VideoController(mockRepo);
+        }
+
     }
 }
