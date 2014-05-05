@@ -65,20 +65,19 @@ namespace TransApp.Controllers
             }
             
         }
-
         public ActionResult OrderByDate()
         {
-            if(IsDateAscending())
+            if(IsDateDescending())
             {
                 var model = (from t in repo.GetVideos()
-                             orderby t.videoTime descending
+                             orderby t.videoTime ascending
                              select t).Take(10);
                 return View(model);
             }
             else
             {
                 var model = (from t in repo.GetVideos()
-                             orderby t.videoTime ascending
+                             orderby t.videoTime descending
                              select t).Take(10);
                 return View(model);
             }
@@ -101,13 +100,13 @@ namespace TransApp.Controllers
             return true;
         }
 
-        public bool IsDateAscending()
+        public bool IsDateDescending()
         {
             var videos = (repo.GetVideos()).ToList();
 
             for (int i = 0; i < videos.Count - 1; i++)
             {
-                if(videos[i].videoTime <= videos[i + 1].videoTime)
+                if(videos[i].videoTime >= videos[i + 1].videoTime)
                 {
                     return false;
                 }

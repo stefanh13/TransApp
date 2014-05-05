@@ -235,13 +235,14 @@ namespace TransApp.Tests.Controllers
             List<Video> videos = new List<Video>();
 
             // Send in descending list
-            for (int i = 10; i < 0; i--)
+            for (int i = 10; i > 0; i--)
             {
                 videos.Add(new Video
                 {
                     vID = i,
                     catID = i,
-                    videoName = "Video " + (i).ToString()
+                    videoName = "Video " + (i).ToString(),
+                    videoTime = DateTime.Now.AddDays(i)
                 });
             }
 
@@ -259,6 +260,39 @@ namespace TransApp.Tests.Controllers
             {
                 int c = string.Compare(model[i].videoName, model[i + 1].videoName);
                 Assert.IsTrue(c <= 0);
+            }
+        }
+
+        [TestMethod]
+        public void TestIfVideosAreOrderedByDateDescending()
+        {
+            List<Video> videos = new List<Video>();
+
+            // Send in ascending list
+            for (int i = 10; i > 0; i--)
+            {
+                videos.Add(new Video
+                {
+                    vID = i,
+                    catID = i,
+                    videoName = "Video " + i.ToString(),
+                    videoTime = DateTime.Now.AddDays(i)
+                });
+            }
+
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new VideoController(mockRepo);
+
+            // Act:
+            var result = controller.OrderByDate();
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            for (int i = 0; i < model.Count - 1; i++)
+            {
+                Assert.IsTrue(model[i].videoTime >= model[i + 1].videoTime);
             }
         }
     }
