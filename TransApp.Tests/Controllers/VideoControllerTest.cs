@@ -4,12 +4,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TransApp.Tests.Controllers
 {
     [TestClass]
-    public class VideoControllerTest
+    public class UnitTest1
     {
         [TestMethod]
         public void TestMethod1()
         {
-        
         }
     }
 }
