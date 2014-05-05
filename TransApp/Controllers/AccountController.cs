@@ -83,7 +83,7 @@ namespace TransApp.Controllers
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("FrontPage", "Video");////////////
                 }
                 else
                 {
@@ -290,7 +290,7 @@ namespace TransApp.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("FrontPage", "Video");
         }
 
         //
@@ -372,7 +372,7 @@ namespace TransApp.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("FrontPage", "Video");
             }
         }
 
