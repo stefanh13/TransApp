@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransApp.Models;
 using TransApp.Repositories;
 
 namespace TransApp.Tests.Mocks
 {
-    class MockTranslationRepository : ITranslationRepository
+    class MockVideoRepository : IVideoRepository
     {
 
+        private readonly List<Video> video;
+        
         public IQueryable<Models.Translation> GetTranslations()
         {
             throw new NotImplementedException();

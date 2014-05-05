@@ -7,8 +7,8 @@ using TransApp.Models;
 
 namespace TransApp.Repositories
 {
-    public interface ITranslationRepository
+    public interface IVideoRepository
     {
-        IQueryable<Translation> GetTranslations();
+        IQueryable<Video> GetVideos();
     }
 }
