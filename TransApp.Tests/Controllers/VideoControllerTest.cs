@@ -42,9 +42,27 @@ namespace TransApp.Tests.Controllers
             // Arrange:
             List<Video> videos = new List<Video>();
 
-            // Act:
+            for(int i = 0; i < 10; i++)
+            {
+                videos.Add(new Video
+                {
+                    vID = i,
+                    catID = i,
+                    videoName = "GrumpyCat"
+                });
+            }
+            
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new VideoController(mockRepo);
 
+            // Act:
+            var result = controller.AddTranslation();
+            
             // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            Assert.IsTrue(model.Count == 10);
         }
 
     }
