@@ -81,5 +81,20 @@ namespace TransApp.Controllers
             
             return true;
         }
+
+        public bool IsDateAscending()
+        {
+            var videos = (repo.GetVideos()).ToList();
+
+            for (int i = 0; i < videos.Count - 1; i++)
+            {
+                if(videos[i].videoTime <= videos[i + 1].videoTime)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 	}
 }

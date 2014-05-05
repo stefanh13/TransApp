@@ -10,6 +10,7 @@ namespace TransApp.Models
         public int vID { get; set; }
         public int catID { get; set; }
         public string videoName { get; set; }
+        public DateTime videoTime { get; set; }
 
     }
 }
