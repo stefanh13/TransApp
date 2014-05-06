@@ -459,7 +459,7 @@ namespace TransApp.Tests.Controllers
                 {
                     vID = i,
                     catID = i,
-                    videoName = "Hackers" + i,
+                    videoName = "Hackers" + i.ToString(),
                     videoTime = DateTime.Now.AddDays(i)
                 });
             }
@@ -474,6 +474,66 @@ namespace TransApp.Tests.Controllers
             List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
 
             Assert.IsTrue(model[model.Count - 1].videoName == "Hackers2");
+        }
+        
+        [TestMethod]
+        public void TestWhatVideoSearchReturnsWhenVideoIsNotInTheList()
+        {
+            List<Video> videos = new List<Video>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                videos.Add(new Video
+                {
+                    vID = i,
+                    catID = i,
+                    videoName = "Hackers" + i.ToString(),
+                    videoTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new VideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetVideoBySearchName("The Matrix");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            Assert.IsTrue(model.Count == 0);
+        
+        }
+
+        [TestMethod]
+        public void TestIfSearchReturnsAllVideosThatContainTheStringAndTestUpperAndLowerCase()
+        {
+            List<Video> videos = new List<Video>();
+
+            for (int i = 0; i < 20; i++)
+            {
+                videos.Add(new Video
+                {
+                    vID = i,
+                    catID = i,
+                    videoName = "Hackers" + i.ToString(),
+                    videoTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new VideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetVideoBySearchName("hackers");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+           for(int i = 0; i < model.Count; i++)
+           {
+               Assert.IsTrue(model[i].videoName.Contains("Hackers"));
+           }
         }
     }
 }

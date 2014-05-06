@@ -14,7 +14,7 @@ namespace TransApp.Controllers
         private readonly IVideoRepository repo;
         private readonly ITranslationRepository repo2;
 
-        public VideoController(IVideoRepository rep)
+        /*public VideoController(IVideoRepository rep)
         {
             repo = rep;
         }
@@ -22,7 +22,7 @@ namespace TransApp.Controllers
         public VideoController(ITranslationRepository reps)
         {
             repo2 = reps;
-        }
+        }*/
         
         //
         // GET: /Video/
@@ -137,12 +137,16 @@ namespace TransApp.Controllers
 
         public ActionResult GetVideoBySearchName(string searchString)
         {
+            searchString = searchString.ToLower();
+            
             var model = (from t in repo.GetVideos()
-                         where t.videoName == searchString
-                         select t);
+                         where t.videoName.ToLower().Contains(searchString)
+                         orderby t.videoTime descending
+                         select t).Take(10);
 
             return View(model);
 
         }
+        
 	}
 }
