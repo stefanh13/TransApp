@@ -114,5 +114,35 @@ namespace TransApp.Controllers
 
             return true;
         }
+
+        public ActionResult GetVideoByCategoryId(int id)
+        {
+            var model = (from t in repo.GetVideos()
+                         where t.catID == id
+                         orderby t.videoTime descending
+                         select t).Take(10);
+
+            return View(model);
+        }
+
+        public ActionResult GetTranslationsByVideoId(int id)
+        {
+            var model = (from t in repo2.GetTranslations()
+                         where t.vID == id
+                         orderby t.translationTime descending
+                         select t).Take(10);
+
+            return View(model);
+        }
+
+        public ActionResult GetVideoBySearchName(string searchString)
+        {
+            var model = (from t in repo.GetVideos()
+                         where t.videoName == searchString
+                         select t);
+
+            return View(model);
+
+        }
 	}
 }

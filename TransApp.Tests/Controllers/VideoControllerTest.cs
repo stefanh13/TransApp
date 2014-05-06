@@ -363,5 +363,117 @@ namespace TransApp.Tests.Controllers
                 Assert.IsTrue(model[i].videoTime <= model[i + 1].videoTime);
             }
         }
+
+        [TestMethod]
+        public void TestIfVideosAreCategorizedByCategory()
+        {
+            List<Video> videos = new List<Video>();
+            int categoryCounter = 0;
+
+            for(int i = 0; i < 20; i++)
+            {
+                videos.Add(new Video
+                {
+                    vID = i,
+                    catID = i % 4,
+                    videoName = "Hackers",
+                    videoTime = DateTime.Now.AddDays(i)
+                });
+
+                if((i % 4) == 2)
+                {
+                    categoryCounter++;
+                }
+            }
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new VideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetVideoByCategoryId(2);
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            for (int i = 0; i < model.Count - 1; i++)
+            {
+                Assert.IsTrue(model[i].videoTime >= model[i + 1].videoTime);
+                Assert.IsTrue(model[i].catID == 2);
+            }
+
+            Assert.IsTrue(model[model.Count - 1].catID == 2);
+            Assert.IsTrue(model.Count == categoryCounter);
+        }
+
+        [TestMethod]
+        public void TestGettingTranslationsByVideoId()
+        {
+            List<Translation> translations = new List<Translation>();
+            int translationCounter = 0;
+
+            for(int i = 0; i < 20; i++)
+            {
+                translations.Add(new Translation
+                {
+                    tID = i,
+                    vID = i % 4,
+                    translationDescription = "Lorem ipsum",
+                    translationText = "Lorem ipsum",
+                    translationLanguage = "English",
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+
+                if((i % 4) == 2)
+                {
+                    translationCounter++;
+                }
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new VideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetTranslationsByVideoId(2);
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
+
+            for (int i = 0; i < model.Count - 1; i++)
+            {
+                Assert.IsTrue(model[i].translationTime >= model[i + 1].translationTime);
+                Assert.IsTrue(model[i].vID == 2);
+            }
+
+            Assert.IsTrue(model[model.Count - 1].vID == 2);
+            Assert.IsTrue(model.Count == translationCounter);
+        }
+
+        [TestMethod]
+        public void TestIfVideoSearchSearchesCorrectly()
+        {
+            List<Video> videos = new List<Video>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                videos.Add(new Video
+                {
+                    vID = i,
+                    catID = i,
+                    videoName = "Hackers" + i,
+                    videoTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new VideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetVideoBySearchName("Hackers2");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            Assert.IsTrue(model[model.Count - 1].videoName == "Hackers2");
+        }
     }
 }
