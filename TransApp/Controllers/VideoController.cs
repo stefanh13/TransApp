@@ -11,8 +11,8 @@ namespace TransApp.Controllers
     public class VideoController : Controller
     {
 
-        private readonly IVideoRepository repo;
-        private readonly ITranslationRepository repo2;
+        /*private readonly IVideoRepository repo;
+        private readonly ITranslationRepository repo2;*/
 
         /*public VideoController(IVideoRepository rep)
         {
@@ -31,7 +31,7 @@ namespace TransApp.Controllers
             return View();
         }
 
-        public ActionResult AddTranslation()
+        /*public ActionResult AddTranslation()
         {
             var model = from t in repo.GetVideos()
                         select t;
@@ -146,7 +146,7 @@ namespace TransApp.Controllers
 
             return View(model);
 
-        }
+        }*/
         
 	}
 }
