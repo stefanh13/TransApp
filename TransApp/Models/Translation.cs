@@ -14,5 +14,10 @@ namespace TransApp.Models
         public string translationText { get; set; }
         public string translationLanguage { get; set; }
         public DateTime translationTime { get; set; }
+
+         public Translation()
+         {
+                translationTime = DateTime.Now;
+         }
     }
 }

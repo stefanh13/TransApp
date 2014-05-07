@@ -66,6 +66,16 @@ namespace TransApp.Controllers
             return View(translation);
         }
 
+        public void AddVideo(Translation translation)
+        {
+            Video newVideo = new Video();
+            newVideo.videoName = translation.translationName;
+            newVideo.videoTime = translation.translationTime;
+            newVideo.catID = 1;
+
+            //videoRepo.Add(newVideo);
+        }
+
         /*public ActionResult GetTranslations()
         {
             var model = (from t in repo2.GetTranslations()

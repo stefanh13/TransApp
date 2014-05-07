@@ -17,5 +17,16 @@ namespace TransApp.Repositories
             return videoDb.videos;
         }
 
+        public void Add(Video v)
+        {
+            videoDb.videos.Add(v);
+            Save();
+        }
+
+        public void Save()
+        {
+            videoDb.SaveChanges();
+        }
+
     }
 }
