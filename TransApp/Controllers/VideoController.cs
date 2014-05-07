@@ -11,15 +11,15 @@ namespace TransApp.Controllers
     public class VideoController : Controller
     {
 
-        /*private readonly IVideoRepository repo;
-        private readonly ITranslationRepository repo2;*/
+        private readonly IVideoRepository repo;
+        /*private readonly ITranslationRepository repo2;*/
 
-        /*public VideoController(IVideoRepository rep)
+        public VideoController(IVideoRepository rep)
         {
             repo = rep;
         }
         
-        public VideoController(ITranslationRepository reps)
+        /*public VideoController(ITranslationRepository reps)
         {
             repo2 = reps;
         }*/
