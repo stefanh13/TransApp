@@ -6,7 +6,7 @@ using TransApp.Models;
 
 namespace TransApp.DAL
 {
-    public class UserRequestInitializer : System.Data.Entity.DropCreateDatabaseAlways<UserRequestContext>
+    public class UserRequestInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<UserRequestContext>
     {
         protected override void Seed(UserRequestContext context)
         {
