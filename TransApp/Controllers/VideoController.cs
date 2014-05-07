@@ -10,6 +10,7 @@ namespace TransApp.Controllers
 {
     public class VideoController : Controller
     {
+        VideoRepository videoRepo = new VideoRepository();
         
         //private readonly IVideoRepository repo;
         /*private readonly ITranslationRepository repo2;*/
@@ -147,6 +148,12 @@ namespace TransApp.Controllers
             return View(model);
 
         }*/
+
+        public ActionResult GetVideos()
+        {
+            var model = videoRepo.GetAllVideos();
+            return View(model);
+        }
         
 	}
 }
