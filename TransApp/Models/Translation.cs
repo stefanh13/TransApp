@@ -17,7 +17,7 @@ namespace TransApp.Models
 
          public Translation()
          {
-                translationTime = DateTime.Now;
+             translationTime = DateTime.Now;
          }
     }
 }

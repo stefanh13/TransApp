@@ -57,6 +57,8 @@ namespace TransApp.Controllers
                 {
                     translation.vID = item.ID;
                     item.videoTime = translation.translationTime;
+                    UpdateModel(item);
+                    videoRepo.UpdateVideoTime(item, translation.translationTime);
                     translationRepo.Add(translation);
                     return RedirectToAction("/GetVideos");
                 }
