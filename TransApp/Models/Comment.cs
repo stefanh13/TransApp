@@ -7,7 +7,7 @@ namespace TransApp.Models
 {
     public class Comment
     {
-        public int cID { get; set; }
+        public int ID { get; set; }
         public int uID { get; set; }
         public int tID { get; set; }
         public string commentText { get; set; }

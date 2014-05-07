@@ -164,6 +164,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserRequestController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="DAL\VideoContext.cs" />
+    <Compile Include="DAL\VideoInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -231,7 +233,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DAL\" />
     <Folder Include="Views\UserRequest\" />
   </ItemGroup>
   <ItemGroup>

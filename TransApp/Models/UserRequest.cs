@@ -7,7 +7,7 @@ namespace TransApp.Models
 {
     public class UserRequest
     {
-        public int urID { get; set; }
+        public int ID { get; set; }
         public int uID { get; set; }
         public string requestName { get; set; }
         public string requestText { get; set; }

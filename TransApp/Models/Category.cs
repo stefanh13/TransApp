@@ -7,7 +7,7 @@ namespace TransApp.Models
 {
     public class Category
     {
-        public int catID { get; set; }
+        public int ID { get; set; }
         public string categoryType { get; set; }
 
     }
