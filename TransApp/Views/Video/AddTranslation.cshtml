@@ -7,7 +7,7 @@
 <h2>AddTranslation</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -15,13 +15,20 @@
         <h4>Translation</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.vID, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.vID)
                 @Html.ValidationMessageFor(model => model.vID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.translationName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.translationName)
+                @Html.ValidationMessageFor(model => model.translationName)
             </div>
         </div>
 
@@ -59,7 +66,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>

@@ -43,6 +43,28 @@ namespace TransApp.Controllers
             return View(model);*/
         }
 
+        [HttpPost]
+        public ActionResult AddTranslation(Translation translation)
+        {
+            string transName = translation.translationName;
+
+            IEnumerable<Video> videoNames = videoRepo.GetAllVideos();
+
+            foreach(var item in videoNames)
+            {
+                if(transName == item.videoName)
+                {
+                    translation.vID = item.ID;
+                    //UpdateVideoTime();
+                    //translationRepo.Add(translation);
+                    return RedirectToAction("/Video/GetVideos");
+                }
+            }
+
+            //AddVideo(translation);
+            
+            return View(translation);
+        }
 
         /*public ActionResult GetTranslations()
         {
