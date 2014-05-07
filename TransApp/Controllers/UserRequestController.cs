@@ -5,18 +5,18 @@ using System.Web;
 using System.Web.Mvc;
 using TransApp.DAL;
 using TransApp.Models;
+using TransApp.Repositories;
 
 namespace TransApp.Controllers
 {
     public class UserRequestController : Controller
     {
-        UserRequestContext context = new UserRequestContext();
+        UserRequestRepository UserReqRepo = new UserRequestRepository();
 
         public ActionResult GetRequests()
         {
-            IEnumerable<UserRequest> requests = context.userRequest.ToList();
-
-            return View(requests);
+            var model = UserReqRepo.GetAllUserRequests();
+            return View(model);
         }
 	}
 }

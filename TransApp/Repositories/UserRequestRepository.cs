@@ -9,11 +9,11 @@ namespace TransApp.Repositories
 {
     public class UserRequestRepository
     {
-        UserRequestContext UserRequestDb = new UserRequestContext();
+        UserRequestContext userRequestDb = new UserRequestContext();
 
         public IEnumerable<UserRequest> GetAllUserRequests()
         {
-            return UserRequestDb.userRequest;
+            return userRequestDb.userRequest;
         }
 
     }
