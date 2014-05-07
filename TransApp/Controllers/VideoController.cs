@@ -11,6 +11,7 @@ namespace TransApp.Controllers
     public class VideoController : Controller
     {
         VideoRepository videoRepo = new VideoRepository();
+        TranslationRepository translationRepo = new TranslationRepository();
         
         //private readonly IVideoRepository repo;
         /*private readonly ITranslationRepository repo2;*/
@@ -55,15 +56,17 @@ namespace TransApp.Controllers
                 if(transName == item.videoName)
                 {
                     translation.vID = item.ID;
-                    //UpdateVideoTime();
-                    //translationRepo.Add(translation);
-                    return RedirectToAction("/Video/GetVideos");
+                    item.videoTime = translation.translationTime;
+                    translationRepo.Add(translation);
+                    return RedirectToAction("/GetVideos");
                 }
             }
 
-            //AddVideo(translation);
-            
-            return View(translation);
+            AddVideo(translation);
+            translationRepo.Add(translation);
+
+            return RedirectToAction("/GetVideos");
+            //return View(translation);
         }
 
         public void AddVideo(Translation translation)
@@ -73,7 +76,7 @@ namespace TransApp.Controllers
             newVideo.videoTime = translation.translationTime;
             newVideo.catID = 1;
 
-            //videoRepo.Add(newVideo);
+            videoRepo.Add(newVideo);
         }
 
         /*public ActionResult GetTranslations()

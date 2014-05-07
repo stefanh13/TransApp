@@ -15,5 +15,16 @@ namespace TransApp.Repositories
         {
             return translationDb.translations;
         }
+
+        public void Add(Translation t)
+        {
+            translationDb.translations.Add(t);
+            Save();
+        }
+
+        public void Save()
+        {
+            translationDb.SaveChanges();
+        }
     }
 }
