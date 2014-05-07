@@ -1,0 +1,11 @@
+﻿@model IEnumerable<TransApp.Models.UserRequest>
+@{
+    ViewBag.Title = "Index";
+}
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.requestName</li>
+    }
+</ul>

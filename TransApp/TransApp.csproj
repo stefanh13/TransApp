@@ -235,10 +235,10 @@
     <Content Include="Views\Video\AddTranslation.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Video\GetVideos.cshtml" />
+    <Content Include="Views\UserRequest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\UserRequest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
