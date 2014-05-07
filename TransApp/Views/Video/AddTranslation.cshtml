@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TransApp.Models.Video>
+﻿@model TransApp.Models.Translation
 
 @{
     ViewBag.Title = "AddTranslation";
@@ -6,6 +6,69 @@
 
 <h2>AddTranslation</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Translation</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.vID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.vID)
+                @Html.ValidationMessageFor(model => model.vID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.translationDescription, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.translationDescription)
+                @Html.ValidationMessageFor(model => model.translationDescription)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.translationText, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.translationText)
+                @Html.ValidationMessageFor(model => model.translationText)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.translationLanguage, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.translationLanguage)
+                @Html.ValidationMessageFor(model => model.translationLanguage)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.translationTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.translationTime)
+                @Html.ValidationMessageFor(model => model.translationTime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

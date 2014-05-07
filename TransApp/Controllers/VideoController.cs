@@ -32,15 +32,17 @@ namespace TransApp.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult AddTranslation()
         {
-
-            return View();
+           
+            return View(new Translation());
             
             /*var model = from t in repo.GetVideos()
                         select t;
             return View(model);*/
         }
+
 
         /*public ActionResult GetTranslations()
         {
@@ -152,6 +154,7 @@ namespace TransApp.Controllers
 
         }*/
 
+        [HttpGet]
         public ActionResult GetVideos()
         {
             var model = videoRepo.GetAllVideos();
