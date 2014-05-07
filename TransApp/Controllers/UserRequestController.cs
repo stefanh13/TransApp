@@ -12,7 +12,7 @@ namespace TransApp.Controllers
     {
         UserRequestContext context = new UserRequestContext();
 
-        public ActionResult Index()
+        public ActionResult GetRequests()
         {
             IEnumerable<UserRequest> requests = context.userRequest.ToList();
 

@@ -6,3 +6,9 @@
 
 <h2>GetVideos</h2>
 
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.videoName</li>
+    }
+</ul>
