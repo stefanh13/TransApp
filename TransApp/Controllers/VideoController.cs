@@ -32,14 +32,17 @@ namespace TransApp.Controllers
             return View();
         }
 
-        /*public ActionResult AddTranslation()
+        public ActionResult AddTranslation()
         {
-            var model = from t in repo.GetVideos()
+
+            return View();
+            
+            /*var model = from t in repo.GetVideos()
                         select t;
-            return View(model);
+            return View(model);*/
         }
 
-        public ActionResult GetTranslations()
+        /*public ActionResult GetTranslations()
         {
             var model = (from t in repo2.GetTranslations()
                          orderby t.translationTime descending
