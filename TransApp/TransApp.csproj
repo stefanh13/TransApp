@@ -164,6 +164,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserRequestController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="DAL\UserRequestContext.cs" />
+    <Compile Include="DAL\UserRequestInitializer.cs" />
     <Compile Include="DAL\VideoContext.cs" />
     <Compile Include="DAL\VideoInitializer.cs" />
     <Compile Include="Global.asax.cs">
