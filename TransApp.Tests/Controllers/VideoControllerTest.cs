@@ -12,6 +12,7 @@ namespace TransApp.Tests.Controllers
     public class UnitTest1
     {
         // Muna að setja videoTime
+        /*
         [TestMethod]
         public void TestAddingNewVideoInEmptyTable()
         {
@@ -19,7 +20,7 @@ namespace TransApp.Tests.Controllers
             List<Video> video = new List<Video>();
             video.Add(new Video
             {
-                vID = 1,
+                ID = 1,
                 catID = 1,
                 videoName = "Kalli"
             });
@@ -47,7 +48,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "GrumpyCat"
                 });
@@ -76,7 +77,7 @@ namespace TransApp.Tests.Controllers
             {
                 translations.Add(new Translation
                 {
-                    tID = i,
+                    ID = i,
                     vID = i,
                     translationDescription = "Lorem ipsum",
                     translationLanguage = "English",
@@ -108,7 +109,7 @@ namespace TransApp.Tests.Controllers
             {
                 translations.Add(new Translation
                 {
-                    tID = i,
+                    ID = i,
                     vID = i,
                     translationDescription = "Lorem ipsum",
                     translationLanguage = "English",
@@ -138,7 +139,7 @@ namespace TransApp.Tests.Controllers
             {
                 translations.Add(new Translation
                 {
-                    tID = i,
+                    ID = i,
                     vID = i,
                     translationDescription = "Lorem ipsum",
                     translationLanguage = "English",
@@ -173,7 +174,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "Video " + i.ToString()
                 });
@@ -206,7 +207,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "Video " + (i % 3).ToString()
                 });
@@ -239,7 +240,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "Video " + (i).ToString(),
                     videoTime = DateTime.Now.AddDays(i)
@@ -273,7 +274,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "Video " + i.ToString(),
                     videoTime = DateTime.Now.AddDays(i)
@@ -306,7 +307,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "Video " + i.ToString(),
                     videoTime = DateTime.Now.AddDays(i % 3)
@@ -341,7 +342,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "Video " + i.ToString(),
                     videoTime = DateTime.Now.AddDays(i)
@@ -374,7 +375,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i % 4,
                     videoName = "Hackers",
                     videoTime = DateTime.Now.AddDays(i)
@@ -415,7 +416,7 @@ namespace TransApp.Tests.Controllers
             {
                 translations.Add(new Translation
                 {
-                    tID = i,
+                    ID = i,
                     vID = i % 4,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
@@ -457,7 +458,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "Hackers" + i.ToString(),
                     videoTime = DateTime.Now.AddDays(i)
@@ -485,7 +486,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "Hackers" + i.ToString(),
                     videoTime = DateTime.Now.AddDays(i)
@@ -514,7 +515,7 @@ namespace TransApp.Tests.Controllers
             {
                 videos.Add(new Video
                 {
-                    vID = i,
+                    ID = i,
                     catID = i,
                     videoName = "Hackers" + i.ToString(),
                     videoTime = DateTime.Now.AddDays(i)
@@ -534,6 +535,6 @@ namespace TransApp.Tests.Controllers
            {
                Assert.IsTrue(model[i].videoName.Contains("Hackers"));
            }
-        }
+        }*/
     }
 }
