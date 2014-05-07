@@ -16,5 +16,16 @@ namespace TransApp.Repositories
             return userRequestDb.userRequest;
         }
 
+        public void AddUserRequests(UserRequest newReq)
+        {
+            userRequestDb.userRequest.Add(newReq);
+            userRequestDb.SaveChanges();
+        }
+
+        public void Save()
+        {
+            userRequestDb.SaveChanges();
+        }
+
     }
 }

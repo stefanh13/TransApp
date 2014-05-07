@@ -2,10 +2,11 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@Html.ActionLink("Ný beiðni", "CreateUserRequest")
 <ul>
     @foreach (var item in Model)
     {
         <li>@item.requestName</li>
     }
 </ul>
+
