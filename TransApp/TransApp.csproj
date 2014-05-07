@@ -238,7 +238,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Video\GetVideos.cshtml" />
     <Content Include="Views\UserRequest\GetRequests.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Video\AddTranslation.cshtml" />
+=======
+    <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
+>>>>>>> origin
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

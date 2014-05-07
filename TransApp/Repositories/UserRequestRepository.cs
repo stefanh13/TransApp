@@ -9,11 +9,22 @@ namespace TransApp.Repositories
 {
     public class UserRequestRepository
     {
-        UserRequestContext UserRequestDb = new UserRequestContext();
+        UserRequestContext userRequestDb = new UserRequestContext();
 
         public IEnumerable<UserRequest> GetAllUserRequests()
         {
-            return UserRequestDb.userRequest;
+            return userRequestDb.userRequest;
+        }
+
+        public void AddUserRequests(UserRequest newReq)
+        {
+            userRequestDb.userRequest.Add(newReq);
+            userRequestDb.SaveChanges();
+        }
+
+        public void Save()
+        {
+            userRequestDb.SaveChanges();
         }
 
     }
