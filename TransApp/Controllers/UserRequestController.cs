@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TransApp.DAL;
 using TransApp.Models;
 using TransApp.Repositories;
+using Microsoft.AspNet.Identity;
 
 
 namespace TransApp.Controllers
@@ -52,6 +53,7 @@ namespace TransApp.Controllers
 
             if (ModelState.IsValid)
             {
+                u.uID = User.Identity.GetUserId();
                 UpdateModel(u);
                 UserReqRepo.AddUserRequests(u);
                 UserReqRepo.Save();
@@ -98,6 +100,11 @@ namespace TransApp.Controllers
             UserReqRepo.UpdateLike(reqId);
 
             return RedirectToAction("GetRequests");
+        }
+
+        public ActionResult GetUserRequestById(int id)
+        {
+            return View();
         }
 	}
 }

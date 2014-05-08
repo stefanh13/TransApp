@@ -13,7 +13,7 @@ namespace TransApp.DAL
             var req = new List<UserRequest>
             {
                 new UserRequest{
-                    uID = 1,
+                    uID = "1",
                     requestName = "James Bond",
                     requestText = "mig vantar hjálp",
                     requestLanguage = "Enska",
@@ -21,7 +21,7 @@ namespace TransApp.DAL
                     requestTime = DateTime.Parse("2014-02-28 15:00:00")
                 },
                 new UserRequest{
-                    uID = 4,
+                    uID = "4",
                     requestName = "Hobbit",
                     requestText = "Halló mig vantar hjálp",
                     requestLanguage = "Enska",
@@ -29,7 +29,7 @@ namespace TransApp.DAL
                     requestTime = DateTime.Parse("2014-02-27 15:00:00")
                 },
                 new UserRequest{
-                    uID = 2,
+                    uID = "2",
                     requestName = "Men in Black",
                     requestText = "mig vantar hjálp",
                     requestLanguage = "Íslenska",
@@ -37,7 +37,7 @@ namespace TransApp.DAL
                     requestTime = DateTime.Parse("2014-02-26 15:00:00")
                 },
                 new UserRequest{
-                    uID = 3,
+                    uID = "3",
                     requestName = "Hobbit",
                     requestText = "mig vantar hjálp",
                     requestLanguage = "Franska",
@@ -45,7 +45,7 @@ namespace TransApp.DAL
                     requestTime = DateTime.Parse("2014-02-25 15:00:00")
                 },
                 new UserRequest{
-                    uID = 9,
+                    uID = "9",
                     requestName = "Lord of the rings",
                     requestText = "what mig vantar hjálp",
                     requestLanguage = "Þýska",
