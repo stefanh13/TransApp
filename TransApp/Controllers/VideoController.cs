@@ -108,48 +108,48 @@ namespace TransApp.Controllers
         {
             if(IsNameAscending())
             {
-                var model = (from t in videoRepo.GetAllVideos()
-                             orderby t.videoName descending
-                             select t).Take(10);
+                var model = (from name in videoRepo.GetAllVideos()
+                             orderby name.videoName descending
+                             select name).Take(10);
                 return View(model);
             }
             else
             {
-                var model = (from t in videoRepo.GetAllVideos()
-                             orderby t.videoName ascending
-                             select t).Take(10);
+                var model = (from name in videoRepo.GetAllVideos()
+                             orderby name.videoName ascending
+                             select name).Take(10);
                 return View(model);
             }
             
         }
-        /*
+        
         public ActionResult OrderByDate()
         {
             if(IsDateDescending())
             {
-                var model = (from t in repo.GetVideos()
-                             orderby t.videoTime ascending
-                             select t).Take(10);
+                var model = (from date in videoRepo.GetAllVideos()
+                             orderby date.videoTime ascending
+                             select date).Take(10);
                 return View(model);
             }
             else
             {
-                var model = (from t in repo.GetVideos()
-                             orderby t.videoTime descending
-                             select t).Take(10);
+                var model = (from date in videoRepo.GetAllVideos()
+                             orderby date.videoTime descending
+                             select date).Take(10);
                 return View(model);
             }
             
         }
-        */
+        
         public bool IsNameAscending()
         {
             var videos = (videoRepo.GetAllVideos()).ToList();
 
-            for(int i = 0; i < videos.Count - 1; i++)
+            for(int i = 1; i < videos.Count; i++)
             {
-                int c = string.Compare(videos[i].videoName, videos[i + 1].videoName);
-                if(c > 0)
+                int areVideosAscending = string.Compare(videos[i - 1].videoName, videos[i].videoName);
+                if(areVideosAscending > 0)
                 {
                     return false;
                 }
@@ -157,14 +157,14 @@ namespace TransApp.Controllers
             
             return true;
         }
-        /*
+        
         public bool IsDateDescending()
         {
-            var videos = (repo.GetVideos()).ToList();
+            var videos = (videoRepo.GetAllVideos()).ToList();
 
-            for (int i = 0; i < videos.Count - 1; i++)
+            for (int i = 1; i < videos.Count; i++)
             {
-                if(videos[i].videoTime >= videos[i + 1].videoTime)
+                if(videos[i - 1].videoTime >= videos[i].videoTime)
                 {
                     return false;
                 }
@@ -172,7 +172,7 @@ namespace TransApp.Controllers
 
             return true;
         }
-
+        /*
         public ActionResult GetVideoByCategoryId(int id)
         {
             var model = (from t in repo.GetVideos()
