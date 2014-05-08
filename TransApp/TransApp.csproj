@@ -245,6 +245,7 @@
     <Content Include="Views\UserRequest\OrderRequestsByLanguage.cshtml" />
     <Content Include="Views\UserRequest\OrderRequestsByDate.cshtml" />
     <Content Include="Views\UserRequest\OrderRequestsByLikes.cshtml" />
+    <Content Include="Views\UserRequest\LikeRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,7 +5,7 @@
     <thead>
         <tr>
             <th>@Html.ActionLink("Nafn", "OrderRequestsByName", "UserRequest")</li>
-            <th>Like</th>
+            <th>LIKE</th>
             <th>@Html.ActionLink("Tungumál", "OrderRequestsByLanguage", "UserRequest")</th>
             <th>@Html.ActionLink("Dagsetning", "OrderRequestsByDate", "UserRequest")</th>
             <th>@Html.ActionLink("Atkvæði", "OrderRequestsByLikes", "UserRequest")</th>
@@ -16,7 +16,7 @@
         {
             <tr>
                 <td>@item.requestName</td>
-                <td>LIKE</td>
+                <td>@Html.ActionLink("Like", "LikeRequest", new { reqId = item.ID })</td>
                 <td>@item.requestLanguage</td>
                 <td>@item.requestTime</td>
                 <td>@item.likes</td>

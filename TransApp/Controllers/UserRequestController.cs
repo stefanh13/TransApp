@@ -18,9 +18,10 @@ namespace TransApp.Controllers
         {
             var model = (from r in UserReqRepo.GetAllUserRequests()
                          orderby r.requestTime descending
-                         select r);
+                         select r).Take(10);
             return View(model);
         }
+
 
         [HttpGet]
         public ActionResult CreateUserRequest()
@@ -90,6 +91,13 @@ namespace TransApp.Controllers
                          select l).Take(10);
 
             return View(model);
+        }
+
+        public ActionResult LikeRequest(int reqId)
+        {
+            UserReqRepo.UpdateLike(reqId);
+
+            return RedirectToAction("GetRequests");
         }
 	}
 }
