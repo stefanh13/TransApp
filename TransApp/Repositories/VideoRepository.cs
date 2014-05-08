@@ -17,9 +17,13 @@ namespace TransApp.Repositories
             return videoDb.videos;
         }
 
-        public void Add(Video v)
+        public void AddVideo(Translation t)
         {
-            videoDb.videos.Add(v);
+            Video newVideo = new Video();
+            newVideo.videoName = t.translationName;
+            newVideo.videoTime = t.translationTime;
+            newVideo.videoCategory = t.translationCategory;
+            videoDb.videos.Add(newVideo);
             Save();
         }
 

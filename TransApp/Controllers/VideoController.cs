@@ -64,36 +64,20 @@ namespace TransApp.Controllers
                     videoRepo.UpdateVideoTime(item);
                     videoRepo.Save();
                     
-                    translation.v = item.ID;
+                    translation.vID = item.ID;
                     UpdateModel(translation);
                     translationRepo.Add(translation);
                     return RedirectToAction("/GetVideos");
                 }
             }
 
-            AddVideo(translation);
+            videoRepo.AddVideo(translation);
             translationRepo.Add(translation);
 
             return RedirectToAction("/GetVideos");
             //return View(translation);
         }
 
-        public void AddVideo(Translation translation)
-        {
-            Video newVideo = new Video();
-            newVideo.videoName = translation.translationName;
-            newVideo.videoTime = translation.translationTime;
-            newVideo.catID = 1;
-
-            videoRepo.Add(newVideo);
-        }
-
-        public void UpdateVideoTime(Video v)
-        {
-            UpdateModel(v);
-            videoRepo.UpdateVideoTime(v);
-            videoRepo.Save();
-        }
 
         /*public ActionResult GetTranslations()
         {
@@ -106,72 +90,24 @@ namespace TransApp.Controllers
         */
         public ActionResult OrderByName()
         {
-            if(IsNameAscending())
-            {
-                var model = (from name in videoRepo.GetAllVideos()
-                             orderby name.videoName descending
-                             select name).Take(10);
-                return View(model);
-            }
-            else
-            {
-                var model = (from name in videoRepo.GetAllVideos()
-                             orderby name.videoName ascending
-                             select name).Take(10);
-                return View(model);
-            }
+            var model = (from name in videoRepo.GetAllVideos()
+                         orderby name.videoName ascending
+                         select name).Take(10);
+            return View(model);
             
         }
         
         public ActionResult OrderByDate()
         {
-            if(IsDateDescending())
-            {
-                var model = (from date in videoRepo.GetAllVideos()
-                             orderby date.videoTime ascending
-                             select date).Take(10);
-                return View(model);
-            }
-            else
-            {
-                var model = (from date in videoRepo.GetAllVideos()
-                             orderby date.videoTime descending
-                             select date).Take(10);
-                return View(model);
-            }
+            var model = (from date in videoRepo.GetAllVideos()
+                         orderby date.videoTime descending
+                         select date).Take(10);
+            return View(model);
+            
             
         }
         
-        public bool IsNameAscending()
-        {
-            var videos = (videoRepo.GetAllVideos()).ToList();
-
-            for(int i = 1; i < videos.Count; i++)
-            {
-                int areVideosAscending = string.Compare(videos[i - 1].videoName, videos[i].videoName);
-                if(areVideosAscending > 0)
-                {
-                    return false;
-                }
-            }
-            
-            return true;
-        }
         
-        public bool IsDateDescending()
-        {
-            var videos = (videoRepo.GetAllVideos()).ToList();
-
-            for (int i = 1; i < videos.Count; i++)
-            {
-                if(videos[i - 1].videoTime >= videos[i].videoTime)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
         /*
         public ActionResult GetVideoByCategoryId(int id)
         {
@@ -209,7 +145,10 @@ namespace TransApp.Controllers
         [HttpGet]
         public ActionResult GetVideos()
         {
-            var model = videoRepo.GetAllVideos();
+            var model = (from videos in videoRepo.GetAllVideos()
+                         orderby videos.videoTime descending
+                         select videos).Take(10);
+
             return View(model);
         }
         

@@ -33,7 +33,7 @@ namespace TransApp.Repositories
             {
                 if(item.ID == t.ID)
                 {
-                    item.v = t.v;
+                    item.vID = t.vID;
                 }
             }
         }
