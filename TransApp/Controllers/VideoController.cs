@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using TransApp.Models;
 using TransApp.Repositories;
+using PagedList;
+
 
 namespace TransApp.Controllers
 {
@@ -149,9 +151,10 @@ namespace TransApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetVideos()
+        public ActionResult GetVideos(string sort)
         {
-            var model = (from videos in videoRepo.GetAllVideos()
+       
+                         var model = (from videos in videoRepo.GetAllVideos()
                          orderby videos.videoTime descending
                          select videos).Take(10);
 

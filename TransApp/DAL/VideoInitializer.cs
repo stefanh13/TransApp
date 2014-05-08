@@ -42,6 +42,48 @@ namespace TransApp.DAL
                     videoName = "P.S I love you",
                     videoTime = DateTime.Parse("2003-03-13")
                 },
+                new Video
+                {
+                    videoCategory = "Rómantík",
+                    videoName = "Notebook",
+                    videoTime = DateTime.Parse("2003-03-13")
+                },
+                new Video
+                {
+                    videoCategory = "Rómantík",
+                    videoName = "Titanic",
+                    videoTime = DateTime.Parse("2003-03-13")
+                },
+                new Video
+                {
+                    videoCategory = "Rómantík",
+                    videoName = "True lies",
+                    videoTime = DateTime.Parse("2003-03-13")
+                },
+                new Video
+                {
+                    videoCategory = "Rómantík",
+                    videoName = "Glaestar vonir",
+                    videoTime = DateTime.Parse("2003-03-13")
+                },
+                new Video
+                {
+                    videoCategory = "Rómantík",
+                    videoName = "P",
+                    videoTime = DateTime.Parse("2003-03-13")
+                },
+                new Video
+                {
+                    videoCategory = "Rómantík",
+                    videoName = "I love you",
+                    videoTime = DateTime.Parse("2003-03-13")
+                },
+                new Video
+                {
+                    videoCategory = "Rómantík",
+                    videoName = "P.S I you",
+                    videoTime = DateTime.Parse("2003-03-13")
+                },
             };
 
             vids.ForEach(a => context.videos.Add(a));
