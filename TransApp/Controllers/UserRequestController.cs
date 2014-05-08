@@ -25,7 +25,7 @@ namespace TransApp.Controllers
         {
             List<SelectListItem> languageList = new List<SelectListItem>();
 
-            languageList.Add(new SelectListItem { Text = "", Value = "1" });
+            languageList.Add(new SelectListItem { Text = "", Value = "" });
             languageList.Add(new SelectListItem { Text = "Enska", Value = "2" });
             languageList.Add(new SelectListItem { Text = "Franska", Value = "3" });
             languageList.Add(new SelectListItem { Text = "Íslenska", Value = "4" });
@@ -40,7 +40,7 @@ namespace TransApp.Controllers
         {
             List<SelectListItem> languageList = new List<SelectListItem>();
 
-            languageList.Add(new SelectListItem { Text = "", Value = "1" });
+            languageList.Add(new SelectListItem { Text = "", Value = "" });
             languageList.Add(new SelectListItem { Text = "Enska", Value = "Enska" });
             languageList.Add(new SelectListItem { Text = "Franska", Value = "Franska" });
             languageList.Add(new SelectListItem { Text = "Íslenska", Value = "Íslenska" });
