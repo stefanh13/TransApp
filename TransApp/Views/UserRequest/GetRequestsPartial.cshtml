@@ -1,0 +1,29 @@
+﻿@model IEnumerable<TransApp.Models.UserRequest>
+@{
+    ViewBag.Title = "Index";
+}
+@Html.ActionLink("Ný beiðni", "CreateUserRequest")
+
+<table>
+    <thead>
+        <tr>
+            <th>@Html.ActionLink("Nafn", "OrderRequestsByName", "UserRequest")</li>
+            <th>Like</th>
+            <th>Tungumál</th>
+            <th>Dagsettning</th>
+            <th>Atkvæði</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.requestName</td>
+                <td>LIKE</td>
+                <td>@item.requestLanguage</td>
+                <td>@item.requestTime</td>
+                <td>@item.likes</td>
+            </tr>
+        }
+    </tbody>
+</table>
