@@ -3,10 +3,27 @@
     ViewBag.Title = "Index";
 }
 @Html.ActionLink("Ný beiðni", "CreateUserRequest")
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>@item.requestName</li>
-    }
-</ul>
 
+<table>
+    <thead>
+        <tr>
+            <th>Nafn</th>
+            <th>Like</th>
+            <th>Tungumál</th>
+            <th>Dagsettning</th>
+            <th>Atkvæði</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.requestName</td>
+                <td>LIKE</td>
+                <td>@item.requestLanguage</td>
+                <td>@item.requestTime</td>
+                <td>@item.likes</td>
+            </tr>
+        }
+    </tbody>
+</table>
