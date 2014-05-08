@@ -28,13 +28,13 @@ namespace TransApp.Repositories
             videoDb.SaveChanges();
         }
 
-        public void UpdateVideoTime(Video v, DateTime time)
+        public void UpdateVideoTime(Video v)
         {
             foreach (var item in videoDb.videos)
             {
                 if (item.ID == v.ID)
                 {
-                    item.videoTime = time;
+                    item.videoTime = v.videoTime;
                     break;
                 }
             }

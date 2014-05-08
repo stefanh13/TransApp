@@ -13,21 +13,24 @@ namespace TransApp.Controllers
         VideoRepository videoRepo = new VideoRepository();
         TranslationRepository translationRepo = new TranslationRepository();
         
-        //private readonly IVideoRepository repo;
-        /*private readonly ITranslationRepository repo2;*/
-        /*
+        private readonly IVideoRepository repo;
+        private readonly ITranslationRepository repo2;
+        
         public VideoController(IVideoRepository rep)
         {
             repo = rep;
         }
-        */
-        /*public VideoController(ITranslationRepository reps)
+        
+        public VideoController(ITranslationRepository reps)
         {
             repo2 = reps;
-        }*/
+        }
+
+        public VideoController()
+        {
+
+        }
         
-        //
-        // GET: /Video/
         public ActionResult FrontPage()
         {
             return View();
@@ -49,7 +52,7 @@ namespace TransApp.Controllers
         {
             string transName = translation.translationName;
 
-            IEnumerable<Video> videoNames = videoRepo.GetAllVideos();
+            IEnumerable<Video> videoNames = videoRepo.GetAllVideos().ToList();
 
             foreach(var item in videoNames)
             {
@@ -58,7 +61,8 @@ namespace TransApp.Controllers
                     translation.vID = item.ID;
                     item.videoTime = translation.translationTime;
                     UpdateModel(item);
-                    videoRepo.UpdateVideoTime(item, translation.translationTime);
+                    videoRepo.UpdateVideoTime(item);
+                    videoRepo.Save();
                     translationRepo.Add(translation);
                     return RedirectToAction("/GetVideos");
                 }
@@ -79,6 +83,13 @@ namespace TransApp.Controllers
             newVideo.catID = 1;
 
             videoRepo.Add(newVideo);
+        }
+
+        public void UpdateVideoTime(Video v)
+        {
+            UpdateModel(v);
+            videoRepo.UpdateVideoTime(v);
+            videoRepo.Save();
         }
 
         /*public ActionResult GetTranslations()
