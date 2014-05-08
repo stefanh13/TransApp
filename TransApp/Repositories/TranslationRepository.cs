@@ -26,5 +26,16 @@ namespace TransApp.Repositories
         {
             translationDb.SaveChanges();
         }
+
+        public void Update(Translation t)
+        {
+            foreach(var item in translationDb.translations)
+            {
+                if(item.ID == t.ID)
+                {
+                    item.v = t.v;
+                }
+            }
+        }
     }
 }

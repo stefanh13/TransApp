@@ -14,7 +14,7 @@ namespace TransApp.DAL
             {
                 new Translation
                 {
-                    vID = 1,
+                    v = 1,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
                     translationLanguage = "Enska",
@@ -23,7 +23,7 @@ namespace TransApp.DAL
                 },
                 new Translation
                 {
-                    vID = 1,
+                    v = 1,
                     translationDescription = "Lorem ipsum Loreum",
                     translationText = "Lorem ipsum ipsum",
                     translationLanguage = "Franska",
@@ -32,7 +32,7 @@ namespace TransApp.DAL
                 },
                  new Translation
                 {
-                    vID = 1,
+                    v = 1,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
                     translationLanguage = "Íslenska",
@@ -41,7 +41,7 @@ namespace TransApp.DAL
                 },
                  new Translation
                 {
-                    vID = 2,
+                    v = 2,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
                     translationLanguage = "Íslenska",
@@ -50,7 +50,7 @@ namespace TransApp.DAL
                 },
                  new Translation
                 {
-                    vID = 3,
+                    v = 3,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
                     translationLanguage = "Enska",
@@ -59,7 +59,7 @@ namespace TransApp.DAL
                 },
                  new Translation
                 {
-                    vID = 4,
+                    v = 4,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
                     translationLanguage = "Íslenska",

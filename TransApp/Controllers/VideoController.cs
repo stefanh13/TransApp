@@ -58,11 +58,14 @@ namespace TransApp.Controllers
             {
                 if(transName == item.videoName)
                 {
-                    translation.vID = item.ID;
+                    
                     item.videoTime = translation.translationTime;
                     UpdateModel(item);
                     videoRepo.UpdateVideoTime(item);
                     videoRepo.Save();
+                    
+                    translation.v = item.ID;
+                    UpdateModel(translation);
                     translationRepo.Add(translation);
                     return RedirectToAction("/GetVideos");
                 }
@@ -100,25 +103,26 @@ namespace TransApp.Controllers
             
             return View(model);
         }
-
+        */
         public ActionResult OrderByName()
         {
             if(IsNameAscending())
             {
-                var model = (from t in repo.GetVideos()
+                var model = (from t in videoRepo.GetAllVideos()
                              orderby t.videoName descending
                              select t).Take(10);
                 return View(model);
             }
             else
             {
-                var model = (from t in repo.GetVideos()
+                var model = (from t in videoRepo.GetAllVideos()
                              orderby t.videoName ascending
                              select t).Take(10);
                 return View(model);
             }
             
         }
+        /*
         public ActionResult OrderByDate()
         {
             if(IsDateDescending())
@@ -137,10 +141,10 @@ namespace TransApp.Controllers
             }
             
         }
-
+        */
         public bool IsNameAscending()
         {
-            var videos = (repo.GetVideos()).ToList();
+            var videos = (videoRepo.GetAllVideos()).ToList();
 
             for(int i = 0; i < videos.Count - 1; i++)
             {
@@ -153,7 +157,7 @@ namespace TransApp.Controllers
             
             return true;
         }
-
+        /*
         public bool IsDateDescending()
         {
             var videos = (repo.GetVideos()).ToList();

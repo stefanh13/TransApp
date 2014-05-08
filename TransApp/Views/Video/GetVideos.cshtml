@@ -4,26 +4,4 @@
     ViewBag.Title = "GetVideos";
 }
 
-<h2>GetVideos</h2>
-
-<a href="Video/AddTranslation">Ný þýðing</a>
-
-<table>
-    <thead>
-        <tr>
-            <th>Nafn</th>
-            <th>Flokkur</th>
-            <th>Dagseting</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.videoName</td>
-                <td>Hasar</td>
-                <td>@item.videoTime</td>
-        </tr>
-        }
-    </tbody>
-</table>
+@{Html.RenderPartial("VideoPartialView");}
