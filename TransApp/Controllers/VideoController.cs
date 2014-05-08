@@ -121,10 +121,16 @@ namespace TransApp.Controllers
 
         public ActionResult GetTranslationsByVideoId(int id)
         {
-            var model = (from t in repo2.GetTranslations()
+
+            var model = (from t in translationRepo.GetAllTranslations()
                          where t.vID == id
                          orderby t.translationTime descending
                          select t).Take(10);
+            
+            /*var model = (from t in repo2.GetTranslations()
+                         where t.vID == id
+                         orderby t.translationTime descending
+                         select t).Take(10);*/
 
             return View(model);
         }

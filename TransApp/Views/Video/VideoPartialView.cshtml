@@ -25,7 +25,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.videoName</td>
+                <td>@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
                 <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
                 <td>@item.videoTime</td>
             </tr>
