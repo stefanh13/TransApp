@@ -20,7 +20,7 @@
         {
             <tr>
                 <td>@item.videoName</td>
-                <td>@item.videoCategory</td>
+                <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
                 <td>@item.videoTime</td>
             </tr>
         }

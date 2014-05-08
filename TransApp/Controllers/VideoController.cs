@@ -108,11 +108,11 @@ namespace TransApp.Controllers
         }
         
         
-        /*
-        public ActionResult GetVideoByCategoryId(int id)
+        
+        public ActionResult GetVideoByCategory(string category)
         {
-            var model = (from t in repo.GetVideos()
-                         where t.catID == id
+            var model = (from t in videoRepo.GetAllVideos()
+                         where t.videoCategory == category
                          orderby t.videoTime descending
                          select t).Take(10);
 
@@ -140,7 +140,7 @@ namespace TransApp.Controllers
 
             return View(model);
 
-        }*/
+        }
 
         [HttpGet]
         public ActionResult GetVideos()

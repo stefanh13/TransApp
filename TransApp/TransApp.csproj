@@ -243,6 +243,7 @@
     <Content Include="Views\Video\VideoPartialView.cshtml" />
     <Content Include="Views\Video\OrderByName.cshtml" />
     <Content Include="Views\Video\OrderByDate.cshtml" />
+    <Content Include="Views\Video\GetVideoByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
