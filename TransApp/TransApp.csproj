@@ -242,6 +242,9 @@
     <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
     <Content Include="Views\UserRequest\GetRequestsPartial.cshtml" />
     <Content Include="Views\UserRequest\OrderRequestsByName.cshtml" />
+    <Content Include="Views\UserRequest\OrderRequestsByLanguage.cshtml" />
+    <Content Include="Views\UserRequest\OrderRequestsByDate.cshtml" />
+    <Content Include="Views\UserRequest\OrderRequestsByLikes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

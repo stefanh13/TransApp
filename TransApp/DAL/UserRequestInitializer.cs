@@ -18,7 +18,7 @@ namespace TransApp.DAL
                     requestText = "mig vantar hjálp",
                     requestLanguage = "Enska",
                     likes = 8,
-                    requestTime = DateTime.Parse("2014-02-20 15:00:00")
+                    requestTime = DateTime.Parse("2014-02-28 15:00:00")
                 },
                 new UserRequest{
                     uID = 4,
@@ -26,7 +26,7 @@ namespace TransApp.DAL
                     requestText = "Halló mig vantar hjálp",
                     requestLanguage = "Enska",
                     likes = 32,
-                    requestTime = DateTime.Parse("2014-02-21 15:00:00")
+                    requestTime = DateTime.Parse("2014-02-27 15:00:00")
                 },
                 new UserRequest{
                     uID = 2,
@@ -34,7 +34,7 @@ namespace TransApp.DAL
                     requestText = "mig vantar hjálp",
                     requestLanguage = "Íslenska",
                     likes = 100,
-                    requestTime = DateTime.Parse("2014-02-22 15:00:00")
+                    requestTime = DateTime.Parse("2014-02-26 15:00:00")
                 },
                 new UserRequest{
                     uID = 3,
@@ -42,7 +42,7 @@ namespace TransApp.DAL
                     requestText = "mig vantar hjálp",
                     requestLanguage = "Franska",
                     likes = 10,
-                    requestTime = DateTime.Parse("2014-02-23 15:00:00")
+                    requestTime = DateTime.Parse("2014-02-25 15:00:00")
                 },
                 new UserRequest{
                     uID = 9,

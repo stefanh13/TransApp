@@ -1,7 +1,4 @@
-﻿@model IEnumerable<TransApp.Models.UserRequest>
-@{
-    ViewBag.Title = "Index";
-}
+﻿
 @Html.ActionLink("Ný beiðni", "CreateUserRequest")
 
 <table>
@@ -9,9 +6,9 @@
         <tr>
             <th>@Html.ActionLink("Nafn", "OrderRequestsByName", "UserRequest")</li>
             <th>Like</th>
-            <th>Tungumál</th>
-            <th>Dagsettning</th>
-            <th>Atkvæði</th>
+            <th>@Html.ActionLink("Tungumál", "OrderRequestsByLanguage", "UserRequest")</th>
+            <th>@Html.ActionLink("Dagsetning", "OrderRequestsByDate", "UserRequest")</th>
+            <th>@Html.ActionLink("Atkvæði", "OrderRequestsByLikes", "UserRequest")</th>
         </tr>
     </thead>
     <tbody>

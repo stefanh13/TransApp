@@ -65,6 +65,29 @@ namespace TransApp.Controllers
 
             return View(model);
         }
-       
+        public ActionResult OrderRequestsByLanguage()
+        {
+            var model = (from l in UserReqRepo.GetAllUserRequests()
+                         orderby l.requestLanguage ascending
+                         select l).Take(10);
+
+            return View(model);
+        }
+        public ActionResult OrderRequestsByDate()
+        {
+            var model = (from t in UserReqRepo.GetAllUserRequests()
+                         orderby t.requestTime ascending
+                         select t).Take(10);
+
+            return View(model);
+        }
+        public ActionResult OrderRequestsByLikes()
+        {
+            var model = (from l in UserReqRepo.GetAllUserRequests()
+                         orderby l.likes descending
+                         select l).Take(10);
+
+            return View(model);
+        }
 	}
 }
