@@ -16,7 +16,9 @@ namespace TransApp.Controllers
 
         public ActionResult GetRequests()
         {
-            var model = UserReqRepo.GetAllUserRequests();
+            var model = (from r in UserReqRepo.GetAllUserRequests()
+                         orderby r.requestTime descending
+                         select r);
             return View(model);
         }
 
@@ -26,10 +28,10 @@ namespace TransApp.Controllers
             List<SelectListItem> languageList = new List<SelectListItem>();
 
             languageList.Add(new SelectListItem { Text = "", Value = "" });
-            languageList.Add(new SelectListItem { Text = "Enska", Value = "2" });
-            languageList.Add(new SelectListItem { Text = "Franska", Value = "3" });
-            languageList.Add(new SelectListItem { Text = "Íslenska", Value = "4" });
-            languageList.Add(new SelectListItem { Text = "Þýska", Value = "5" });
+            languageList.Add(new SelectListItem { Text = "Enska", Value = "Enska" });
+            languageList.Add(new SelectListItem { Text = "Franska", Value = "Franska" });
+            languageList.Add(new SelectListItem { Text = "Íslenska", Value = "Íslenska" });
+            languageList.Add(new SelectListItem { Text = "Þýska", Value = "Þýska" });
             ViewData["requestLanguage"] = languageList;
             UserReqRepo.Save();
             return View(new UserRequest());
