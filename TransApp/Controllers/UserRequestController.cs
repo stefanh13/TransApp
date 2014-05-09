@@ -108,8 +108,6 @@ namespace TransApp.Controllers
                          where l.ID == id
                          select l).FirstOrDefault();
 
-            var x = model;
-
             return View(model);
         }
 	}
