@@ -3,6 +3,7 @@
 
 # User-specific files
 *.mdf
+*.ldf
 *.suo
 *.user
 *.sln.docstates
