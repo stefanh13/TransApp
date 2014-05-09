@@ -196,6 +196,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\TransApp.mdf" />
+    <Content Include="App_Data\TransApp_log.ldf">
+      <DependentUpon>TransApp.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -246,14 +250,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Video\GetVideos.cshtml" />
     <Content Include="Views\UserRequest\GetRequests.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
     <Content Include="Views\Video\VideoPartialView.cshtml" />
     <Content Include="Views\Video\OrderByName.cshtml" />
     <Content Include="Views\Video\OrderByDate.cshtml" />
     <Content Include="Views\Video\GetVideoByCategory.cshtml" />
-    <Content Include="Views\Video\AddTranslation.cshtml" />
-=======
     <Content Include="Views\Video\AddTranslation.cshtml" />
     <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
     <Content Include="Views\UserRequest\GetRequestsPartial.cshtml" />
@@ -264,11 +265,8 @@
     <Content Include="Views\UserRequest\LikeRequest.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestByIdList.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
->>>>>>> 88147035039dc8053384a9b936eaaa11845e85c7
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
