@@ -67,7 +67,8 @@ namespace TransApp.Controllers
                     videoRepo.Save();
                     
                     translation.vID = item.ID;
-                    UpdateModel(translation);
+                    
+
                     translationRepo.Add(translation);
                     return RedirectToAction("/GetVideos");
                 }
