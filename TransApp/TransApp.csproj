@@ -246,12 +246,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Video\GetVideos.cshtml" />
     <Content Include="Views\UserRequest\GetRequests.cshtml" />
-    <Content Include="Views\Video\AddTranslation.cshtml" />
     <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
     <Content Include="Views\Video\VideoPartialView.cshtml" />
     <Content Include="Views\Video\OrderByName.cshtml" />
     <Content Include="Views\Video\OrderByDate.cshtml" />
     <Content Include="Views\Video\GetVideoByCategory.cshtml" />
+    <Content Include="Views\Video\AddTranslation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

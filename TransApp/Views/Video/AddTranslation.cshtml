@@ -25,6 +25,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.translationCategory, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.translationCategory)
+                @Html.ValidationMessageFor(model => model.translationCategory)
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.translationName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.translationName)
