@@ -5,6 +5,7 @@ using System.Web;
 using TransApp.DAL;
 using TransApp.Models;
 
+
 namespace TransApp.Repositories
 {
     public class UserRequestRepository
@@ -27,5 +28,24 @@ namespace TransApp.Repositories
             userRequestDb.SaveChanges();
         }
 
+        public void UpdateLike(int? reqId)
+        {
+            foreach(var item in userRequestDb.userRequest)
+            {
+                if (item.ID == reqId)
+                {
+                    item.likes += 1;
+                    int tala = item.likes;
+                    //userRequestDb.Entry(item).CurrentValues.SetValues(item.likes);
+           
+                    break;
+                }
+            }
+            Save();
+            /*
+            var x = userRequestDb.userRequest.Find(reqId);
+            userRequestDb.Entry(x).CurrentValues.SetValues(x.Us)
+             */
+        }
     }
 }
