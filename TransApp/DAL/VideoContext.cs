@@ -16,7 +16,7 @@ namespace TransApp.DAL
         }
 
         public DbSet<Video> videos { get; set; }
-        public DbSet<Translation> translations { get; set; }
+        //public DbSet<Translation> translations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
