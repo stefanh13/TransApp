@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TransApp.Models.UserRequest>
+
+@{
+    ViewBag.Title = "GetUserRequestByIdList";
+}
+
+<h2>GetUserRequestByIdList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.uID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.requestName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.requestText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.requestLanguage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.likes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.requestTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.uID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.requestName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.requestText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.requestLanguage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.likes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.requestTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
