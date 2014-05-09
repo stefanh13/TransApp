@@ -15,7 +15,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.ActionLink(item.requestName, "GetUserRequestById", new { id = item.ID})</td>
+                <td>@Html.ActionLink((string)item.requestName, "GetUserRequestById", new { id = item.ID})</td>
                 <td>@Html.ActionLink("Like", "LikeRequest", new { reqId = item.ID })</td>
                 <td>@item.requestLanguage</td>
                 <td>@item.requestTime</td>

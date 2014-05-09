@@ -246,8 +246,8 @@
     <Content Include="Views\UserRequest\OrderRequestsByDate.cshtml" />
     <Content Include="Views\UserRequest\OrderRequestsByLikes.cshtml" />
     <Content Include="Views\UserRequest\LikeRequest.cshtml" />
-    <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestByIdList.cshtml" />
+    <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

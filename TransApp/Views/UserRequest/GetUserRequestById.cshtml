@@ -1,6 +1,8 @@
-﻿@model IEnumerable<TransApp.Models.UserRequest>
+﻿@model TransApp.Models.UserRequest
 @{
     ViewBag.Title = "GetUserRequestById";
 }
 
-<p>@model.requestName</p>
+<h1>@Model.requestName</h1>
+<p>@Model.requestText </p>
+<p>@Model.requestLanguage</p>

@@ -104,7 +104,13 @@ namespace TransApp.Controllers
 
         public ActionResult GetUserRequestById(int id)
         {
-            return View();
+            var model = (from l in UserReqRepo.GetAllUserRequests()
+                         where l.ID == id
+                         select l).FirstOrDefault();
+
+            var x = model;
+
+            return View(model);
         }
 	}
 }
