@@ -267,14 +267,9 @@
     <Content Include="Views\UserRequest\GetUserRequestByIdList.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="obj\" />
   </ItemGroup>
-
-  <ItemGroup />
-
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

@@ -91,35 +91,44 @@ namespace TransApp.Controllers
             return View(model);
         }
         */
-        public ActionResult OrderByName()
+        public ActionResult OrderByName(int? page)
         {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            
             var model = (from name in videoRepo.GetAllVideos()
                          orderby name.videoName ascending
-                         select name).Take(10);
-            return View(model);
+                         select name);
+            return View(model.ToPagedList(pageNumber, pageSize));
             
         }
         
-        public ActionResult OrderByDate()
+        public ActionResult OrderByDate(int? page)
         {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
             var model = (from date in videoRepo.GetAllVideos()
                          orderby date.videoTime descending
-                         select date).Take(10);
-            return View(model);
+                         select date);
+            return View(model.ToPagedList(pageNumber, pageSize));
             
             
         }
         
         
         
-        public ActionResult GetVideoByCategory(string category)
+        public ActionResult GetVideoByCategory(string category, int? page)
         {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            
             var model = (from t in videoRepo.GetAllVideos()
                          where t.videoCategory == category
                          orderby t.videoTime descending
-                         select t).Take(10);
+                         select t);
 
-            return View(model);
+            return View(model.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult GetTranslationsByVideoId(int id)
@@ -152,14 +161,17 @@ namespace TransApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetVideos(string sort)
+        public ActionResult GetVideos(int? page)
         {
-       
-                         var model = (from videos in videoRepo.GetAllVideos()
-                         orderby videos.videoTime descending
-                         select videos).Take(10);
 
-            return View(model);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+ 
+            var model = (from videos in videoRepo.GetAllVideos()
+                         orderby videos.videoTime descending
+                         select videos);
+
+            return View(model.ToPagedList(pageNumber, pageSize));
         }
         
 	}
