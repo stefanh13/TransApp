@@ -16,6 +16,8 @@ namespace TransApp.DAL
                 {
                     vID = 1,
                     translationDescription = "Lorem ipsum",
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
                     translationText = "Lorem ipsum",
                     translationLanguage = "Enska",
                     translationTime = DateTime.Parse("2013-03-03")
@@ -26,6 +28,8 @@ namespace TransApp.DAL
                     vID = 1,
                     translationDescription = "Lorem ipsum Loreum",
                     translationText = "Lorem ipsum ipsum",
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
                     translationLanguage = "Franska",
                     translationTime = DateTime.Parse("2013-03-03")
 
@@ -35,6 +39,8 @@ namespace TransApp.DAL
                     vID = 1,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
                     translationLanguage = "Íslenska",
                     translationTime = DateTime.Parse("2013-03-03")
 
@@ -44,6 +50,8 @@ namespace TransApp.DAL
                     vID = 2,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
+                    translationName = "The Matrix",
+                    translationCategory = "Hasar",
                     translationLanguage = "Íslenska",
                     translationTime = DateTime.Parse("2013-03-03")
 
@@ -53,6 +61,8 @@ namespace TransApp.DAL
                     vID = 3,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
+                    translationName = "Hitchikers guide to the galaxy",
+                    translationCategory = "Ævintýra",
                     translationLanguage = "Enska",
                     translationTime = DateTime.Parse("2013-03-03")
 
@@ -62,6 +72,8 @@ namespace TransApp.DAL
                     vID = 4,
                     translationDescription = "Lorem ipsum",
                     translationText = "Lorem ipsum",
+                    translationName = "Lord of the rings: Fellowship of the ring",
+                    translationCategory = "Ævintýra",
                     translationLanguage = "Íslenska",
                     translationTime = DateTime.Parse("2013-03-03")
 

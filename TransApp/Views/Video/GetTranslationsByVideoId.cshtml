@@ -28,7 +28,7 @@
         {
             <tr>
                 <td>@Html.ActionLink(item.translationName, "GetTranslationsByVideoId", new { id = item.ID })</td>
-                <td>item.translationLanguage</td>
+                <td>@item.translationLanguage</td>
                 <td>@item.translationTime</td>
             </tr>
         }
