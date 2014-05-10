@@ -266,6 +266,8 @@
     <Content Include="Views\UserRequest\LikeRequest.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestByIdList.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
+    <Content Include="Views\Video\GetTranslationsByVideoId.cshtml" />
+    <Content Include="Views\Video\SearchEngine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

@@ -74,7 +74,11 @@ namespace TransApp.Controllers
                 }
             }
 
+            int videoId = videoNames.Last().ID + 1;
+            
             videoRepo.AddVideo(translation);
+
+            translation.vID = videoId;
             translationRepo.Add(translation);
 
             return RedirectToAction("/GetVideos");
@@ -131,9 +135,12 @@ namespace TransApp.Controllers
             return View(model.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult GetTranslationsByVideoId(int id)
+        public ActionResult GetTranslationsByVideoId(int id, int? page)
         {
 
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            
             var model = (from t in translationRepo.GetAllTranslations()
                          where t.vID == id
                          orderby t.translationTime descending
@@ -144,7 +151,7 @@ namespace TransApp.Controllers
                          orderby t.translationTime descending
                          select t).Take(10);*/
 
-            return View(model);
+            return View(model.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult GetVideoBySearchName(string searchString)
@@ -172,6 +179,23 @@ namespace TransApp.Controllers
                          select videos);
 
             return View(model.ToPagedList(pageNumber, pageSize));
+        }
+
+        
+        [HttpGet]
+        public ViewResult SearchEngine(string searchString, int? page)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            
+            var searchVideos = (from a in videoRepo.GetAllVideos()
+                                select a);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchVideos = searchVideos.Where(a => a.videoName.ToLower().Contains(searchString.ToLower()));
+            }
+            
+            return View(searchVideos.ToPagedList(pageNumber, pageSize));
         }
         
 	}

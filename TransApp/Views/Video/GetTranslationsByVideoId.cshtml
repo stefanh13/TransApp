@@ -1,22 +1,14 @@
-﻿@model PagedList.IPagedList<TransApp.Models.Video>
+﻿@model PagedList.IPagedList<TransApp.Models.Translation>
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "GetVideos";
+    ViewBag.Title = "GetTranslationsByVideoId";
 }
 
-<h2>GetVideos</h2>
+<h2>GetTranslationsByVideoId</h2>
+
 
 @Html.ActionLink("Ný þýðing", "AddTranslation", "Video")
-
-@using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
-{
-    <p>
-        Search: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
-}
-
 <ul>
     <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
     <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
@@ -27,7 +19,7 @@
     <thead>
         <tr>
             <th>@Html.ActionLink("Nafn", "OrderByName", "Video")</th>
-            <th>Flokkur</th>
+            <th>Tungumál</th>
             <th>@Html.ActionLink("Dagsetning", "OrderByDate", "Video")</th>
         </tr>
     </thead>
@@ -35,10 +27,18 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
-                <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
-                <td>@item.videoTime</td>
+                <td>@Html.ActionLink(item.translationName, "GetTranslationsByVideoId", new { id = item.ID })</td>
+                <td>item.translationLanguage</td>
+                <td>@item.translationTime</td>
             </tr>
         }
     </tbody>
 </table>
+
+
+
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("GetTranslationsByVideoId", new { page }))
+
