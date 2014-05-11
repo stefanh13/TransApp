@@ -268,6 +268,9 @@
     <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
     <Content Include="Views\Video\GetTranslationsByVideoId.cshtml" />
     <Content Include="Views\Video\SearchEngine.cshtml" />
+    <Content Include="Views\Video\GetTranslationById.cshtml" />
+    <Content Include="Views\Video\OrderCategoryByName.cshtml" />
+    <Content Include="Views\Video\OrderCategoryByDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

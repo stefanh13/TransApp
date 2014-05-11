@@ -29,11 +29,15 @@ namespace TransApp.Repositories
 
         public void Update(Translation t)
         {
-            foreach(var item in translationDb.translations)
+            var translations = translationDb.translations.ToList();
+            
+            foreach(var item in translations)
             {
                 if(item.ID == t.ID)
                 {
-                    item.vID = t.vID;
+                    item.translationText = t.translationText;
+                    Save();
+                    break;
                 }
             }
         }

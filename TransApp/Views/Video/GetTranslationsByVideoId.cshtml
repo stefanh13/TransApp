@@ -18,16 +18,16 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>@Html.ActionLink("Nafn", "OrderByName", "Video")</th>
+            <th>Nafn</th>
             <th>Tungumál</th>
-            <th>@Html.ActionLink("Dagsetning", "OrderByDate", "Video")</th>
+            <th>Dagsetning</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.ActionLink(item.translationName, "GetTranslationsByVideoId", new { id = item.ID })</td>
+                <td>@Html.ActionLink(item.translationName, "GetTranslationById", new { id = item.ID })</td>
                 <td>@item.translationLanguage</td>
                 <td>@item.translationTime</td>
             </tr>

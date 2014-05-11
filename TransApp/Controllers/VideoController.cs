@@ -41,7 +41,25 @@ namespace TransApp.Controllers
         [HttpGet]
         public ActionResult AddTranslation()
         {
-           
+
+            List<SelectListItem> languageList = new List<SelectListItem>();
+
+            languageList.Add(new SelectListItem { Text = "Veldu Tungumál", Value = "" });
+            languageList.Add(new SelectListItem { Text = "Enska", Value = "Enska" });
+            languageList.Add(new SelectListItem { Text = "Franska", Value = "Franska" });
+            languageList.Add(new SelectListItem { Text = "Íslenska", Value = "Íslenska" });
+            languageList.Add(new SelectListItem { Text = "Þýska", Value = "Þýska" });
+            ViewData["translationLanguage"] = languageList;
+
+            List<SelectListItem> categoryList = new List<SelectListItem>();
+
+            categoryList.Add(new SelectListItem { Text = "Veldu Flokk", Value = "" });
+            categoryList.Add(new SelectListItem { Text = "Hasar", Value = "Hasar" });
+            categoryList.Add(new SelectListItem { Text = "Ævintýra", Value = "Ævintýra" });
+            categoryList.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+            categoryList.Add(new SelectListItem { Text = "Gaman", Value = "Gaman" });
+            ViewData["translationCategory"] = categoryList;
+            
             return View(new Translation());
             
             /*var model = from t in repo.GetVideos()
@@ -52,37 +70,61 @@ namespace TransApp.Controllers
         [HttpPost]
         public ActionResult AddTranslation(Translation translation)
         {
-            string transName = translation.translationName;
+            List<SelectListItem> languageList = new List<SelectListItem>();
 
-            IEnumerable<Video> videoNames = videoRepo.GetAllVideos().ToList();
+            languageList.Add(new SelectListItem { Text = "Veldu Tungumál", Value = "" });
+            languageList.Add(new SelectListItem { Text = "Enska", Value = "Enska" });
+            languageList.Add(new SelectListItem { Text = "Franska", Value = "Franska" });
+            languageList.Add(new SelectListItem { Text = "Íslenska", Value = "Íslenska" });
+            languageList.Add(new SelectListItem { Text = "Þýska", Value = "Þýska" });
+            ViewData["translationLanguage"] = languageList;
 
-            foreach(var item in videoNames)
-            {
-                if(transName == item.videoName)
-                {
-                    
-                    item.videoTime = translation.translationTime;
-                    UpdateModel(item);
-                    videoRepo.UpdateVideoTime(item);
-                    videoRepo.Save();
-                    
-                    translation.vID = item.ID;
-                    
+            List<SelectListItem> categoryList = new List<SelectListItem>();
 
-                    translationRepo.Add(translation);
-                    return RedirectToAction("/GetVideos");
-                }
-            }
-
-            int videoId = videoNames.Last().ID + 1;
+            categoryList.Add(new SelectListItem { Text = "Veldu Flokk", Value = "" });
+            categoryList.Add(new SelectListItem { Text = "Hasar", Value = "Hasar" });
+            categoryList.Add(new SelectListItem { Text = "Ævintýra", Value = "Ævintýra" });
+            categoryList.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+            categoryList.Add(new SelectListItem { Text = "Gaman", Value = "Gaman" });
+            ViewData["translationCategory"] = categoryList;
             
-            videoRepo.AddVideo(translation);
+            if(ModelState.IsValid)
+            { 
 
-            translation.vID = videoId;
-            translationRepo.Add(translation);
+                string transName = translation.translationName;
 
-            return RedirectToAction("/GetVideos");
-            //return View(translation);
+                IEnumerable<Video> videoNames = videoRepo.GetAllVideos().ToList();
+
+                foreach(var item in videoNames)
+                {
+                    if(transName == item.videoName)
+                    {
+                    
+                        item.videoTime = translation.translationTime;
+                        UpdateModel(item);
+                        videoRepo.UpdateVideoTime(item);
+                        videoRepo.Save();
+                    
+                        translation.vID = item.ID;
+                    
+
+                        translationRepo.Add(translation);
+                        return RedirectToAction("/GetVideos");
+                    }
+                }
+
+                int videoId = videoNames.Last().ID + 1;
+            
+                videoRepo.AddVideo(translation);
+
+                translation.vID = videoId;
+                translationRepo.Add(translation);
+
+                return RedirectToAction("/GetVideos");
+            
+            }
+            
+            return View(translation);
         }
 
 
@@ -133,6 +175,34 @@ namespace TransApp.Controllers
                          select t);
 
             return View(model.ToPagedList(pageNumber, pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult OrderCategoryByName(int? page, string category)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var model = (from name in videoRepo.GetAllVideos()
+                         where name.videoCategory == category
+                         orderby name.videoName ascending
+                         select name);
+            return View(model.ToPagedList(pageNumber, pageSize));
+
+        }
+
+        public ActionResult OrderCategoryByDate(int? page, string category)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var model = (from date in videoRepo.GetAllVideos()
+                         where date.videoCategory == category
+                         orderby date.videoTime descending
+                         select date);
+            return View(model.ToPagedList(pageNumber, pageSize));
+
+
         }
 
         public ActionResult GetTranslationsByVideoId(int id, int? page)
@@ -194,8 +264,30 @@ namespace TransApp.Controllers
             {
                 searchVideos = searchVideos.Where(a => a.videoName.ToLower().Contains(searchString.ToLower()));
             }
-            
+
             return View(searchVideos.ToPagedList(pageNumber, pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult GetTranslationById(int id)
+        {
+            var model = (from translation in translationRepo.GetAllTranslations()
+                         where translation.ID == id
+                         select translation).SingleOrDefault();
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult GetTranslationById(Translation t)
+        {
+            if(ModelState.IsValid)
+            {
+                translationRepo.Update(t);
+                return RedirectToAction("/GetVideos");
+            }
+
+            return View(t);
         }
         
 	}

@@ -2,10 +2,8 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "GetVideoByCategory";
+    ViewBag.Title = "OrderCategoryByDate";
 }
-
-<h2>GetVideoByCategory</h2>
 
 @Html.ActionLink("Ný þýðing", "AddTranslation", "Video")
 
@@ -26,7 +24,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>@Html.ActionLink("Nafn", "OrderCategoryByName", new { category = Model[0].videoCategory})</th>
+            <th>@Html.ActionLink("Nafn", "OrderCategoryByName", new { category = Model[0].videoCategory })</th>
             <th>Flokkur</th>
             <th>@Html.ActionLink("Dagsetning", "OrderCategoryByDate", new { category = Model[0].videoCategory })</th>
         </tr>
@@ -45,6 +43,8 @@
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+@Html.PagedListPager(Model, page => Url.Action("OrderCategoryByDate", new { page, category = Model[0].videoCategory}))
 
-@Html.PagedListPager(Model, page => Url.Action("GetVideoByCategory", new {category = Model[0].videoCategory, page }))
+
+
 
