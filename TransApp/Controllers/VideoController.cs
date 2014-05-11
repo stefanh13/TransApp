@@ -253,10 +253,21 @@ namespace TransApp.Controllers
 
         
         [HttpGet]
-        public ViewResult SearchEngine(string searchString, int? page)
+        public ViewResult SearchEngine(string searchString, string currentFilter, int? page)
         {
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+
+            if(searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
             
             var searchVideos = (from a in videoRepo.GetAllVideos()
                                 select a);
