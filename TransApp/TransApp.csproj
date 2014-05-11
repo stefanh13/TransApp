@@ -271,6 +271,9 @@
     <Content Include="Views\Video\GetTranslationById.cshtml" />
     <Content Include="Views\Video\OrderCategoryByName.cshtml" />
     <Content Include="Views\Video\OrderCategoryByDate.cshtml" />
+    <Content Include="Views\Video\OrderSearchByName.cshtml" />
+    <Content Include="Views\Video\Search.cshtml" />
+    <Content Include="Views\Video\OrderSearchByDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

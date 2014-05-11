@@ -2,11 +2,15 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "SearchEngine";
+    ViewBag.Title = "OrderSearchByDate";
 }
 
 @{Html.RenderPartial("Search");}
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("SearchEngine", new { page, currentFilter = ViewBag.CurrentFilter }))
+@Html.PagedListPager(Model, page => Url.Action("OrderSearchByDate", new { page, currentFilter = ViewBag.CurrentFilter }))
+
+
+
+

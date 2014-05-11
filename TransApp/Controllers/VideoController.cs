@@ -280,6 +280,62 @@ namespace TransApp.Controllers
         }
 
         [HttpGet]
+        public ActionResult OrderSearchByName(string searchString, string currentFilter, int? page)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var searchVideos = (from a in videoRepo.GetAllVideos()
+                                select a);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchVideos = searchVideos.Where(a => a.videoName.ToLower().Contains(searchString.ToLower())).OrderBy(s => s.videoName);
+            }
+
+            return View(searchVideos.ToPagedList(pageNumber, pageSize));
+
+        }
+
+        [HttpGet]
+        public ActionResult OrderSearchByDate(string searchString, string currentFilter, int? page)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var searchVideos = (from a in videoRepo.GetAllVideos()
+                                select a);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchVideos = searchVideos.Where(a => a.videoName.ToLower().Contains(searchString.ToLower())).OrderByDescending(s => s.videoTime);
+            }
+
+            return View(searchVideos.ToPagedList(pageNumber, pageSize));
+
+        }
+
+        [HttpGet]
         public ActionResult GetTranslationById(int id)
         {
             var model = (from translation in translationRepo.GetAllTranslations()
