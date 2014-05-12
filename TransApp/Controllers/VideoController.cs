@@ -365,7 +365,7 @@ namespace TransApp.Controllers
             return View(t);
         }
 
-        public ActionResult Download(string translation)
+        public ActionResult Download(string translation, string fileName)
         {
             /*MemoryStream ms = new MemoryStream();
             TextWriter tw = new StreamWriter(ms);
@@ -389,9 +389,11 @@ namespace TransApp.Controllers
             byte[] bytes = mStream.ToArray();
             mStream.Close();
 
+            string enCodeFileName = Server.UrlEncode(fileName);
+
             Response.Clear();
             Response.ContentType = "application/force-download";
-            Response.AddHeader("content-disposition", "attachment;    filename=file.srt");
+            Response.AddHeader("content-disposition", "attachment;    filename=" + enCodeFileName + ".srt");
             Response.BinaryWrite(bytes);
             Response.End();
             
