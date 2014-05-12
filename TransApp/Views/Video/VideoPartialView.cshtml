@@ -5,23 +5,20 @@
     ViewBag.Title = "GetVideos";
 }
 
-<h2>GetVideos</h2>
+@Html.ActionLink("Ný þýðing", "AddTranslation", "Video", null, new { @class = "btn btn-default btn-lg active" })
 
-@Html.ActionLink("Ný þýðing", "AddTranslation", "Video")
-
-@using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
+@using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get, new { @class = "leita" }))
 {
     <p>
         Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
-
-<ul>
-    <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
-    <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
-    <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
-</ul>
+    <ul class="flokkar">
+        <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
+        <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
+        <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
+    </ul>
 
 <table class="table table-hover">
     <thead>

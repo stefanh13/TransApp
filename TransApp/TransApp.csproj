@@ -276,7 +276,7 @@
     <Content Include="Views\Video\OrderSearchByDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="obj\" />
+    <Folder Include="fonts\obj\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
