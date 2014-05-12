@@ -1,4 +1,4 @@
-﻿@model TransApp.Models.Translation
+﻿@model TransApp.ViewModels.TranslationViewModel
 
 @{
     ViewBag.Title = "GetTranslationById";
@@ -10,66 +10,57 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Translation</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.vID, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationCategory, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.vID)
-                @Html.ValidationMessageFor(model => model.vID)
+                @Html.EditorFor(model => model.Translation.translationCategory)
+                @Html.ValidationMessageFor(model => model.Translation.translationCategory)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.translationCategory, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.translationCategory)
-                @Html.ValidationMessageFor(model => model.translationCategory)
+                @Html.EditorFor(model => model.Translation.translationName)
+                @Html.ValidationMessageFor(model => model.Translation.translationName)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.translationName, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationDescription, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.translationName)
-                @Html.ValidationMessageFor(model => model.translationName)
+                @Html.EditorFor(model => model.Translation.translationDescription)
+                @Html.ValidationMessageFor(model => model.Translation.translationDescription)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.translationDescription, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationText, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.translationDescription)
-                @Html.ValidationMessageFor(model => model.translationDescription)
+                @Html.TextAreaFor(model => model.Translation.translationText, new { @cols = "80", @rows = "8" })
+                @Html.ValidationMessageFor(model => model.Translation.translationText)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.translationText, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationLanguage, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.translationText, new { @cols = "80", @rows = "8" })
-                @Html.ValidationMessageFor(model => model.translationText)
+                @Html.EditorFor(model => model.Translation.translationLanguage)
+                @Html.ValidationMessageFor(model => model.Translation.translationLanguage)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.translationLanguage, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationTime, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.translationLanguage)
-                @Html.ValidationMessageFor(model => model.translationLanguage)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.translationTime, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.translationTime)
-                @Html.ValidationMessageFor(model => model.translationTime)
+                @Html.EditorFor(model => model.Translation.translationTime)
+                @Html.ValidationMessageFor(model => model.Translation.translationTime)
             </div>
         </div>
 
@@ -79,17 +70,52 @@
             </div>
         </div>
     </div>
-    
-   
+
+
 }
 
-@using (Html.BeginForm("Download", "Video", new { translation = Model.translationText, fileName = Model.translationName }))
+@using (Html.BeginForm("Download", "Video", new { translation = Model.Translation.translationText, fileName = Model.Translation.translationName }))
 {
     <p>
 
         <input type="submit" value="Sækja" />
     </p>
 }
+
+<hr />
+
+<ul class="list-group" style="max-width: 560px;">
+
+    @foreach(var item in Model.Comments)
+    {
+        <li class="list-group-item">
+            <p>
+                <span class="glyphicon glyphicon-user"></span>
+                <span>@item.userName</span>
+                <span>@item.commentText</span>
+            </p>
+            <p>
+                <span>@item.commentTime</span>
+            </p>
+        </li>
+    }
+
+    <li class="list-group-item">
+
+        <div class="form-horizontal">
+            @using (Html.BeginForm("AddComment", "Video", new { id = Model.Translations.ID }, FormMethod.Post))
+            {
+                <p>
+                    @Html.TextBox("SearchString")
+                    <input type="submit" id="SearchBtnID" value="Senda" />
+                </p>
+            }
+            <textarea class="form-control" rows="3" id="CommentText" ></textarea>
+            <button id="SubmitButton" type="submit" class="btn btn-primary">Senda</button>
+        </div>
+    </li>
+
+</ul>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

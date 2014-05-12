@@ -7,6 +7,7 @@ using TransApp.Models;
 using TransApp.Repositories;
 using PagedList;
 using System.IO;
+using TransApp.ViewModels;
 
 
 namespace TransApp.Controllers
@@ -15,6 +16,7 @@ namespace TransApp.Controllers
     {
         VideoRepository videoRepo = new VideoRepository();
         TranslationRepository translationRepo = new TranslationRepository();
+        CommentRepository commentRepo = new CommentRepository();
         
         private readonly IVideoRepository repo;
         private readonly ITranslationRepository repo2;
@@ -349,8 +351,24 @@ namespace TransApp.Controllers
             var model = (from translation in translationRepo.GetAllTranslations()
                          where translation.ID == id
                          select translation).SingleOrDefault();
+
+            /*if (model == null) {
+                return View("NotFound");
+            }*/
+
+            //model = model.SingleOrDefault();
+
             
-            return View(model);
+            // Fetch comments for the transtion in question.
+            var comments = (from comm in commentRepo.GetAllComments()
+                            where comm.tID == id
+                            select comm);
+
+            TranslationViewModel tViewModel = new TranslationViewModel();
+
+            tViewModel.Translation = model;
+            tViewModel.Comments = comments;
+            return View(tViewModel);
         }
 
         [HttpPost]
@@ -397,6 +415,11 @@ namespace TransApp.Controllers
             Response.BinaryWrite(bytes);
             Response.End();
             
+            return View();
+        }
+
+        public ActionResult AddDownload(int? id, string commentText)
+        {
             return View();
         }
         
