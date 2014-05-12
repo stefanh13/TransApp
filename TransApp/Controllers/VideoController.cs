@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TransApp.Models;
 using TransApp.Repositories;
 using PagedList;
+using System.IO;
 
 
 namespace TransApp.Controllers
@@ -338,8 +339,13 @@ namespace TransApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetTranslationById(int id)
+        public ActionResult GetTranslationById(int? id)
         {
+            if(id == null || !translationRepo.isIdValid(id))
+            {
+                return View("NotFound");
+            }
+            
             var model = (from translation in translationRepo.GetAllTranslations()
                          where translation.ID == id
                          select translation).SingleOrDefault();
@@ -357,6 +363,41 @@ namespace TransApp.Controllers
             }
 
             return View(t);
+        }
+
+        public ActionResult Download(string translation, string fileName)
+        {
+            /*MemoryStream ms = new MemoryStream();
+            TextWriter tw = new StreamWriter(ms);
+            tw.WriteLine("Line 1");
+            tw.WriteLine("Line 2");
+            tw.WriteLine("Line 3");
+            tw.Flush();
+            byte[] bytes = ms.ToArray();
+            ms.Close();
+
+            Response.Clear();
+            Response.ContentType = "application/force-download";
+            Response.AddHeader("content-disposition", "attachment;    filename=file.txt");
+            Response.BinaryWrite(bytes);
+            Response.End();*/
+
+            MemoryStream mStream = new MemoryStream();
+            TextWriter tWriter = new StreamWriter(mStream);
+            tWriter.WriteLine(translation);
+            tWriter.Flush();
+            byte[] bytes = mStream.ToArray();
+            mStream.Close();
+
+            string enCodeFileName = Server.UrlEncode(fileName);
+
+            Response.Clear();
+            Response.ContentType = "application/force-download";
+            Response.AddHeader("content-disposition", "attachment;    filename=" + enCodeFileName + ".srt");
+            Response.BinaryWrite(bytes);
+            Response.End();
+            
+            return View();
         }
         
 	}
