@@ -1,8 +1,11 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<div class="forsida">
+    <img src="frontPage.png" alt="forsida" width="300" height="300" />
+</div>
 
-@using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
+@using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get, new { @class = "leita" }))
 {
     <p>
         @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
@@ -10,7 +13,7 @@
     </p>
 }
 
-<ul>
+<ul class="flokkar">
     <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
     <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
     <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
