@@ -41,5 +41,23 @@ namespace TransApp.Repositories
                 }
             }
         }
+
+        public bool isIdValid(int? id)
+        {
+           if(id == null)
+           {
+               return false;
+           }
+           
+           foreach(var translation in translationDb.translations)
+           {
+               if(translation.ID == id)
+               {
+                   return true;
+               }
+           }
+
+           return false;
+        }
     }
 }

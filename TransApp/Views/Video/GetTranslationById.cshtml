@@ -79,6 +79,16 @@
             </div>
         </div>
     </div>
+    
+   
+}
+
+@using (Html.BeginForm("Download", "Video", new { translation = Model.translationText }))
+{
+    <p>
+
+        <input type="submit" value="Sækja" />
+    </p>
 }
 
 <div>

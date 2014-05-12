@@ -274,6 +274,7 @@
     <Content Include="Views\Video\OrderSearchByName.cshtml" />
     <Content Include="Views\Video\Search.cshtml" />
     <Content Include="Views\Video\OrderSearchByDate.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
