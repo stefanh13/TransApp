@@ -11,8 +11,8 @@
 @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
 {
     <p>
-        Search: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
+        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
+        <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
     </p>
 }
 
