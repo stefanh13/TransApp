@@ -17,6 +17,8 @@ namespace TransApp.Controllers
         
         private readonly IVideoRepository repo;
         private readonly ITranslationRepository repo2;
+       
+        const int PAGESIZE = 10;
         
         public VideoController(IVideoRepository rep)
         {
@@ -139,7 +141,7 @@ namespace TransApp.Controllers
         */
         public ActionResult OrderByName(int? page)
         {
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
             
             var model = (from name in videoRepo.GetAllVideos()
@@ -151,7 +153,7 @@ namespace TransApp.Controllers
         
         public ActionResult OrderByDate(int? page)
         {
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
 
             var model = (from date in videoRepo.GetAllVideos()
@@ -166,7 +168,7 @@ namespace TransApp.Controllers
         
         public ActionResult GetVideoByCategory(string category, int? page)
         {
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
             
             var model = (from t in videoRepo.GetAllVideos()
@@ -180,7 +182,7 @@ namespace TransApp.Controllers
         [HttpGet]
         public ActionResult OrderCategoryByName(int? page, string category)
         {
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
 
             var model = (from name in videoRepo.GetAllVideos()
@@ -193,7 +195,7 @@ namespace TransApp.Controllers
 
         public ActionResult OrderCategoryByDate(int? page, string category)
         {
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
 
             var model = (from date in videoRepo.GetAllVideos()
@@ -208,7 +210,7 @@ namespace TransApp.Controllers
         public ActionResult GetTranslationsByVideoId(int id, int? page)
         {
 
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
             
             var model = (from t in translationRepo.GetAllTranslations()
@@ -241,7 +243,7 @@ namespace TransApp.Controllers
         public ActionResult GetVideos(int? page)
         {
 
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
  
             var model = (from videos in videoRepo.GetAllVideos()
@@ -255,7 +257,7 @@ namespace TransApp.Controllers
         [HttpGet]
         public ViewResult SearchEngine(string searchString, string currentFilter, int? page)
         {
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
 
             if(searchString != null)
@@ -282,7 +284,7 @@ namespace TransApp.Controllers
         [HttpGet]
         public ActionResult OrderSearchByName(string searchString, string currentFilter, int? page)
         {
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
 
             if (searchString != null)
@@ -310,7 +312,7 @@ namespace TransApp.Controllers
         [HttpGet]
         public ActionResult OrderSearchByDate(string searchString, string currentFilter, int? page)
         {
-            int pageSize = 10;
+            int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
 
             if (searchString != null)
