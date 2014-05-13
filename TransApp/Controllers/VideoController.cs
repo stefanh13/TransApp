@@ -79,15 +79,9 @@ namespace TransApp.Controllers
        
         [HttpPost]
         public ActionResult AddTranslation(HttpPostedFileBase file, Translation translation)
-        {
-         
+        { 
             string contentData = null;
-
-            if (file.ContentLength > 1000000)
-            {
-                return View("FileView");
-            }
-            
+ 
             if (file != null)
             {
                 using (StreamReader stream = new StreamReader(file.InputStream))
@@ -420,6 +414,11 @@ namespace TransApp.Controllers
             string returnUrl = "/GetTranslationById/" + id.ToString();
 
             return RedirectToAction(returnUrl);
+        }
+
+        public ActionResult UploadTooLarge()
+        {
+            return View();
         }
         
 	}
