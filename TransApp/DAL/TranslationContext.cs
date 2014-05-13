@@ -10,7 +10,7 @@ namespace TransApp.DAL
 {
     public class TranslationContext : DbContext
     {
-         public TranslationContext() : base("TranslationContext")
+        public TranslationContext() : base("TranslationContext")
         {
 
         }

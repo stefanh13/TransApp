@@ -7,6 +7,7 @@ using TransApp.Models;
 using TransApp.Repositories;
 using PagedList;
 using System.IO;
+using TransApp.ViewModels;
 
 
 namespace TransApp.Controllers
@@ -15,6 +16,7 @@ namespace TransApp.Controllers
     {
         VideoRepository videoRepo = new VideoRepository();
         TranslationRepository translationRepo = new TranslationRepository();
+        CommentRepository commentRepo = new CommentRepository();
         
         private readonly IVideoRepository repo;
         private readonly ITranslationRepository repo2;
@@ -349,8 +351,24 @@ namespace TransApp.Controllers
             var model = (from translation in translationRepo.GetAllTranslations()
                          where translation.ID == id
                          select translation).SingleOrDefault();
+
+            /*if (model == null) {
+                return View("NotFound");
+            }*/
+
+            //model = model.SingleOrDefault();
+
             
-            return View(model);
+            // Fetch comments for the transtion in question.
+            var comments = (from comm in commentRepo.GetAllComments()
+                            where comm.tID == id
+                            select comm);
+
+            TranslationViewModel tViewModel = new TranslationViewModel();
+
+            tViewModel.Translation = model;
+            tViewModel.Comments = comments;
+            return View(tViewModel);
         }
 
         [HttpPost]
@@ -367,20 +385,6 @@ namespace TransApp.Controllers
 
         public ActionResult Download(string translation, string fileName)
         {
-            /*MemoryStream ms = new MemoryStream();
-            TextWriter tw = new StreamWriter(ms);
-            tw.WriteLine("Line 1");
-            tw.WriteLine("Line 2");
-            tw.WriteLine("Line 3");
-            tw.Flush();
-            byte[] bytes = ms.ToArray();
-            ms.Close();
-
-            Response.Clear();
-            Response.ContentType = "application/force-download";
-            Response.AddHeader("content-disposition", "attachment;    filename=file.txt");
-            Response.BinaryWrite(bytes);
-            Response.End();*/
 
             MemoryStream mStream = new MemoryStream();
             TextWriter tWriter = new StreamWriter(mStream);
@@ -398,6 +402,18 @@ namespace TransApp.Controllers
             Response.End();
             
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddComment(int? id, string commentText)
+        {
+            int translationId = id.Value;
+            
+            commentRepo.AddComment(translationId, commentText, User.Identity.Name);
+
+            string returnUrl = "/GetTranslationById/" + id.ToString();
+
+            return RedirectToAction(returnUrl);
         }
         
 	}
