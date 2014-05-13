@@ -169,17 +169,36 @@ namespace TransApp.Controllers
         
         
         
-        public ActionResult GetVideoByCategory(string category, int? page)
+        public ActionResult GetVideoByCategory(string category, int? page, string sortOrder)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
+            
+      
+            var videos = from v in videoRepo.GetAllVideos()
+                         where v.videoCategory == category
+                         select v;
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    videos = videos.OrderByDescending(v => v.videoName);
+                    break;
+                case "Date":
+                    videos = videos.OrderBy(v => v.videoTime);
+                    break;
+                case "Name":
+                    videos = videos.OrderBy(v => v.videoName);
+                    break;
+                default:
+                    videos = videos.OrderByDescending(v => v.videoTime);
+                    break;
+            }
             int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
             
-            var model = (from t in videoRepo.GetAllVideos()
-                         where t.videoCategory == category
-                         orderby t.videoTime descending
-                         select t);
-
-            return View(model.ToPagedList(pageNumber, pageSize));
+            return View(videos.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpGet]
@@ -210,23 +229,45 @@ namespace TransApp.Controllers
 
         }
 
-        public ActionResult GetTranslationsByVideoId(int id, int? page)
+        public ActionResult GetTranslationsByVideoId(int? id, int? page, string sortOrder)
         {
+            ViewBag.ID = id;
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.LanguageSortParm = sortOrder == "Language" ? "lang_desc" : "Language";
+            var translations = from v in translationRepo.GetAllTranslations()
+                         where v.vID == id
+                         select v;
+            switch (sortOrder)
+            {
+                case "Date":
+                    translations = translations.OrderBy(t => t.translationTime);
+                    break;
+                case "lang_desc":
+                    translations = translations.OrderByDescending(t => t.translationLanguage);
+                    break;
+                case "Language":
+                    translations = translations.OrderBy(t => t.translationLanguage);
+                    break;
+                default:
+                    translations = translations.OrderByDescending(t => t.translationTime);
+                    break;
+            }
 
             int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
             
-            var model = (from t in translationRepo.GetAllTranslations()
+            /*var model = (from t in translationRepo.GetAllTranslations()
                          where t.vID == id
                          orderby t.translationTime descending
-                         select t).Take(10);
+                         select t).Take(10);*/
             
             /*var model = (from t in repo2.GetTranslations()
                          where t.vID == id
                          orderby t.translationTime descending
                          select t).Take(10);*/
 
-            return View(model.ToPagedList(pageNumber, pageSize));
+            return View(translations.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult GetVideoBySearchName(string searchString)
@@ -246,8 +287,8 @@ namespace TransApp.Controllers
         public ActionResult GetVideos(int? page, string sortOrder)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
             var videos = from v in videoRepo.GetAllVideos()
                            select v;
             switch (sortOrder)
@@ -258,11 +299,11 @@ namespace TransApp.Controllers
                 case "Date":
                     videos = videos.OrderBy(v => v.videoTime);
                     break;
-                case "date_desc":
-                    videos = videos.OrderByDescending(v => v.videoTime);
+                case "Name":
+                    videos = videos.OrderBy(v => v.videoName);
                     break;
                 default:
-                    videos = videos.OrderBy(v => v.videoName);
+                    videos = videos.OrderByDescending(v => v.videoTime);
                     break;
             }
 
@@ -280,12 +321,13 @@ namespace TransApp.Controllers
 
         
         [HttpGet]
-        public ViewResult SearchEngine(string searchString, string currentFilter, int? page)
+        public ViewResult SearchEngine(string searchString, string currentFilter, int? page, string sortOrder)
         {
-            int pageSize = PAGESIZE;
-            int pageNumber = (page ?? 1);
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
 
-            if(searchString != null)
+            if (searchString != null)
             {
                 page = 1;
             }
@@ -302,7 +344,29 @@ namespace TransApp.Controllers
             {
                 searchVideos = searchVideos.Where(a => a.videoName.ToLower().Contains(searchString.ToLower()));
             }
+            
 
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    searchVideos = searchVideos.OrderByDescending(v => v.videoName);
+                    break;
+                case "Date":
+                    searchVideos = searchVideos.OrderBy(v => v.videoTime);
+                    break;
+                case "Name":
+                    searchVideos = searchVideos.OrderBy(v => v.videoName);
+                    break;
+                default:
+                    searchVideos = searchVideos.OrderByDescending(v => v.videoTime);
+                    break;
+            }
+            
+            int pageSize = PAGESIZE;
+            int pageNumber = (page ?? 1);
+
+            
+            
             return View(searchVideos.ToPagedList(pageNumber, pageSize));
         }
 

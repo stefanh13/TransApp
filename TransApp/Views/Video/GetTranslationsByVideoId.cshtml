@@ -16,8 +16,8 @@
     <thead>
         <tr>
             <th>Nafn</th>
-            <th>Tungumál</th>
-            <th>Dagsetning</th>
+            <th>@Html.ActionLink("Tungumál", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.LanguageSortParm })</th>
+            <th>@Html.ActionLink("Dagsetning", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DateSortParm })</th>
         </tr>
     </thead>
     <tbody>

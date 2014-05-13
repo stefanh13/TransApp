@@ -5,8 +5,42 @@
     ViewBag.Title = "SearchEngine";
 }
 
-@{Html.RenderPartial("Search");}
+@Html.ActionLink("Ný þýðing", "AddTranslation", "Video")
+
+@using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
+        <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
+    </p>
+}
+
+<ul>
+    <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
+    <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
+    <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
+</ul>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink("Nafn", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.NameSortParm })</th>
+            <th>Flokkur</th>
+            <th>@Html.ActionLink("Dagsetning", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.DateSortParm })</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
+                <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
+                <td>@item.videoTime</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("SearchEngine", new { page, currentFilter = ViewBag.CurrentFilter }))
+@Html.PagedListPager(Model, page => Url.Action("SearchEngine", new { page, currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.CurrentSort }))
