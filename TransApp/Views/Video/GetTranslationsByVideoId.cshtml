@@ -2,14 +2,11 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "GetTranslationsByVideoId";
+    ViewBag.Title = "Sjá þýðingu";
 }
 
-<h2>GetTranslationsByVideoId</h2>
-
-
-@Html.ActionLink("Ný þýðing", "AddTranslation", "Video")
-<ul>
+@Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { @class = "btn btn-default btn-lg active" })
+<ul class="flokkar">
     <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
     <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
     <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
