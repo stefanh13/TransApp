@@ -1,0 +1,28 @@
+﻿@model TransApp.Models.Video
+
+@{
+    ViewBag.Title = "CommonQuestions";
+}
+
+<h2>Algengar spurningar</h2>
+
+<h3>Hvað er .srt?</h3>
+<p>srt. er skjátextaskrá sem margir myndbandsspilarar geta notað. Snið .srt skráa er einfalt að lesa og auðvelt er að búa til .srt skrár. </p>
+
+<h3>Hvernig er snið á .srt skrám?</h3>
+<p>Snið á srt. skrám er eftirfarandi:</p>
+<p>Númer á skjátexta</p>
+<p>Byrjun skjátextans -> Endir skjátextans</p>
+<p>Skjátextinn</p>
+<p>Auð lína</p>
+<p>Dæmi:</p>
+<p>001</p>
+<p>00:01:02.000 -> 00:01:05.000</p>
+<p>Fyrsta lína af skjátexta 1</p>
+<p>Önnur lína af skjátexta 1</p>
+<br />
+<p>Þetta dæmi myndi láta fyrsta skjátextann birtast á 1 mínútu og 2 sekúndu í myndbandinu og skjátextinn myndi hverfa a 1 mínútu og 5 sekúndu.
+Nauðsynlegt er að hafa rétt snið á skránni svo hún virki. Byrjað er með númer á skjátexta í fyrst línunni. Svo kemur línuskipting áður en slegið er byrjun á skjátexta. Svo kemur eitt línubil milli og táknin “->” svo annað línubil og loksins endirinn á skjátextanum. Svo kemur eitt línubil og textinn sem mun birtast með myndbandinu. Hægt er að hafa margar línur hér og til að byrja á næsta texta sem birtist er slegið inn autt bil.
+</p>
+<h3>Hvernig er búið til srt. skrá?</h3>
+<p>Leiðin sem við mælum með er að nota ritvinnsluforrit (t.d. word eða notepad) til að að búa til eða að breyta .srt skrá. Þegar búið er að búa til skrána eða breyta henni er hún vistuð með .srt endingunni. </p>

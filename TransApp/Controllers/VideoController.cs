@@ -48,6 +48,11 @@ namespace TransApp.Controllers
             return View();
         }
 
+        public ActionResult CommonQuestions()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult AddTranslation()
         {

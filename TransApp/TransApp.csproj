@@ -270,6 +270,7 @@
     <Content Include="Views\Video\FileView.cshtml" />
     <Content Include="Views\UserRequest\GetRequests.cshtml" />
     <Content Include="Views\Video\UploadTooLarge.cshtml" />
+    <Content Include="Views\Video\CommonQuestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
