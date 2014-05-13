@@ -7,12 +7,12 @@ using TransApp.Models;
 using TransApp.Repositories;
 using PagedList;
 using System.IO;
-<<<<<<< HEAD
+
 using TransApp.ViewModels;
-=======
 
 
->>>>>>> Autori-Branch
+
+
 
 
 namespace TransApp.Controllers
