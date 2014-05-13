@@ -9,7 +9,7 @@ namespace TransApp.Models
     public class UserRequest
     {
         public int ID { get; set; }
-        public string uID { get; set; }
+        public string userName { get; set; }
         [Required(ErrorMessage="Settu inn titil")]
         public string requestName { get; set; }
         public string requestText { get; set; }

@@ -7,20 +7,66 @@ using TransApp.DAL;
 using TransApp.Models;
 using TransApp.Repositories;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 
 namespace TransApp.Controllers
 {
     public class UserRequestController : Controller
     {
-        UserRequestRepository UserReqRepo = new UserRequestRepository();
+        const int PAGESIZE = 10;
+        
+        UserRequestRepository userReqRepo = new UserRequestRepository();
 
-        public ActionResult GetRequests()
+        public ActionResult GetRequests(int? page, string sortOrder)
         {
-            var model = (from r in UserReqRepo.GetAllUserRequests()
+
+            ViewBag.CurrentSort = sortOrder;
+            
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewBag.LanguageSortParm = sortOrder == "Language" ? "lang_desc" : "Language";
+            ViewBag.LikeSortParm = sortOrder == "Like" ? "like_desc" : "Like";
+            
+            var requests = (from req in userReqRepo.GetAllUserRequests()
+                            select req);
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    requests = requests.OrderByDescending(r => r.requestName);
+                    break;
+                case "lang_desc":
+                    requests = requests.OrderByDescending(r => r.requestLanguage);
+                    break;
+                case "like_desc":
+                    requests = requests.OrderByDescending(r => r.likes);
+                    break;
+                case "Date":
+                    requests = requests.OrderBy(r => r.requestTime);
+                    break;
+                case "Name":
+                    requests = requests.OrderBy(r => r.requestName);
+                    break;
+                case "Language":
+                    requests = requests.OrderBy(r => r.requestLanguage);
+                    break;
+                case "Like":
+                    requests = requests.OrderBy(r => r.likes);
+                    break;
+                default:
+                    requests = requests.OrderByDescending(r => r.requestTime);
+                    break;
+            }
+
+            int pageSize = PAGESIZE;
+            int pageNumber = (page ?? 1);
+
+            return View(requests.ToPagedList(pageNumber, pageSize));
+            
+            /*var model = (from r in UserReqRepo.GetAllUserRequests()
                          orderby r.requestTime descending
                          select r).Take(10);
-            return View(model);
+            return View(model);*/
         }
 
 
@@ -35,7 +81,7 @@ namespace TransApp.Controllers
             languageList.Add(new SelectListItem { Text = "Íslenska", Value = "Íslenska" });
             languageList.Add(new SelectListItem { Text = "Þýska", Value = "Þýska" });
             ViewData["requestLanguage"] = languageList;
-            UserReqRepo.Save();
+            userReqRepo.Save();
             return View(new UserRequest());
         }
 
@@ -53,61 +99,25 @@ namespace TransApp.Controllers
 
             if (ModelState.IsValid)
             {
-                u.uID = User.Identity.GetUserId();
-                UpdateModel(u);
-                UserReqRepo.AddUserRequests(u);
-                UserReqRepo.Save();
+                u.userName = User.Identity.Name;
+                userReqRepo.AddUserRequests(u);
                 return RedirectToAction("GetRequests");
             }
             return View(u);
         }
 
-        public ActionResult OrderRequestsByName()
-        {
-            var model = (from r in UserReqRepo.GetAllUserRequests()
-                         orderby r.requestName ascending
-                         select r).Take(10);
-
-            return View(model);
-        }
-        public ActionResult OrderRequestsByLanguage()
-        {
-            var model = (from l in UserReqRepo.GetAllUserRequests()
-                         orderby l.requestLanguage ascending
-                         select l).Take(10);
-
-            return View(model);
-        }
-        public ActionResult OrderRequestsByDate()
-        {
-            var model = (from t in UserReqRepo.GetAllUserRequests()
-                         orderby t.requestTime ascending
-                         select t).Take(10);
-
-            return View(model);
-        }
-        public ActionResult OrderRequestsByLikes()
-        {
-            var model = (from l in UserReqRepo.GetAllUserRequests()
-                         orderby l.likes descending
-                         select l).Take(10);
-
-            return View(model);
-        }
-
         public ActionResult LikeRequest(int reqId)
         {
-            UserReqRepo.UpdateLike(reqId);
+            userReqRepo.UpdateLike(reqId);
 
             return RedirectToAction("GetRequests");
         }
 
         public ActionResult GetUserRequestById(int id)
         {
-            var model = (from l in UserReqRepo.GetAllUserRequests()
+            var model = (from l in userReqRepo.GetAllUserRequests()
                          where l.ID == id
                          select l).FirstOrDefault();
-            var x = model;
 
             return View(model);
         }

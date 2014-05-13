@@ -20,7 +20,7 @@ namespace TransApp.Repositories
         public void AddUserRequests(UserRequest newReq)
         {
             userRequestDb.userRequest.Add(newReq);
-            userRequestDb.SaveChanges();
+            Save();
         }
 
         public void Save()
