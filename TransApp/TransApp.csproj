@@ -257,8 +257,6 @@
     <Content Include="Views\UserRequest\GetRequests.cshtml" />
     <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
     <Content Include="Views\Video\VideoPartialView.cshtml" />
-    <Content Include="Views\Video\OrderByName.cshtml" />
-    <Content Include="Views\Video\OrderByDate.cshtml" />
     <Content Include="Views\Video\GetVideoByCategory.cshtml" />
     <Content Include="Views\Video\AddTranslation.cshtml" />
     <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
@@ -271,10 +269,6 @@
     <Content Include="Views\UserRequest\GetUserRequestByIdList.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
     <Content Include="Views\Video\SearchEngine.cshtml" />
-    <Content Include="Views\Video\OrderCategoryByName.cshtml" />
-    <Content Include="Views\Video\OrderCategoryByDate.cshtml" />
-    <Content Include="Views\Video\OrderSearchByName.cshtml" />
-    <Content Include="Views\Video\Search.cshtml" />
     <Content Include="Views\Video\OrderSearchByDate.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Video\GetTranslationById.cshtml" />

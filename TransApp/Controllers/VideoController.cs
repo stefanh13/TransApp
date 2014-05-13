@@ -142,30 +142,8 @@ namespace TransApp.Controllers
             return View(model);
         }
         */
-        public ActionResult OrderByName(int? page)
-        {
-            int pageSize = PAGESIZE;
-            int pageNumber = (page ?? 1);
-            
-            var model = (from name in videoRepo.GetAllVideos()
-                         orderby name.videoName ascending
-                         select name);
-            return View(model.ToPagedList(pageNumber, pageSize));
-            
-        }
-        
-        public ActionResult OrderByDate(int? page)
-        {
-            int pageSize = PAGESIZE;
-            int pageNumber = (page ?? 1);
-
-            var model = (from date in videoRepo.GetAllVideos()
-                         orderby date.videoTime descending
-                         select date);
-            return View(model.ToPagedList(pageNumber, pageSize));
-            
-            
-        }
+       
+       
         
         
         
@@ -201,35 +179,7 @@ namespace TransApp.Controllers
             return View(videos.ToPagedList(pageNumber, pageSize));
         }
 
-        [HttpGet]
-        public ActionResult OrderCategoryByName(int? page, string category)
-        {
-            int pageSize = PAGESIZE;
-            int pageNumber = (page ?? 1);
-
-            var model = (from name in videoRepo.GetAllVideos()
-                         where name.videoCategory == category
-                         orderby name.videoName ascending
-                         select name);
-            return View(model.ToPagedList(pageNumber, pageSize));
-
-        }
-
-        public ActionResult OrderCategoryByDate(int? page, string category)
-        {
-            int pageSize = PAGESIZE;
-            int pageNumber = (page ?? 1);
-
-            var model = (from date in videoRepo.GetAllVideos()
-                         where date.videoCategory == category
-                         orderby date.videoTime descending
-                         select date);
-            return View(model.ToPagedList(pageNumber, pageSize));
-
-
-        }
-
-        public ActionResult GetTranslationsByVideoId(int? id, int? page, string sortOrder)
+         public ActionResult GetTranslationsByVideoId(int? id, int? page, string sortOrder)
         {
             ViewBag.ID = id;
             ViewBag.CurrentSort = sortOrder;
@@ -270,7 +220,7 @@ namespace TransApp.Controllers
             return View(translations.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult GetVideoBySearchName(string searchString)
+        /*public ActionResult GetVideoBySearchName(string searchString)
         {
             searchString = searchString.ToLower();
             
@@ -281,7 +231,7 @@ namespace TransApp.Controllers
 
             return View(model);
 
-        }
+        }*/
 
         [HttpGet]
         public ActionResult GetVideos(int? page, string sortOrder)
@@ -370,62 +320,7 @@ namespace TransApp.Controllers
             return View(searchVideos.ToPagedList(pageNumber, pageSize));
         }
 
-        [HttpGet]
-        public ActionResult OrderSearchByName(string searchString, string currentFilter, int? page)
-        {
-            int pageSize = PAGESIZE;
-            int pageNumber = (page ?? 1);
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var searchVideos = (from a in videoRepo.GetAllVideos()
-                                select a);
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                searchVideos = searchVideos.Where(a => a.videoName.ToLower().Contains(searchString.ToLower())).OrderBy(s => s.videoName);
-            }
-
-            return View(searchVideos.ToPagedList(pageNumber, pageSize));
-
-        }
-
-        [HttpGet]
-        public ActionResult OrderSearchByDate(string searchString, string currentFilter, int? page)
-        {
-            int pageSize = PAGESIZE;
-            int pageNumber = (page ?? 1);
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var searchVideos = (from a in videoRepo.GetAllVideos()
-                                select a);
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                searchVideos = searchVideos.Where(a => a.videoName.ToLower().Contains(searchString.ToLower())).OrderByDescending(s => s.videoTime);
-            }
-
-            return View(searchVideos.ToPagedList(pageNumber, pageSize));
-
-        }
-
+       
         [HttpGet]
         public ActionResult GetTranslationById(int? id)
         {
