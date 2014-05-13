@@ -270,9 +270,13 @@
     <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
     <Content Include="Views\Video\SearchEngine.cshtml" />
     <Content Include="Views\Video\OrderSearchByDate.cshtml" />
+
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Video\GetTranslationById.cshtml" />
     <Content Include="Views\Video\GetTranslationsByVideoId.cshtml" />
+
+    <Content Include="Views\Video\FileView.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

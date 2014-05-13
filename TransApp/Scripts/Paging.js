@@ -17,4 +17,13 @@
             $("#SearchBtnID").removeAttr('disabled');
         }
     });
+
+    $("#fileInput").keyup(function () {
+        console.log("I");
+       // alert(this.files[0].size / 1024 / 1024);
+    });
+
+    function checkFile() {
+        console.log($("#fileInput"));
+    };
 });

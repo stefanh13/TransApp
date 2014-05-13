@@ -16,7 +16,7 @@ namespace TransApp.Models
         public string translationName { get; set; }
         [Required(ErrorMessage = "Vinsamlegast sláðu inn lýsingu")]
         public string translationDescription { get; set; }
-        [Required(ErrorMessage = "Vinsamlegast sláðu inn þýðingu")]
+        
         public string translationText { get; set; }
         [Required(ErrorMessage = "Vinsamlegast veldu tungumál")]
         public string translationLanguage { get; set; }

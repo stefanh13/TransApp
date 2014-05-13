@@ -7,7 +7,12 @@ using TransApp.Models;
 using TransApp.Repositories;
 using PagedList;
 using System.IO;
+<<<<<<< HEAD
 using TransApp.ViewModels;
+=======
+
+
+>>>>>>> Autori-Branch
 
 
 namespace TransApp.Controllers
@@ -71,10 +76,26 @@ namespace TransApp.Controllers
                         select t;
             return View(model);*/
         }
-
+       
         [HttpPost]
-        public ActionResult AddTranslation(Translation translation)
+        public ActionResult AddTranslation(HttpPostedFileBase file, Translation translation)
         {
+         
+            string contentData = null;
+
+            if (file.ContentLength > 1000000)
+            {
+                return View("FileView");
+            }
+            
+            if (file != null)
+            {
+                using (StreamReader stream = new StreamReader(file.InputStream))
+                {
+                    contentData = stream.ReadToEnd();
+                }
+            }
+           
             List<SelectListItem> languageList = new List<SelectListItem>();
 
             languageList.Add(new SelectListItem { Text = "Veldu Tungumál", Value = "" });
@@ -94,10 +115,14 @@ namespace TransApp.Controllers
             ViewData["translationCategory"] = categoryList;
             
             if(ModelState.IsValid)
-            { 
-
+            {
                 string transName = translation.translationName;
-
+                
+                if (!String.IsNullOrEmpty(contentData))
+                {
+                    translation.translationText = translation.translationText + contentData;
+                }
+                
                 IEnumerable<Video> videoNames = videoRepo.GetAllVideos().ToList();
 
                 foreach(var item in videoNames)
