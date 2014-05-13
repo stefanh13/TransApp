@@ -15,5 +15,25 @@ namespace TransApp.Repositories
         {
             return commentDb.comments;
         }
+    
+        public void AddComment(int id, string commentText, string userName)
+        {
+            Comment c = new Comment();
+
+            c.commentText = commentText;
+            c.tID = id;
+            c.commentTime = DateTime.Now;
+            c.userName = userName;
+
+            commentDb.comments.Add(c);
+            Save();
+
+        }
+
+        public void Save()
+        {
+            commentDb.SaveChanges();
+        }
     }
+
 }

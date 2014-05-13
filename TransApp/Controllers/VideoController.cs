@@ -385,20 +385,6 @@ namespace TransApp.Controllers
 
         public ActionResult Download(string translation, string fileName)
         {
-            /*MemoryStream ms = new MemoryStream();
-            TextWriter tw = new StreamWriter(ms);
-            tw.WriteLine("Line 1");
-            tw.WriteLine("Line 2");
-            tw.WriteLine("Line 3");
-            tw.Flush();
-            byte[] bytes = ms.ToArray();
-            ms.Close();
-
-            Response.Clear();
-            Response.ContentType = "application/force-download";
-            Response.AddHeader("content-disposition", "attachment;    filename=file.txt");
-            Response.BinaryWrite(bytes);
-            Response.End();*/
 
             MemoryStream mStream = new MemoryStream();
             TextWriter tWriter = new StreamWriter(mStream);
@@ -418,9 +404,16 @@ namespace TransApp.Controllers
             return View();
         }
 
-        public ActionResult AddDownload(int? id, string commentText)
+        [HttpPost]
+        public ActionResult AddComment(int? id, string commentText)
         {
-            return View();
+            int translationId = id.Value;
+            
+            commentRepo.AddComment(translationId, commentText, User.Identity.Name);
+
+            string returnUrl = "/GetTranslationById/" + id.ToString();
+
+            return RedirectToAction(returnUrl);
         }
         
 	}

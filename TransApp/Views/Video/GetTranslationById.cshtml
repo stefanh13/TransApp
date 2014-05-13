@@ -103,11 +103,11 @@
     <li class="list-group-item">
 
         <div class="form-horizontal">
-            @using (Html.BeginForm("AddComment", "Video", new { id = Model.Translations.ID }, FormMethod.Post))
+            @using (Html.BeginForm("AddComment", "Video", new { id = Model.Translation.ID }))
             {
                 <p>
-                    @Html.TextBox("SearchString")
-                    <input type="submit" id="SearchBtnID" value="Senda" />
+                    @Html.TextBox("commentText", null, new { @class = "form-control" })
+                    <input type="submit" value="Senda" />
                 </p>
             }
             <textarea class="form-control" rows="3" id="CommentText" ></textarea>
