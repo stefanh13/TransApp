@@ -23,9 +23,9 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>@Html.ActionLink("Nafn", "OrderByName", "Video")</th>
+            <th>@Html.ActionLink("Nafn", "GetVideos", new { sortOrder = ViewBag.NameSortParm })</th>
             <th>Flokkur</th>
-            <th>@Html.ActionLink("Dagsetning", "OrderByDate", "Video")</th>
+            <th>@Html.ActionLink("Dagsetning", "GetVideos", new { sortOrder = ViewBag.DateSortParm })</th>
         </tr>
     </thead>
     <tbody>

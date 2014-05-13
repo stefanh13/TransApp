@@ -243,17 +243,39 @@ namespace TransApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetVideos(int? page)
+        public ActionResult GetVideos(int? page, string sortOrder)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var videos = from v in videoRepo.GetAllVideos()
+                           select v;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    videos = videos.OrderByDescending(v => v.videoName);
+                    break;
+                case "Date":
+                    videos = videos.OrderBy(v => v.videoTime);
+                    break;
+                case "date_desc":
+                    videos = videos.OrderByDescending(v => v.videoTime);
+                    break;
+                default:
+                    videos = videos.OrderBy(v => v.videoName);
+                    break;
+            }
 
             int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
  
-            var model = (from videos in videoRepo.GetAllVideos()
+            /*var model = (from videos in videoRepo.GetAllVideos()
                          orderby videos.videoTime descending
-                         select videos);
+                         select videos);*/
 
-            return View(model.ToPagedList(pageNumber, pageSize));
+            
+
+            return View(videos.ToPagedList(pageNumber, pageSize));
         }
 
         
