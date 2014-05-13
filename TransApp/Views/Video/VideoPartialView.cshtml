@@ -5,12 +5,12 @@
     ViewBag.Title = "GetVideos";
 }
 
-@Html.ActionLink("Ný þýðing", "AddTranslation", "Video", null, new { @class = "btn btn-default btn-lg active" })
+@Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { @class = "btn btn-default btn-lg active" })
 
 @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get, new { @class = "leita" }))
 {
     <p>
-        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
         <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
     </p>
 }

@@ -37,9 +37,14 @@ footer {
     margin-left: 39%;
 }
 
+.forsida {
+    margin-left: 36%;
+    margin-top: 3%;
+}
+
 .leita {
     margin-top: 3%;
-    margin-left: 38%; 
+    margin-left: 40%; 
 }
 
 .table {
@@ -49,7 +54,6 @@ footer {
 .btn { 
     margin-left: 45%;
     margin-top: 3%;
-    padding: 3%;
 }
 /* styles for validation helpers */
 .field-validation-error {
