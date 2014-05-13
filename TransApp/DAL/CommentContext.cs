@@ -8,13 +8,13 @@ using TransApp.Models;
 
 namespace TransApp.DAL
 {
-    public class TranslationContext : DbContext
+    public class CommentContext : DbContext
     {
-        public TranslationContext() : base("TranslationContext")
+        public CommentContext() : base("CommentContext")
         {
 
         }
-         public DbSet<Translation> translations { get; set; }
+         public DbSet<Comment> comments { get; set; }
         
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

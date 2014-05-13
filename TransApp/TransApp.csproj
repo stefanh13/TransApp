@@ -170,6 +170,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserRequestController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="DAL\CommentContext.cs" />
+    <Compile Include="DAL\CommentInitializer.cs" />
     <Compile Include="DAL\TranslationContext.cs" />
     <Compile Include="DAL\TranslationInitializer.cs" />
     <Compile Include="DAL\UserRequestContext.cs" />
@@ -189,12 +191,14 @@
     <Compile Include="Models\UserRequest.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CommentRepository.cs" />
     <Compile Include="Repositories\ITranslationRepository.cs" />
     <Compile Include="Repositories\IVideoRepository.cs" />
     <Compile Include="Repositories\TranslationRepository.cs" />
     <Compile Include="Repositories\UserRequestRepository.cs" />
     <Compile Include="Repositories\VideoRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\TranslationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\TransApp.mdf" />
@@ -253,8 +257,6 @@
     <Content Include="Views\UserRequest\GetRequests.cshtml" />
     <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
     <Content Include="Views\Video\VideoPartialView.cshtml" />
-    <Content Include="Views\Video\OrderByName.cshtml" />
-    <Content Include="Views\Video\OrderByDate.cshtml" />
     <Content Include="Views\Video\GetVideoByCategory.cshtml" />
     <Content Include="Views\Video\AddTranslation.cshtml" />
     <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
@@ -266,14 +268,11 @@
     <Content Include="Views\UserRequest\LikeRequest.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestByIdList.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
-    <Content Include="Views\Video\GetTranslationsByVideoId.cshtml" />
     <Content Include="Views\Video\SearchEngine.cshtml" />
-    <Content Include="Views\Video\GetTranslationById.cshtml" />
-    <Content Include="Views\Video\OrderCategoryByName.cshtml" />
-    <Content Include="Views\Video\OrderCategoryByDate.cshtml" />
-    <Content Include="Views\Video\OrderSearchByName.cshtml" />
-    <Content Include="Views\Video\Search.cshtml" />
     <Content Include="Views\Video\OrderSearchByDate.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Video\GetTranslationById.cshtml" />
+    <Content Include="Views\Video\GetTranslationsByVideoId.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

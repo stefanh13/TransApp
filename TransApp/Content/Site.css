@@ -16,6 +16,45 @@ textarea {
     max-width: 280px;
 }
 
+.reqheader {
+    color: black;
+}
+
+th {
+    color: black;
+}
+
+footer {
+    text-align: center;
+    border-top: medium; 
+}
+
+.flokkar li {
+    display: inline;
+}
+
+.flokkar {
+    margin-left: 39%;
+}
+
+.forsida {
+    margin-left: 36%;
+    margin-top: 3%;
+}
+
+.leita {
+    margin-top: 3%;
+    margin-left: 40%; 
+}
+
+.table {
+    margin-top: 5%;
+}
+
+.btn { 
+    margin-left: 45%;
+    margin-top: 3%;
+}
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;
