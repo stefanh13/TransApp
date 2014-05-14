@@ -63,13 +63,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.translationTime, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.translationTime)
-                @Html.ValidationMessageFor(model => model.translationTime)
-            </div>
-        </div>
+        
 
         @Html.Label("file")<input type="file" name="file" id="field" />
 
