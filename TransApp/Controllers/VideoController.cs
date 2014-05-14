@@ -9,6 +9,7 @@ using PagedList;
 using System.IO;
 
 using TransApp.ViewModels;
+using System.Text;
 
 
 
@@ -90,9 +91,9 @@ namespace TransApp.Controllers
  
             if (file != null)
             {
-                using (StreamReader stream = new StreamReader(file.InputStream))
+                using (StreamReader stream = new StreamReader(file.InputStream, Encoding.Default, true))
                 {
-                    contentData = stream.ReadToEnd();
+                    contentData = System.Environment.NewLine + stream.ReadToEnd();
                 }
                 string extension = Path.GetExtension(file.FileName);
 
