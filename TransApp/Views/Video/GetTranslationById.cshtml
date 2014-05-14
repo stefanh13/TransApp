@@ -121,12 +121,10 @@
             @using (Html.BeginForm("AddComment", "Video", new { id = Model.Translation.ID }))
             {
                 <p>
-                    @Html.TextBox("commentText", ViewBag.CurrentFilter as string, null, new { @class = "form-control", id = "CommentID" })
+                    @Html.TextBox("commentText", ViewBag.CurrentFilter as string, new { @class = "form-control", id = "CommentID" })
                     <input type="submit" id="CommhBtnID" value="Senda" disabled="disabled" />
                 </p>
             }
-            <textarea class="form-control" rows="3" id="CommentText" ></textarea>
-            <button id="SubmitButton" type="submit" class="btn btn-primary">Senda</button>
         </div>
     </li>
 
