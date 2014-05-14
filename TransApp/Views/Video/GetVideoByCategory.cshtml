@@ -4,47 +4,55 @@
 @{
     ViewBag.Title = "GetVideoByCategory";
 }
+<div class="row spacer">
+    <div class="span4">&nbsp;</div>
+    <div class="row text-center">
+        @Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { @class = "btn btn-default btn-lg active" })
+    </div>
+</div>
 
-<h2>GetVideoByCategory</h2>
+    @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
+    {
+        <div class="row spacer">
+            <div class="span4">&nbsp;</div>
+            <div class="row text-center">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
+                <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
+            </div>
+            <div class="span4">&nbsp;</div>
+        </div>
+    }
 
-@Html.ActionLink("Ný þýðing", "AddTranslation", "Video")
+    <div class="row text-center">
+        <ul class="list-inline">
+            <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
+            <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
+            <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
+        </ul>
+    </div>
 
-@using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
-{
-    <p>
-        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
-        <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
-    </p>
-}
-
-<ul>
-    <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
-    <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
-    <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
-</ul>
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>@Html.ActionLink("Nafn", "GetVideoByCategory", new { category = Model[0].videoCategory, sortOrder = ViewBag.NameSortParm })</th>
-            <th>Flokkur</th>
-            <th>@Html.ActionLink("Dagsetning", "GetVideoByCategory", new { category = Model[0].videoCategory, sortOrder = ViewBag.DateSortParm })</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
-                <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
-                <td>@item.videoTime</td>
+                <th>@Html.ActionLink("Nafn", "GetVideoByCategory", new { category = Model[0].videoCategory, sortOrder = ViewBag.NameSortParm })</th>
+                <th>Flokkur</th>
+                <th>@Html.ActionLink("Dagsetning", "GetVideoByCategory", new { category = Model[0].videoCategory, sortOrder = ViewBag.DateSortParm })</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
+                    <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
+                    <td>@item.videoTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
 
-@Html.PagedListPager(Model, page => Url.Action("GetVideoByCategory", new { category = Model[0].videoCategory, page, sortOrder = ViewBag.CurrentSort }))
+    @Html.PagedListPager(Model, page => Url.Action("GetVideoByCategory", new { category = Model[0].videoCategory, page, sortOrder = ViewBag.CurrentSort }))
 
