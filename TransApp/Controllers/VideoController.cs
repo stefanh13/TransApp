@@ -437,7 +437,7 @@ namespace TransApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetTranslationById(Translation t)
+        public ActionResult GetTranslationById(TranslationViewModel t, int? id)
         {
             if (t == null)
             {
@@ -446,7 +446,7 @@ namespace TransApp.Controllers
             
             if(ModelState.IsValid)
             {
-                translationRepo.Update(t);
+                translationRepo.Update(t.Translation.translationText, id);
                 return RedirectToAction("/GetVideos");
             }
 
@@ -455,7 +455,7 @@ namespace TransApp.Controllers
 
         public ActionResult Download(string translationText, string fileName, int? id)
         {
-            if(id == null || translationRepo.isIdValid(id) || String.IsNullOrEmpty(fileName))
+            if(id == null || !translationRepo.isIdValid(id) || String.IsNullOrEmpty(fileName))
             {
                 return View("NotFound");
             }
@@ -521,6 +521,7 @@ namespace TransApp.Controllers
             translationRepo.UpdateVotes(vote.Value, id.Value);
 
             string returnUrl = "/GetTranslationById/" + id.ToString();
+            
             return RedirectToAction(returnUrl);
         }
 
