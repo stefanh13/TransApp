@@ -5,48 +5,48 @@
     ViewBag.Title = "Sjá þýðingu";
 }
 
-@Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { @class = "btn btn-default btn-lg active" })
-<ul class="flokkar">
-    <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
-    <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
-    <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
-</ul>
+<div class="row spacer">
+    <div class="span4">&nbsp;</div>
+    <div class="row text-center">
+        @Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { @class = "btn btn-default btn-lg active" })
+    </div>
+    <div class="span4">&nbsp;</div>
+</div>
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Nafn</th>
-            <th>@Html.ActionLink("Tungumál", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.LanguageSortParm })</th>
-            <th>@Html.ActionLink("Dagsetning", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DateSortParm })</th>
-            <th>@Html.ActionLink("Meðaleinkunn", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.AverageSortParm })</th>
-            <th>@Html.ActionLink("Sótt", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DownloadCountSortParm })</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(item.translationName, "GetTranslationById", new { id = item.ID })</td>
-                <td>@item.translationLanguage</td>
-                <td>@item.translationTime</td>
-                @if(item.voteCount == 0)
+<div class="row text-center">
+    <ul class="list-inline">
+        <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
+        <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
+        <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
+    </ul>
+</div>
+
+    <div class="row spacer">
+        <div class="span4">&nbsp;</div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nafn</th>
+                    <th>@Html.ActionLink("Tungumál", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.LanguageSortParm })</th>
+                    <th>@Html.ActionLink("Dagsetning", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DateSortParm })</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
                 {
-                    <td>-</td>
+                    <tr>
+                        <td>@Html.ActionLink(item.translationName, "GetTranslationById", new { id = item.ID })</td>
+                        <td>@item.translationLanguage</td>
+                        <td>@item.translationTime</td>
+                    </tr>
                 }
-                else
-                {
-                    <td>@item.averageVotes af 5</td>
-                }
-                <td>@item.downloadCount sinnum</td>
-            </tr>
-        }
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
 
 
 
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("GetTranslationsByVideoId", new { page }))
+    @Html.PagedListPager(Model, page => Url.Action("GetTranslationsByVideoId", new { page }))
 
