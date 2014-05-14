@@ -121,8 +121,8 @@
             @using (Html.BeginForm("AddComment", "Video", new { id = Model.Translation.ID }))
             {
                 <p>
-                    @Html.TextBox("commentText", null, new { @class = "form-control" })
-                    <input type="submit" value="Senda" />
+                    @Html.TextBox("commentText", ViewBag.CurrentFilter as string, null, new { @class = "form-control", id = "CommentID" })
+                    <input type="submit" id="CommhBtnID" value="Senda" disabled="disabled" />
                 </p>
             }
             <textarea class="form-control" rows="3" id="CommentText" ></textarea>

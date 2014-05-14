@@ -18,6 +18,25 @@
         }
     });
 
+    console.log("Java2")
+    $("#CommentID").keyup(function () {
+        console.log("KEYUP2")
+        var empty = false;
+        $("#CommentID").each(function () {
+            console.log("in each function");
+            if ($(this).val().length == 0) {
+                console.log("is empty?");
+                empty = true;
+            }
+        });
+        console.log(empty + " empty?");
+        if (empty) {
+            $("CommhBtnID").attr('disabled', 'disabled');
+        } else {
+            $("#CommhBtnID").removeAttr('disabled');
+        }
+    });
+
 <<<<<<< HEAD
     $(function () {
         $('#back-btn').click(function () {
