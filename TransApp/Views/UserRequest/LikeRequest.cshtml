@@ -1,7 +1,38 @@
-﻿@model IEnumerable<TransApp.Models.UserRequest>
+﻿@model PagedList.IPagedList<TransApp.Models.UserRequest>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "LikeRequest";
 }
 
-@{Html.RenderPartial("GetRequestsPartial"); }
+@Html.ActionLink("Ný beiðni", "CreateUserRequest", null, new { @class = "btn btn-default btn-lg active" })
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink("Nafn", "GetRequests", "UserRequest", new { sortOrder = ViewBag.sortOrder }, null)</th>
+            <th>LIKE</th>
+            <th>@Html.ActionLink("Tungumál", "GetRequests", "UserRequest", new { sortOrder = ViewBag.sortOrder }, null)</th>
+            <th>@Html.ActionLink("Dagsetning", "GetRequests", "UserRequest", new { sortOrder = ViewBag.sortOrder }, null)</th>
+            <th>@Html.ActionLink("Atkvæði", "GetRequests", "UserRequest", new { sortOrder = ViewBag.sortOrder }, null)</th>
+            <th>Innsendandi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink((string)item.requestName, "GetUserRequestById", new { id = item.ID })</td>
+                <td>@Html.ActionLink("Like", "LikeRequest", new { reqId = item.ID})</td>
+                <td>@item.requestLanguage</td>
+                <td>@item.requestTime</td>
+                <td>@item.likes</td>
+                <td>@item.userName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("GetRequests", "UserRequest", new { page, sortOrder = ViewBag.CurrentSort }))

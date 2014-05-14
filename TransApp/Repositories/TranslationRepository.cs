@@ -59,5 +59,37 @@ namespace TransApp.Repositories
 
            return false;
         }
+
+        public void UpdateVotes(int votes, int id)
+        {
+            var translations = translationDb.translations.ToList();
+            
+            foreach(var item in translations)
+            {
+                if(item.ID == id)
+                {
+                    item.overallVotes += votes;
+                    item.voteCount++;
+                    item.averageVotes = Math.Round(Convert.ToDouble(item.overallVotes) / item.voteCount, 1);
+                    Save();
+                    break;
+                }
+            }
+        }
+
+        public void RaiseDownloads(int id)
+        {
+            var translations = translationDb.translations.ToList();
+
+            foreach(var item in translations)
+            {
+                if(item.ID == id)
+                {
+                    item.downloadCount++;
+                    Save();
+                    break;
+                }
+            }
+        }
     }
 }

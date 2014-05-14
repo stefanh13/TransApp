@@ -181,6 +181,11 @@ namespace TransApp.Controllers
         
         public ActionResult GetVideoByCategory(string category, int? page, string sortOrder)
         {
+            if(String.IsNullOrEmpty(category) || !videoRepo.ContainsCategory(category))
+            {
+                return View("NotFound");
+            }
+            
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
             ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
@@ -189,7 +194,12 @@ namespace TransApp.Controllers
             var videos = from v in videoRepo.GetAllVideos()
                          where v.videoCategory == category
                          select v;
-
+            
+            if(Math.Ceiling(Convert.ToDouble(videos.Count())/PAGESIZE) < page )
+            {
+                return View("NotFound");
+            }
+            
             switch (sortOrder)
             {
                 case "name_desc":
@@ -208,28 +218,56 @@ namespace TransApp.Controllers
             int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
             
+            pageNumber = pageNumber < 0 ? 1 : pageNumber;
+            
             return View(videos.ToPagedList(pageNumber, pageSize));
         }
 
          public ActionResult GetTranslationsByVideoId(int? id, int? page, string sortOrder)
         {
+            if (id == null || !videoRepo.isIdValid(id))
+            {
+                return View("NotFound");
+            }
+             
             ViewBag.ID = id;
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
             ViewBag.LanguageSortParm = sortOrder == "Language" ? "lang_desc" : "Language";
-            var translations = from v in translationRepo.GetAllTranslations()
+            ViewBag.DownloadCountSortParm = sortOrder == "Count" ? "count_desc" : "Count";
+            ViewBag.AverageSortParm = sortOrder == "Average" ? "aver_desc" : "Average";
+            
+             var translations = from v in translationRepo.GetAllTranslations()
                          where v.vID == id
                          select v;
+
+             if (Math.Ceiling(Convert.ToDouble(translations.Count()) / PAGESIZE) < page)
+             {
+                 return View("NotFound");
+             }
+            
             switch (sortOrder)
             {
                 case "Date":
                     translations = translations.OrderBy(t => t.translationTime);
                     break;
-                case "lang_desc":
-                    translations = translations.OrderByDescending(t => t.translationLanguage);
-                    break;
                 case "Language":
                     translations = translations.OrderBy(t => t.translationLanguage);
+                    break;
+                case "Count":
+                    translations = translations.OrderBy(t => t.downloadCount);
+                    break;
+                case "Average":
+                    translations = translations.OrderBy(t => t.averageVotes);
+                    break;
+                case "aver_desc":
+                    translations = translations.OrderByDescending(t => t.averageVotes);
+                    break;
+                case "count_desc":
+                    translations = translations.OrderByDescending(t => t.downloadCount);
+                    break;
+                case "lang_desc":
+                    translations = translations.OrderByDescending(t => t.translationLanguage);
                     break;
                 default:
                     translations = translations.OrderByDescending(t => t.translationTime);
@@ -248,6 +286,7 @@ namespace TransApp.Controllers
                          where t.vID == id
                          orderby t.translationTime descending
                          select t).Take(10);*/
+            pageNumber = pageNumber < 0 ? 1 : pageNumber;
 
             return View(translations.ToPagedList(pageNumber, pageSize));
         }
@@ -271,8 +310,15 @@ namespace TransApp.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
             ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
+            
             var videos = from v in videoRepo.GetAllVideos()
-                           select v;
+                         select v;
+
+            if (Math.Ceiling(Convert.ToDouble(videos.Count()) / PAGESIZE) < page)
+            {
+                return View("NotFound");
+            }
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -296,7 +342,7 @@ namespace TransApp.Controllers
                          orderby videos.videoTime descending
                          select videos);*/
 
-            
+            pageNumber = pageNumber < 0 ? 1 : pageNumber;
 
             return View(videos.ToPagedList(pageNumber, pageSize));
         }
@@ -322,6 +368,12 @@ namespace TransApp.Controllers
             
             var searchVideos = (from a in videoRepo.GetAllVideos()
                                 select a);
+            
+            if (Math.Ceiling(Convert.ToDouble(searchVideos.Count()) / PAGESIZE) < page)
+            {
+                return View("NotFound");
+            }
+            
             if (!String.IsNullOrEmpty(searchString))
             {
                 searchVideos = searchVideos.Where(a => a.videoName.ToLower().Contains(searchString.ToLower()));
@@ -347,7 +399,7 @@ namespace TransApp.Controllers
             int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
 
-            
+            pageNumber = pageNumber < 0 ? 1 : pageNumber;
             
             return View(searchVideos.ToPagedList(pageNumber, pageSize));
         }
@@ -387,6 +439,11 @@ namespace TransApp.Controllers
         [HttpPost]
         public ActionResult GetTranslationById(Translation t)
         {
+            if (t == null)
+            {
+                return View("NotFound");
+            }
+            
             if(ModelState.IsValid)
             {
                 translationRepo.Update(t);
@@ -396,12 +453,16 @@ namespace TransApp.Controllers
             return View(t);
         }
 
-        public ActionResult Download(string translation, string fileName)
+        public ActionResult Download(string translationText, string fileName, int? id)
         {
-
+            if(id == null || translationRepo.isIdValid(id) || String.IsNullOrEmpty(fileName))
+            {
+                return View("NotFound");
+            }
+            
             MemoryStream mStream = new MemoryStream();
             TextWriter tWriter = new StreamWriter(mStream);
-            tWriter.WriteLine(translation);
+            tWriter.WriteLine(translationText);
             tWriter.Flush();
             byte[] bytes = mStream.ToArray();
             mStream.Close();
@@ -413,19 +474,53 @@ namespace TransApp.Controllers
             Response.AddHeader("content-disposition", "attachment;    filename=" + enCodeFileName + ".srt");
             Response.BinaryWrite(bytes);
             Response.End();
+
+            int translationId = id.Value;
             
-            return View();
+            translationRepo.RaiseDownloads(translationId);
+
+            string returnUrl = "/GetTranslationById/" + id.ToString();
+            
+            return View(returnUrl);
         }
 
         [HttpPost]
         public ActionResult AddComment(int? id, string commentText)
         {
+            
+            if(id == null || !translationRepo.isIdValid(id))
+            {
+                return View("NotFound");
+            }
+
+            string returnUrl = "/GetTranslationById/" + id.ToString();
+            if(String.IsNullOrEmpty(commentText))
+            {
+                return RedirectToAction(returnUrl);
+
+            }
+            
             int translationId = id.Value;
             
             commentRepo.AddComment(translationId, commentText, User.Identity.Name);
 
-            string returnUrl = "/GetTranslationById/" + id.ToString();
+            
 
+            return RedirectToAction(returnUrl);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateVotes(int? vote, int? id)
+        {
+            
+            if(!vote.HasValue || !id.HasValue || !translationRepo.isIdValid(id))
+            {
+                return View("NotFound");
+            }
+            
+            translationRepo.UpdateVotes(vote.Value, id.Value);
+
+            string returnUrl = "/GetTranslationById/" + id.ToString();
             return RedirectToAction(returnUrl);
         }
 

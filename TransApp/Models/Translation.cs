@@ -21,10 +21,17 @@ namespace TransApp.Models
         [Required(ErrorMessage = "Vinsamlegast veldu tungumál")]
         public string translationLanguage { get; set; }
         public DateTime translationTime { get; set; }
-
-         public Translation()
-         {
-             translationTime = DateTime.Now;
-         }
+        public int overallVotes { get; set; }
+        public int voteCount { get; set; }
+        public double averageVotes { get; set; }
+        public int downloadCount { get; set; }
+        public Translation()
+        {
+            translationTime = DateTime.Now;
+            voteCount = 0;
+            overallVotes = 0;
+            downloadCount = 0;
+            averageVotes = 0;
+        }
     }
 }

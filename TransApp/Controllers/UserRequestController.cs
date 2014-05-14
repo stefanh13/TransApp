@@ -106,11 +106,46 @@ namespace TransApp.Controllers
             return View(u);
         }
 
-        public ActionResult LikeRequest(int reqId)
+        public ActionResult LikeRequest(int reqId, string sortOrder, int? page) 
         {
             userReqRepo.UpdateLike(reqId);
 
-            return RedirectToAction("GetRequests");
+            ViewBag.CurrentSort = sortOrder;
+
+            var requests = (from req in userReqRepo.GetAllUserRequests()
+                            select req);
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    requests = requests.OrderByDescending(r => r.requestName);
+                    break;
+                case "lang_desc":
+                    requests = requests.OrderByDescending(r => r.requestLanguage);
+                    break;
+                case "like_desc":
+                    requests = requests.OrderByDescending(r => r.likes);
+                    break;
+                case "Date":
+                    requests = requests.OrderBy(r => r.requestTime);
+                    break;
+                case "Name":
+                    requests = requests.OrderBy(r => r.requestName);
+                    break;
+                case "Language":
+                    requests = requests.OrderBy(r => r.requestLanguage);
+                    break;
+                case "Like":
+                    requests = requests.OrderBy(r => r.likes);
+                    break;
+                default:
+                    requests = requests.OrderByDescending(r => r.requestTime);
+                    break;
+            }
+
+            int pageSize = PAGESIZE;
+            int pageNumber = (page ?? 1);
+
+            return View(requests.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult GetUserRequestById(int id)
@@ -118,6 +153,7 @@ namespace TransApp.Controllers
             var model = (from l in userReqRepo.GetAllUserRequests()
                          where l.ID == id
                          select l).FirstOrDefault();
+  
 
             return View(model);
         }
