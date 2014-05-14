@@ -43,5 +43,32 @@ namespace TransApp.Repositories
                 }
             }
         }
+
+        public bool ContainsCategory(string category)
+        {
+            foreach(var item in videoDb.videos)
+            {
+                if(item.videoCategory == category)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool isIdValid(int? id)
+        {
+            foreach(var item in videoDb.videos)
+            {
+                if(item.ID == id)
+                {
+                    return true;
+                }
+            }
+
+
+            return false;
+        }
     }
 }

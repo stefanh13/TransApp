@@ -23,7 +23,7 @@
         {
             <tr>
                 <td>@Html.ActionLink((string)item.requestName, "GetUserRequestById", new { id = item.ID })</td>
-                <td>@Html.ActionLink("Like", "LikeRequest", new { reqId = item.ID })</td>
+                <td>@Html.ActionLink("Like", "LikeRequest", new { reqId = item.ID,  })</td>
                 <td>@item.requestLanguage</td>
                 <td>@item.requestTime</td>
                 <td>@item.likes</td>

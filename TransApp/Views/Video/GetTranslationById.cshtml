@@ -74,13 +74,28 @@
 
 }
 
-@using (Html.BeginForm("Download", "Video", new { translation = Model.Translation.translationText, fileName = Model.Translation.translationName }))
+@using (Html.BeginForm("Download", "Video", new { translation = Model.Translation.translationText, fileName = Model.Translation.translationName, id = Model.Translation.ID }))
 {
     <p>
 
         <input type="submit" value="Sækja" />
     </p>
 }
+
+@using (Html.BeginForm("UpdateVotes", "Video", new { id = Model.Translation.ID, t = Model.Translation }))
+{
+    <ul class="list list-inline" >
+        <li>1 @Html.RadioButton("vote", 1, false)</li>
+        <li>2 @Html.RadioButton("vote", 2, false)</li>
+        <li>3 @Html.RadioButton("vote", 3, false)</li>
+        <li>4 @Html.RadioButton("vote", 4, false)</li>
+        <li>5 @Html.RadioButton("vote", 5, false)</li>
+        <li><input type="submit" value="Gefa einkunn" /></li>
+    </ul>
+
+}
+<p>Heildareinkunn: @Model.Translation.averageVotes af 5 </p>
+<p>@Model.Translation.voteCount atkvæði</p>
 
 <hr />
 

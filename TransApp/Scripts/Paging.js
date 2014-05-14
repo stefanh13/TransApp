@@ -26,4 +26,6 @@
     function checkFile() {
         console.log($("#fileInput"));
     };
+
+
 });

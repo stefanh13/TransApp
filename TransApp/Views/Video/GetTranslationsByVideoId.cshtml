@@ -18,6 +18,8 @@
             <th>Nafn</th>
             <th>@Html.ActionLink("Tungumál", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.LanguageSortParm })</th>
             <th>@Html.ActionLink("Dagsetning", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DateSortParm })</th>
+            <th>@Html.ActionLink("Meðaleinkunn", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.AverageSortParm })</th>
+            <th>@Html.ActionLink("Sótt", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DownloadCountSortParm })</th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +29,15 @@
                 <td>@Html.ActionLink(item.translationName, "GetTranslationById", new { id = item.ID })</td>
                 <td>@item.translationLanguage</td>
                 <td>@item.translationTime</td>
+                @if(item.voteCount == 0)
+                {
+                    <td>-</td>
+                }
+                else
+                {
+                    <td>@item.averageVotes af 5</td>
+                }
+                <td>@item.downloadCount sinnum</td>
             </tr>
         }
     </tbody>
