@@ -27,8 +27,8 @@
             <thead>
                 <tr>
                     <th>Nafn</th>
-                    <th>@Html.ActionLink("Tungumál", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.LanguageSortParm })</th>
-                    <th>@Html.ActionLink("Dagsetning", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DateSortParm })</th>
+                    <th>@Html.ActionLink("Tungumál", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.LanguageSortParm }, new { @class = "svartur" })</th>
+                    <th>@Html.ActionLink("Dagsetning", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DateSortParm }, new { @class = "svartur" })</th>
                 </tr>
             </thead>
             <tbody>

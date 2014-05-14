@@ -10,11 +10,10 @@
 </div>
 @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
 {
-<div class="row text-center">   
-     @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID"})
-    <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
-</div>
 
-
+     <div class="row text-center">
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
+        <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
+     </div>
 }
 

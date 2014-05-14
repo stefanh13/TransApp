@@ -16,6 +16,10 @@ textarea {
     max-width: 280px;
 }
 
+.svartur {
+    color: black;
+}
+
 .reqheader {
     color: black;
 }
