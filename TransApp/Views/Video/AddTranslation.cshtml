@@ -7,7 +7,7 @@
 <h2>AddTranslation</h2>
 
 
-@using (Html.BeginForm("AddTranslation", "Video", FormMethod.Post, new { enctype = "multipart/form-data"}))
+@using (Html.BeginForm("AddTranslation", "Video", FormMethod.Post, new { enctype = "multipart/form-data", id = "myform" }))
 {
     @Html.AntiForgeryToken()
     
@@ -70,13 +70,12 @@
                 @Html.ValidationMessageFor(model => model.translationTime)
             </div>
         </div>
-        
 
-        @Html.Label("file")<input type="file" name="file" />
+        @Html.Label("file")<input type="file" name="file" id="field" />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" id="" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -89,11 +88,26 @@
 
     }
 *@
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script>
+    // just for the demos, avoids form submit
+    jQuery.validator.setDefaults({
+        debug: false,
+        success: "valid"
+    });
+    $( "#myform" ).validate({
+        rules: {
+            file: {
+                required: true,
+                extension: "srt"
+            }
+        }
+    });
+    </script>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
-@section Scripts {
+    @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+    }
 

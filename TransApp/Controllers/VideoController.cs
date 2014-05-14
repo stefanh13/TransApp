@@ -84,7 +84,15 @@ namespace TransApp.Controllers
        
         [HttpPost]
         public ActionResult AddTranslation(HttpPostedFileBase file, Translation translation)
-        { 
+        {
+
+            string extension = Path.GetExtension(file.FileName);
+
+            if(extension != ".srt")
+            {
+                return View("WrongFileType");
+            }
+
             string contentData = null;
  
             if (file != null)
