@@ -7,13 +7,15 @@
 
 @Html.ActionLink("Ný þýðing", "AddTranslation", "Video")
 
-@using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
-{
-    <p>
-        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
-        <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
-    </p>
-}
+<div class="row text-center">
+    @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get, new { @class = "navbar-form navbar-center" }))
+    {
+        <div class="form-group input-xlarge">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID", @class = "form-control input-xlarge", @placeholder = "Search" })
+        </div>
+        <input type="submit" id="SearchBtnID" value="Search" class="btn btn-primary btn-large" disabled=" disabled" />
+    }
+</div>
 
 <ul>
     <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>

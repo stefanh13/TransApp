@@ -8,13 +8,14 @@
 </div>
     <div class="span4">&nbsp;</div>
 </div>
-@using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
-{
-<div class="row text-center">   
-     @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID"})
-    <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
+
+
+<div class="row text-center">
+    @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get, new { @class = "navbar-form navbar-center" }))
+    {
+        <div class="form-group input-xlarge">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID", @class = "form-control input-xlarge", @placeholder = "Search" })
+        </div>
+    <input type="submit" id="SearchBtnID" value="Search" class="btn btn-primary btn-large" disabled=" disabled" />
+    }
 </div>
-
-
-}
-
