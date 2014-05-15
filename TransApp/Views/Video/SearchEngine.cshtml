@@ -5,7 +5,12 @@
     ViewBag.Title = "SearchEngine";
 }
 
-@Html.ActionLink("Ný þýðing", "AddTranslation", "Video")
+<div class="row spacer">
+    <div class="span4">&nbsp;</div>
+    <div class="row text-center">
+        @Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { id = "newTransLink", @class = "btn btn-default btn-lg active" })
+    </div>
+</div>
 
 <div class="row text-center">
     @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get, new { @class = "navbar-form navbar-center" }))
@@ -17,33 +22,35 @@
     }
 </div>
 
-<ul>
-    <li>@Html.ActionLink("Gaman", "GetVideoByCategory", new { category = "Gaman" }, new { @class = "svartur" })</li>
-    <li>|</li>
-    <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" }, new { @class = "svartur" })</li>
-    <li>|</li>
-    <li>@Html.ActionLink("Hryllings", "GetVideoByCategory", new { category = "Hryllings" }, new { @class = "svartur" })</li>
-    <li>|</li>
-    <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" }, new { @class = "svartur" })</li>
-    <li>|</li>
-    <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" }, new { @class = "svartur" })</li>
-</ul>
+<div class="row text-center">
+    <ul class="list-inline">
+        <li>@Html.ActionLink("Gaman", "GetVideoByCategory", new { category = "Gaman" }, new { @class = "svartur" })</li>
+        <li>|</li>
+        <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" }, new { @class = "svartur" })</li>
+        <li>|</li>
+        <li>@Html.ActionLink("Hryllings", "GetVideoByCategory", new { category = "Hryllings" }, new { @class = "svartur" })</li>
+        <li>|</li>
+        <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" }, new { @class = "svartur" })</li>
+        <li>|</li>
+        <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" }, new { @class = "svartur" })</li>
+    </ul>
+</div>
 
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>@Html.ActionLink("Nafn", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.NameSortParm })</th>
+            <th>@Html.ActionLink("Nafn", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.NameSortParm }, new { @class = "svartur" })</th>
             <th>Flokkur</th>
-            <th>@Html.ActionLink("Dagsetning", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.DateSortParm })</th>
+            <th>@Html.ActionLink("Dagsetning", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.DateSortParm }, new { @class = "svartur" })</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
-                <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
-                <td>@item.videoTime</td>
+                <td id="SL1">@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
+                <td id="SL2">@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
+                <td id="SL3">@item.videoTime</td>
             </tr>
         }
     </tbody>

@@ -124,3 +124,15 @@ input[type="checkbox"].input-validation-error {
 {
     text-align : center;
 }
+#SL1
+{
+    width: 50%;
+}
+#SL2
+{
+    width: 30%;
+}
+#SL3
+{
+    width: 20%;
+}
