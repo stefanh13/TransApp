@@ -1,4 +1,5 @@
 ﻿@model TransApp.Models.UserRequest
+
 @{
     ViewBag.Title = "GetUserRequestById";
 }
@@ -6,3 +7,8 @@
 <h1>@Model.requestName</h1>
 <p>@Model.requestText </p>
 <p>@Model.requestLanguage</p>
+@using (Html.BeginForm("Like", "UserRequest", new { id = Model.ID }))
+{
+    <input type="submit" value="Like" />
+}
+<p>Fjöldi atkvæða: @Model.likes</p>

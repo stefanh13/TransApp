@@ -16,7 +16,6 @@
     <thead>
         <tr>
             <th>@Html.ActionLink("Nafn", "GetRequests", "UserRequest", new { sortOrder = ViewBag.NameSortParm }, new { @class = "svartur" })</th>
-            <th>LIKE</th>
             <th>@Html.ActionLink("Tungumál", "GetRequests", "UserRequest", new { sortOrder = ViewBag.LanguageSortParm }, new { @class = "svartur" })</th>
             <th>@Html.ActionLink("Dagsetning", "GetRequests", "UserRequest", new { sortOrder = ViewBag.DateSortParm }, new { @class = "svartur" })</th>
             <th>@Html.ActionLink("Atkvæði", "GetRequests", "UserRequest", new { sortOrder = ViewBag.LikeSortParm }, new { @class = "svartur" })</th>
@@ -28,7 +27,6 @@
         {
             <tr>
                 <td>@Html.ActionLink((string)item.requestName, "GetUserRequestById", new { id = item.ID })</td>
-                <td>@Html.ActionLink("Like", "LikeRequest", new { reqId = item.ID,  })</td>
                 <td>@item.requestLanguage</td>
                 <td>@item.requestTime</td>
                 <td>@item.likes</td>
