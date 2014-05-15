@@ -95,3 +95,32 @@ input[type="checkbox"].input-validation-error {
 {
     text-align:center;
 }
+.CatBar
+{
+    
+    color:black;
+}
+#TT1
+{
+    width: 30%;
+}
+#TT2
+{
+    width: 20%;
+}
+#TT3
+{
+    width: 20%;
+}
+#TT4
+{
+    width: 20%;
+}
+#TT5
+{
+    width: 10%;
+}
+#TransName
+{
+    text-align : center;
+}
