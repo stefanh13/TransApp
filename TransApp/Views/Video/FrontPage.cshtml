@@ -13,7 +13,7 @@
     @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get, new { @class = "navbar-form navbar-center" }))
     {
         <div class="form-group input-xlarge">
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID", @class = "form-control input-xlarge", @placeholder = "Leitið hér" })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID", @class = "form-control input-xlarge", @placeholder = "Leita hér" })
         </div>
     <input type="submit" id="SearchBtnID" value="Leita" class="btn btn-default" disabled=" disabled" />
     }
