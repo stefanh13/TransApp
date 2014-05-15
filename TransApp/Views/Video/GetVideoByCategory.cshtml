@@ -34,9 +34,9 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>@Html.ActionLink("Nafn", "GetVideoByCategory", new { category = Model[0].videoCategory, sortOrder = ViewBag.NameSortParm })</th>
+                <th>@Html.ActionLink("Nafn", "GetVideoByCategory", new { category = Model[0].videoCategory, sortOrder = ViewBag.NameSortParm }, new { @class = "svartur" })</th>
                 <th>Flokkur</th>
-                <th>@Html.ActionLink("Dagsetning", "GetVideoByCategory", new { category = Model[0].videoCategory, sortOrder = ViewBag.DateSortParm })</th>
+                <th>@Html.ActionLink("Dagsetning", "GetVideoByCategory", new { category = Model[0].videoCategory, sortOrder = ViewBag.DateSortParm }, new { @class = "svartur" })</th>
             </tr>
         </thead>
         <tbody>

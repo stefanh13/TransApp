@@ -27,15 +27,16 @@ namespace TransApp.Repositories
             translationDb.SaveChanges();
         }
 
-        public void Update(Translation t)
+        public void Update(string translationText, int? id)
         {
             var translations = translationDb.translations.ToList();
             
             foreach(var item in translations)
             {
-                if(item.ID == t.ID)
+                if(item.ID == id)
                 {
-                    item.translationText = t.translationText;
+                    item.translationText = translationText;
+                    item.translationTime = DateTime.Now;
                     Save();
                     break;
                 }

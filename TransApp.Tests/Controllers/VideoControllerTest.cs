@@ -111,6 +111,8 @@ namespace TransApp.Tests.Controllers
                 {
                     ID = i,
                     vID = i,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
                     translationDescription = "Lorem ipsum",
                     translationLanguage = "English",
                     translationText = "Lorem ipsum",
@@ -125,6 +127,7 @@ namespace TransApp.Tests.Controllers
             // Assert:
             var viewResult = (ViewResult)result;
             List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
+
 
             Assert.IsTrue(model.Count == 7);
         }

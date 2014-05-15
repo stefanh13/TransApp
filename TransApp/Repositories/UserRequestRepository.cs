@@ -47,5 +47,18 @@ namespace TransApp.Repositories
             userRequestDb.Entry(x).CurrentValues.SetValues(x.Us)
              */
         }
+
+        public bool IsIdValid(int? id)
+        {
+            foreach(var item in userRequestDb.userRequest)
+            {
+                if(item.ID == id)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
