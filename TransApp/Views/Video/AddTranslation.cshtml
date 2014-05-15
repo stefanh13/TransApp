@@ -4,84 +4,71 @@
     ViewBag.Title = "AddTranslation";
 }
 
-<h2>AddTranslation</h2>
+<h2>Settu inn nýja þýðingu</h2>
 
 
-@using (Html.BeginForm("AddTranslation", "Video", FormMethod.Post, new { enctype = "multipart/form-data", id = "myform" }))
+@using (Html.BeginForm("AddTranslation", "Video", FormMethod.Post, new { enctype = "multipart/form-data", id = "myform", @class="form-horizontal"}))
 {
+    <fieldset>
+        <legend></legend>
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Translation</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+            @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.vID, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.vID)
-                @Html.ValidationMessageFor(model => model.vID)
+            <div class="form-group">
+                @Html.LabelFor(model => model.translationCategory,"Flokkur", new { @class = "control-label col-md-2" } )
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.translationCategory, ViewBag.requestLanguage as List<SelectListItem>, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.translationCategory)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.translationCategory, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.translationCategory, ViewBag.requestLanguage as List<SelectListItem>)
-                @Html.ValidationMessageFor(model => model.translationCategory)
+            <div class="form-group">
+                @Html.LabelFor(model => model.translationName,"Nafn myndar", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.translationName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.translationName)
+                </div>
             </div>
-        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.translationName, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.translationDescription,"Lýsing", new { @class = "control-label col-md-2 span12" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.translationName)
-                @Html.ValidationMessageFor(model => model.translationName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.translationDescription, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.translationDescription)
+                @Html.TextAreaFor(model => model.translationDescription, new {  @rows="3", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.translationDescription)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.translationText, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.translationText)
+            <div class="form-group">
+                @Html.LabelFor(model => model.translationText, "þýðing", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.translationText, new { @cols = 10, @rows = 10, @class = "form-control" })
+                </div>
             </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.translationLanguage, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.translationLanguage, ViewBag.requestLanguage as List<SelectListItem>)
-                @Html.ValidationMessageFor(model => model.translationLanguage)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.translationLanguage,"Túngumál", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.translationLanguage, ViewBag.requestLanguage as List<SelectListItem>, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.translationLanguage)
+                </div>
             </div>
-        </div>
-
-        
-
-        @Html.Label("file")<input type="file" name="file" id="field" />
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        <div style="position:relative; margin:3em; ">
+            <a class='btn btn-primary' href='javascript:;'>
+                Veldu skrá
+                @Html.Label("")<input type="file" name="file" id="field" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' onchange='$("#upload-file-info").html($(this).val());'  />
+                </a>
+                &nbsp;
+            <span class='btn btn-default btn-sm' id="upload-file-info"></span>
     </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Vista" class="btn btn-default" />
+                </div>
+            </div>
+</fieldset>
 }
-@*
-    @using (Html.BeginForm("AddTranslation", "Video", FormMethod.Post, new { enctype = "multipart/form-data", id = "form2"}))
-    {
-        <input type="file" name="file" />
 
-
-    }
-*@
 <script>
     // just for the demos, avoids form submit
     jQuery.validator.setDefaults({
@@ -96,8 +83,9 @@
         }
     });
     </script>
+
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Aftur í lista", "Index")
     </div>
 
     @section Scripts {
