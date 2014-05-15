@@ -18,11 +18,15 @@
 </div>
 
 <ul>
-    <li>@Html.ActionLink("Gaman", "GetVideoByCategory", new { category = "Gaman" })</li>
-    <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
-    <li>@Html.ActionLink("Hryllings", "GetVideoByCategory", new { category = "Hryllings" })</li>
-    <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
-    <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
+    <li>@Html.ActionLink("Gaman", "GetVideoByCategory", new { category = "Gaman" }, new { @class = "svartur" })</li>
+    <li>|</li>
+    <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" }, new { @class = "svartur" })</li>
+    <li>|</li>
+    <li>@Html.ActionLink("Hryllings", "GetVideoByCategory", new { category = "Hryllings" }, new { @class = "svartur" })</li>
+    <li>|</li>
+    <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" }, new { @class = "svartur" })</li>
+    <li>|</li>
+    <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" }, new { @class = "svartur" })</li>
 </ul>
 
 <table class="table table-hover">

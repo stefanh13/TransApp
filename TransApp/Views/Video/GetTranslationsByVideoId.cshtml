@@ -15,24 +15,28 @@
 
 <div class="row text-center">
     <ul class="list-inline">
-        <li>@Html.ActionLink("Gaman", "GetVideoByCategory", new { category = "Gaman" })</li>
-        <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
-        <li>@Html.ActionLink("Hryllings", "GetVideoByCategory", new { category = "Hryllings" })</li>
-        <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
-        <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
+        <li>@Html.ActionLink("Gaman", "GetVideoByCategory", new { category = "Gaman" }, new { @class = "svartur" })</li>
+        <li>|</li>
+        <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" }, new { @class = "svartur" })</li>
+        <li>|</li>
+        <li>@Html.ActionLink("Hryllings", "GetVideoByCategory", new { category = "Hryllings" }, new { @class = "svartur" })</li>
+        <li>|</li>
+        <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" }, new { @class = "svartur" })</li>
+        <li>|</li>
+        <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" }, new { @class = "svartur" })</li>
     </ul>
 </div>
-
+<h2 id="TransName">Þýðingar fyrir @Model[0].translationName</h2>
     <div class="row spacer">
         <div class="span4">&nbsp;</div>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nafn</th>
-                    <th>@Html.ActionLink("Tungumál", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.LanguageSortParm }, new { @class = "svartur" })</th>
-                    <th>@Html.ActionLink("Dagsetning", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DateSortParm }, new { @class = "svartur" })</th>
-                    <th>@Html.ActionLink("Meðaleinkunn", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.AverageSortParm }, new { @class = "svartur" })</th>
-                    <th>@Html.ActionLink("Sótt", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DownloadCountSortParm }, new { @class = "svartur" })</th>
+                    <th id="TT1">Nafn</th>
+                    <th id="TT2">@Html.ActionLink("Tungumál", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.LanguageSortParm }, new { @class = "svartur" })</th>
+                    <th id="TT3">@Html.ActionLink("Dagsetning", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DateSortParm }, new { @class = "svartur" })</th>
+                    <th id="TT4">@Html.ActionLink("Meðaleinkunn", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.AverageSortParm }, new { @class = "svartur" })</th>
+                    <th id="TT5">@Html.ActionLink("Sótt", "GetTranslationsByVideoId", new { id = ViewBag.ID, sortOrder = ViewBag.DownloadCountSortParm }, new { @class = "svartur" })</th>
                 </tr>
             </thead>
             <tbody>
