@@ -77,7 +77,7 @@ namespace TransApp.Controllers
             return View(model);*/
         }
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult CreateUserRequest()
         {
