@@ -168,6 +168,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MockVideoController.cs" />
     <Compile Include="Controllers\UserRequestController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="DAL\CommentContext.cs" />
@@ -258,7 +259,6 @@
     <Content Include="Views\Video\VideoPartialView.cshtml" />
     <Content Include="Views\Video\GetVideoByCategory.cshtml" />
     <Content Include="Views\Video\AddTranslation.cshtml" />
-    <Content Include="Views\UserRequest\CreateUserRequest.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestByIdList.cshtml" />
     <Content Include="Views\UserRequest\GetUserRequestById.cshtml" />
     <Content Include="Views\Video\SearchEngine.cshtml" />
@@ -273,6 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
+    <Folder Include="Views\MockVideo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

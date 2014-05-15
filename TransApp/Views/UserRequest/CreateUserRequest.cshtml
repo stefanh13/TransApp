@@ -2,8 +2,13 @@
 
 @using (Html.BeginForm())
 {
+
+     <fieldset>
+
     @Html.AntiForgeryToken()
-    
+
+   
+
     <div class="form-horizontal">
         <h2>Settu inn nýja beiðni</h2>
         <hr />
@@ -13,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.requestName, "Nafn", new { @class="control-lable col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.requestName)
+                @Html.TextBoxFor(model => model.requestName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.requestName)
             </div>
         </div>
@@ -21,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.requestText, "Lýsing á beiðni", new { @class = "control-lable col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.requestText, new { @cols="80", @rows="8"})
+                @Html.TextAreaFor(model => model.requestText, new {  @rows="3", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.requestText)
             </div>
         </div>
@@ -37,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.requestLanguage, "Tungumál", new { @class = "control-lable col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.requestLanguage, ViewBag.requestLanguage as List<SelectListItem>)
+                @Html.DropDownListFor(model => model.requestLanguage, ViewBag.requestLanguage as List<SelectListItem>, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.requestLanguage)
             </div>
         </div>
@@ -49,5 +54,5 @@
         </div>
     </div>
     
-    
+    </fieldset>
 }
