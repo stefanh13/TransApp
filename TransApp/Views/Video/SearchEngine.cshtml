@@ -43,6 +43,6 @@
     </tbody>
 </table>
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+<p>Síða @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount</p>
 
 @Html.PagedListPager(Model, page => Url.Action("SearchEngine", new { page, currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.CurrentSort }))

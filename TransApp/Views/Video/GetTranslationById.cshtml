@@ -4,7 +4,7 @@
     ViewBag.Title = "GetTranslationById";
 }
 
-<h2>GetTranslationById</h2>
+<h2>@Model.Translation.translationName</h2>
 
 
 @using (Html.BeginForm("GetTranslationById", "Video", new { id = Model.Translation.ID }))
@@ -12,12 +12,12 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Translation</h4>
+        <h4>Þýðing</h4>
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Translation.translationCategory, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationCategory, "Flokkur", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Translation.translationCategory)
                 @Html.ValidationMessageFor(model => model.Translation.translationCategory)
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Translation.translationName, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationName, "Nafn", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Translation.translationName)
                 @Html.ValidationMessageFor(model => model.Translation.translationName)
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Translation.translationDescription, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationDescription, "Lýsing", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Translation.translationDescription)
                 @Html.ValidationMessageFor(model => model.Translation.translationDescription)
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Translation.translationText, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationText, "Þýðing", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Translation.translationText, new { @cols = "80", @rows = "8" })
                 @Html.ValidationMessageFor(model => model.Translation.translationText)
@@ -49,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Translation.translationLanguage, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationLanguage, "Tungumál", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Translation.translationLanguage)
                 @Html.ValidationMessageFor(model => model.Translation.translationLanguage)
@@ -58,7 +58,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Vista" class="btn btn-default" />
             </div>
         </div>
     </div>
