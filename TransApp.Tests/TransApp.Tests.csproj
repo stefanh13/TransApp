@@ -86,7 +86,6 @@
     <Compile Include="Mocks\MockTranslationRepository.cs" />
     <Compile Include="Mocks\MockVideoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

@@ -11,61 +11,6 @@ namespace TransApp.Tests.Controllers
     [TestClass]
     public class UnitTest1
     {
-        // Muna að setja videoTime
-        /*
-        [TestMethod]
-        public void TestAddingNewVideoInEmptyTable()
-        {
-            // Arrange:
-            List<Video> video = new List<Video>();
-            video.Add(new Video
-            {
-                ID = 1,
-                catID = 1,
-                videoName = "Kalli"
-            });
-
-            var mockRepo = new Mocks.MockVideoRepository(video);
-            var controller = new VideoController(mockRepo);
-            
-            // Act:
-            var result = controller.AddTranslation();
-
-            // Assert:
-            var viewResult = (ViewResult)result;
-            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
-            
-            Assert.IsTrue(model.Count == 1);
-        }
-
-        [TestMethod]
-        public void TestAddingManyVideosInTheTable()
-        {
-            // Arrange:
-            List<Video> videos = new List<Video>();
-
-            for(int i = 0; i < 10; i++)
-            {
-                videos.Add(new Video
-                {
-                    ID = i,
-                    catID = i,
-                    videoName = "GrumpyCat"
-                });
-            }
-            
-            var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
-
-            // Act:
-            var result = controller.AddTranslation();
-            
-            // Assert:
-            var viewResult = (ViewResult)result;
-            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
-
-            Assert.IsTrue(model.Count == 10);
-        }
 
         [TestMethod]
         public void TryToGetMoreThan10Translations()
@@ -78,7 +23,9 @@ namespace TransApp.Tests.Controllers
                 translations.Add(new Translation
                 {
                     ID = i,
-                    vID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
                     translationDescription = "Lorem ipsum",
                     translationLanguage = "English",
                     translationText = "Lorem ipsum",
@@ -87,16 +34,21 @@ namespace TransApp.Tests.Controllers
             }
 
             var mockRepo = new Mocks.MockTranslationRepository(translations);
-            var controller = new VideoController(mockRepo);
+            var controller = new MockVideoController(mockRepo);
 
             // Act:
-            var result = controller.GetTranslations();
+            var result = controller.GetTranslationByVideoId(2, null, "");
 
             // Assert:
             var viewResult = (ViewResult)result;
             List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
 
-            Assert.IsTrue(model.Count == 10);
+            foreach(var item in model)
+            {
+                Assert.IsTrue(item.vID == 2);
+            }
+
+            Assert.IsTrue(model.Count == 4);
         }
 
         [TestMethod]
@@ -110,7 +62,7 @@ namespace TransApp.Tests.Controllers
                 translations.Add(new Translation
                 {
                     ID = i,
-                    vID = i,
+                    vID = i % 3,
                     translationName = "Hackers",
                     translationCategory = "Hasar",
                     translationDescription = "Lorem ipsum",
@@ -120,30 +72,36 @@ namespace TransApp.Tests.Controllers
                 });
             }
             var mockRepo = new Mocks.MockTranslationRepository(translations);
-            var controller = new VideoController(mockRepo);
+            var controller = new MockVideoController(mockRepo);
             // Act:
-            var result = controller.GetTranslations();
+            var result = controller.GetTranslationByVideoId(2, null, "");
             
             // Assert:
             var viewResult = (ViewResult)result;
             List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
 
+            foreach(var item in model)
+            {
+                Assert.IsTrue(item.vID == 2);
+            }
 
-            Assert.IsTrue(model.Count == 7);
+            Assert.IsTrue(model.Count == 2);
         }
 
         [TestMethod]
-        public void TestIfTranslationsAreOrderedByDateAndCheckIfExactly10()
+        public void TestIfTranslationsAreOrderedByDateDescendingAndCheckIfExactly10()
         {
             // Arrange:
             List<Translation> translations = new List<Translation>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 30; i++)
             {
                 translations.Add(new Translation
                 {
                     ID = i,
-                    vID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
                     translationDescription = "Lorem ipsum",
                     translationLanguage = "English",
                     translationText = "Lorem ipsum",
@@ -151,16 +109,17 @@ namespace TransApp.Tests.Controllers
                 });
             }
             var mockRepo = new Mocks.MockTranslationRepository(translations);
-            var controller = new VideoController(mockRepo);
+            var controller = new MockVideoController(mockRepo);
         
             // Act:
-            var result = controller.GetTranslations();
+            var result = controller.GetTranslationByVideoId(1, null, "");
 
             // Assert:
             var viewResult = (ViewResult)result;
             List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
 
             Assert.IsTrue(model.Count == 10);
+          
             for(int i = 0; i < model.Count - 1; i++)
             {
                 Assert.IsTrue(model[i].translationTime >= model[i + 1].translationTime);
@@ -168,26 +127,381 @@ namespace TransApp.Tests.Controllers
         }
 
         [TestMethod]
-        public void TestIfVideosAreOrderedByNameDescending()
+        public void TestIfTranslationsAreOrderedByDateAscendingAndCheckIfExactly10()
         {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                translations.Add(new Translation
+                {
+                    ID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English",
+                    translationText = "Lorem ipsum",
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var resultAscending = controller.GetTranslationByVideoId(1, null, "Date");
+
+            // Assert:
+            var viewResultAscending = (ViewResult)resultAscending;
+            List<Translation> modelAscending = (viewResultAscending.Model as IEnumerable<Translation>).ToList();
+            
+            Assert.IsTrue(modelAscending.Count == 10);
+            for (int i = 0; i < modelAscending.Count - 1; i++)
+            {
+                Assert.IsTrue(modelAscending[i].translationTime <= modelAscending[i + 1].translationTime);
+            }
+        }
+
+        [TestMethod]
+        public void TestIfTranslationsAreOrderedByLanguageAscending()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                translations.Add(new Translation
+                {
+                    ID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English" + i.ToString(),
+                    translationText = "Lorem ipsum",
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var resultAscending = controller.GetTranslationByVideoId(1, null, "Language");
+
+            // Assert:
+            var viewResultAscending = (ViewResult)resultAscending;
+            List<Translation> modelAscending = (viewResultAscending.Model as IEnumerable<Translation>).ToList();
+
+            for (int i = 0; i < modelAscending.Count - 1; i++)
+            {
+                int compare = String.Compare(modelAscending[i].translationLanguage, modelAscending[i + 1].translationLanguage);
+                Assert.IsTrue(compare <= 0);
+            }
+        }
+
+        [TestMethod]
+        public void TestIfTranslationsAreOrderedByLanguageDescending()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                translations.Add(new Translation
+                {
+                    ID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English" + i.ToString(),
+                    translationText = "Lorem ipsum",
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetTranslationByVideoId(1, null, "lang_desc");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
+
+            for (int i = 0; i < model.Count - 1; i++)
+            {
+                int compare = String.Compare(model[i].translationLanguage, model[i + 1].translationLanguage);
+                Assert.IsTrue(compare >= 0);
+            }
+        }
+
+        [TestMethod]
+        public void TestIfTranslationsAreOrderedByDownloadCountAscending()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                translations.Add(new Translation
+                {
+                    ID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English" + i.ToString(),
+                    translationText = "Lorem ipsum",
+                    downloadCount = i,
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var resultAscending = controller.GetTranslationByVideoId(1, null, "Count");
+
+            // Assert:
+            var viewResultAscending = (ViewResult)resultAscending;
+            List<Translation> modelAscending = (viewResultAscending.Model as IEnumerable<Translation>).ToList();
+
+            for (int i = 0; i < modelAscending.Count - 1; i++)
+            {
+                Assert.IsTrue(modelAscending[i].downloadCount <= modelAscending[i + 1].downloadCount);
+            }
+        }
+
+        [TestMethod]
+        public void TestIfTranslationsAreOrderedByDownloadCountDescending()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                translations.Add(new Translation
+                {
+                    ID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English" + i.ToString(),
+                    translationText = "Lorem ipsum",
+                    downloadCount = i,
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetTranslationByVideoId(1, null, "count_desc");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
+
+            for (int i = 0; i < model.Count - 1; i++)
+            {
+                Assert.IsTrue(model[i].downloadCount >= model[i + 1].downloadCount);
+            }
+        }
+
+        [TestMethod]
+        public void TestIfTranslationsAreOrderedByAverageVotesAscending()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                translations.Add(new Translation
+                {
+                    ID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English" + i.ToString(),
+                    translationText = "Lorem ipsum",
+                    averageVotes = Convert.ToDouble(i),
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var resultAscending = controller.GetTranslationByVideoId(1, null, "Average");
+
+            // Assert:
+            var viewResultAscending = (ViewResult)resultAscending;
+            List<Translation> modelAscending = (viewResultAscending.Model as IEnumerable<Translation>).ToList();
+
+            for (int i = 0; i < modelAscending.Count - 1; i++)
+            {
+                Assert.IsTrue(modelAscending[i].averageVotes <= modelAscending[i + 1].averageVotes);
+            }
+        }
+
+        [TestMethod]
+        public void TestIfTranslationsAreOrderedByAverageVotesDescending()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                translations.Add(new Translation
+                {
+                    ID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English" + i.ToString(),
+                    translationText = "Lorem ipsum",
+                    averageVotes = Convert.ToDouble(i),
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetTranslationByVideoId(1, null, "aver_desc");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
+
+            for (int i = 0; i < model.Count - 1; i++)
+            {
+                Assert.IsTrue(model[i].averageVotes >= model[i + 1].averageVotes);
+            }
+        }
+
+        [TestMethod]
+        public void TestGettingTranslationById()
+        {
+            // Arrange:
+            List<Translation> translations = new List<Translation>();
+
+            for (int i = 0; i < 15; i++)
+            {
+                translations.Add(new Translation
+                {
+                    ID = i,
+                    vID = i % 3,
+                    translationName = "Hackers",
+                    translationCategory = "Hasar",
+                    translationDescription = "Lorem ipsum",
+                    translationLanguage = "English" + i.ToString(),
+                    translationText = "Lorem ipsum",
+                    averageVotes = Convert.ToDouble(i),
+                    translationTime = DateTime.Now.AddDays(i)
+                });
+            }
+            var mockRepo = new Mocks.MockTranslationRepository(translations);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetTranslationById(7);
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
+
+            Assert.IsTrue(model.Count == 1);
+            Assert.IsTrue(model[0].ID == 7);
+        }
+
+        [TestMethod]
+        public void TestGettingMoreThan10Videos()
+        {
+            // Arrange:
             List<Video> videos = new List<Video>();
 
-            // Send in ascending list
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 13; i++)
             {
                 videos.Add(new Video
                 {
                     ID = i,
-                    catID = i,
+                    videoCategory = "Hasar",
+                    videoTime = DateTime.Now.AddDays(i),
                     videoName = "Video " + i.ToString()
                 });
             }
 
             var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
+            var controller = new MockVideoController(mockRepo);
 
             // Act:
-            var result = controller.OrderByName();
+            var result = controller.GetVideos(null, "");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            Assert.IsTrue(model.Count == 10);
+        }
+
+        [TestMethod]
+        public void TestGettingLessThan10Videos()
+        {
+            // Arrange:
+            List<Video> videos = new List<Video>();
+
+            for (int i = 0; i < 7; i++)
+            {
+                videos.Add(new Video
+                {
+                    ID = i,
+                    videoCategory = "Hasar",
+                    videoTime = DateTime.Now.AddDays(i),
+                    videoName = "Video " + i.ToString()
+                });
+            }
+
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetVideos(null, "");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            Assert.IsTrue(model.Count == 7);
+        }
+
+        [TestMethod]
+        public void TestOrderingVideosByDateDescending()
+        {
+            // Arrange:
+            List<Video> videos = new List<Video>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                videos.Add(new Video
+                {
+                    ID = i,
+                    videoCategory = "Hasar",
+                    videoTime = DateTime.Now.AddDays(i),
+                    videoName = "Video " + i.ToString()
+                });
+            }
+
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var result = controller.GetVideos(null, "");
 
             // Assert:
             var viewResult = (ViewResult)result;
@@ -195,168 +509,32 @@ namespace TransApp.Tests.Controllers
 
             for(int i = 0; i < model.Count - 1; i++)
             {
-                int c = string.Compare(model[i].videoName, model[i + 1].videoName);
-                Assert.IsTrue(c >= 0);
-            }
-        }
-
-        [TestMethod]
-        public void TestIfVideosAreOrderedByNameAscending()
-        {
-            List<Video> videos = new List<Video>();
-
-            // Send in unordered list
-            for (int i = 0; i < 10; i++)
-            {
-                videos.Add(new Video
-                {
-                    ID = i,
-                    catID = i,
-                    videoName = "Video " + (i % 3).ToString()
-                });
-            }
-
-            var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
-
-            // Act:
-            var result = controller.OrderByName();
-
-            // Assert:
-            var viewResult = (ViewResult)result;
-            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
-
-            for (int i = 0; i < model.Count - 1; i++)
-            {
-                int c = string.Compare(model[i].videoName, model[i + 1].videoName);
-                Assert.IsTrue(c <= 0);
-            }        
-        }
-
-        [TestMethod]
-        public void TestIfVideosAreOrderedByNameAscending2()
-        {
-            List<Video> videos = new List<Video>();
-
-            // Send in descending list
-            for (int i = 10; i > 0; i--)
-            {
-                videos.Add(new Video
-                {
-                    ID = i,
-                    catID = i,
-                    videoName = "Video " + (i).ToString(),
-                    videoTime = DateTime.Now.AddDays(i)
-                });
-            }
-
-            var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
-
-            // Act:
-            var result = controller.OrderByName();
-
-            // Assert:
-            var viewResult = (ViewResult)result;
-            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
-
-            for (int i = 0; i < model.Count - 1; i++)
-            {
-                int c = string.Compare(model[i].videoName, model[i + 1].videoName);
-                Assert.IsTrue(c <= 0);
-            }
-        }
-
-        [TestMethod]
-        public void TestIfVideosAreOrderedByDateDescending()
-        {
-            List<Video> videos = new List<Video>();
-
-            // Send in ascending list
-            for (int i = 10; i > 0; i--)
-            {
-                videos.Add(new Video
-                {
-                    ID = i,
-                    catID = i,
-                    videoName = "Video " + i.ToString(),
-                    videoTime = DateTime.Now.AddDays(i)
-                });
-            }
-
-            var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
-
-            // Act:
-            var result = controller.OrderByDate();
-
-            // Assert:
-            var viewResult = (ViewResult)result;
-            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
-
-            for (int i = 0; i < model.Count - 1; i++)
-            {
                 Assert.IsTrue(model[i].videoTime >= model[i + 1].videoTime);
             }
         }
 
         [TestMethod]
-        public void TestIfVideosAreOrderedByDateDescending2()
+        public void TestOrderingVideosByDateAscending()
         {
+            // Arrange:
             List<Video> videos = new List<Video>();
 
-            // Send in unordered list
-            for (int i = 10; i > 0; i--)
-            {
-                videos.Add(new Video
-                {
-                    ID = i,
-                    catID = i,
-                    videoName = "Video " + i.ToString(),
-                    videoTime = DateTime.Now.AddDays(i % 3)
-                });
-            }
-
-            var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
-
-            // Act:
-            var result = controller.OrderByDate();
-
-            // Assert:
-            var viewResult = (ViewResult)result;
-            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
-
-            for (int i = 0; i < model.Count - 1; i++)
-            {
-                Assert.IsTrue(model[i].videoTime >= model[i + 1].videoTime);
-            }
-        }
-        
-        
-        
-        [TestMethod]
-        public void TestIfVideosAreOrderedByDateAscending()
-        {
-            List<Video> videos = new List<Video>();
-
-            // Send in descending list
             for (int i = 0; i < 10; i++)
             {
                 videos.Add(new Video
                 {
                     ID = i,
-                    catID = i,
-                    videoName = "Video " + i.ToString(),
-                    videoTime = DateTime.Now.AddDays(i)
+                    videoCategory = "Hasar",
+                    videoTime = DateTime.Now.AddDays(i),
+                    videoName = "Video " + i.ToString()
                 });
             }
 
             var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
+            var controller = new MockVideoController(mockRepo);
 
             // Act:
-            var result = controller.OrderByDate();
+            var result = controller.GetVideos(null, "Date");
 
             // Assert:
             var viewResult = (ViewResult)result;
@@ -369,92 +547,9 @@ namespace TransApp.Tests.Controllers
         }
 
         [TestMethod]
-        public void TestIfVideosAreCategorizedByCategory()
+        public void TestOrderingVideosByNameDescending()
         {
-            List<Video> videos = new List<Video>();
-            int categoryCounter = 0;
-
-            for(int i = 0; i < 20; i++)
-            {
-                videos.Add(new Video
-                {
-                    ID = i,
-                    catID = i % 4,
-                    videoName = "Hackers",
-                    videoTime = DateTime.Now.AddDays(i)
-                });
-
-                if((i % 4) == 2)
-                {
-                    categoryCounter++;
-                }
-            }
-            var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
-
-            // Act:
-            var result = controller.GetVideoByCategoryId(2);
-
-            // Assert:
-            var viewResult = (ViewResult)result;
-            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
-
-            for (int i = 0; i < model.Count - 1; i++)
-            {
-                Assert.IsTrue(model[i].videoTime >= model[i + 1].videoTime);
-                Assert.IsTrue(model[i].catID == 2);
-            }
-
-            Assert.IsTrue(model[model.Count - 1].catID == 2);
-            Assert.IsTrue(model.Count == categoryCounter);
-        }
-
-        [TestMethod]
-        public void TestGettingTranslationsByVideoId()
-        {
-            List<Translation> translations = new List<Translation>();
-            int translationCounter = 0;
-
-            for(int i = 0; i < 20; i++)
-            {
-                translations.Add(new Translation
-                {
-                    ID = i,
-                    vID = i % 4,
-                    translationDescription = "Lorem ipsum",
-                    translationText = "Lorem ipsum",
-                    translationLanguage = "English",
-                    translationTime = DateTime.Now.AddDays(i)
-                });
-
-                if((i % 4) == 2)
-                {
-                    translationCounter++;
-                }
-            }
-            var mockRepo = new Mocks.MockTranslationRepository(translations);
-            var controller = new VideoController(mockRepo);
-
-            // Act:
-            var result = controller.GetTranslationsByVideoId(2);
-
-            // Assert:
-            var viewResult = (ViewResult)result;
-            List<Translation> model = (viewResult.Model as IEnumerable<Translation>).ToList();
-
-            for (int i = 0; i < model.Count - 1; i++)
-            {
-                Assert.IsTrue(model[i].translationTime >= model[i + 1].translationTime);
-                Assert.IsTrue(model[i].vID == 2);
-            }
-
-            Assert.IsTrue(model[model.Count - 1].vID == 2);
-            Assert.IsTrue(model.Count == translationCounter);
-        }
-
-        [TestMethod]
-        public void TestIfVideoSearchSearchesCorrectly()
-        {
+            // Arrange:
             List<Video> videos = new List<Video>();
 
             for (int i = 0; i < 10; i++)
@@ -462,27 +557,33 @@ namespace TransApp.Tests.Controllers
                 videos.Add(new Video
                 {
                     ID = i,
-                    catID = i,
-                    videoName = "Hackers" + i.ToString(),
-                    videoTime = DateTime.Now.AddDays(i)
+                    videoCategory = "Hasar",
+                    videoTime = DateTime.Now.AddDays(i),
+                    videoName = "Video " + i.ToString()
                 });
             }
+
             var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
+            var controller = new MockVideoController(mockRepo);
 
             // Act:
-            var result = controller.GetVideoBySearchName("Hackers2");
+            var result = controller.GetVideos(null, "name_desc");
 
             // Assert:
             var viewResult = (ViewResult)result;
             List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
 
-            Assert.IsTrue(model[model.Count - 1].videoName == "Hackers2");
+            for (int i = 0; i < model.Count - 1; i++)
+            {
+                int compare = String.Compare(model[i].videoName, model[i + 1].videoName);
+                Assert.IsTrue(compare >= 0);
+            }
         }
-        
+
         [TestMethod]
-        public void TestWhatVideoSearchReturnsWhenVideoIsNotInTheList()
+        public void TestOrderingVideosByNameAscending()
         {
+            // Arrange:
             List<Video> videos = new List<Video>();
 
             for (int i = 0; i < 10; i++)
@@ -490,28 +591,33 @@ namespace TransApp.Tests.Controllers
                 videos.Add(new Video
                 {
                     ID = i,
-                    catID = i,
-                    videoName = "Hackers" + i.ToString(),
-                    videoTime = DateTime.Now.AddDays(i)
+                    videoCategory = "Hasar",
+                    videoTime = DateTime.Now.AddDays(i),
+                    videoName = "Video " + i.ToString()
                 });
             }
+
             var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
+            var controller = new MockVideoController(mockRepo);
 
             // Act:
-            var result = controller.GetVideoBySearchName("The Matrix");
+            var result = controller.GetVideos(null, "Name");
 
             // Assert:
             var viewResult = (ViewResult)result;
             List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
 
-            Assert.IsTrue(model.Count == 0);
-        
+            for (int i = 0; i < model.Count - 1; i++)
+            {
+                int compare = String.Compare(model[i].videoName, model[i + 1].videoName);
+                Assert.IsTrue(compare <= 0);
+            }
         }
 
         [TestMethod]
-        public void TestIfSearchReturnsAllVideosThatContainTheStringAndTestUpperAndLowerCase()
+        public void TestGettingVideoByCategory()
         {
+            // Arrange:
             List<Video> videos = new List<Video>();
 
             for (int i = 0; i < 20; i++)
@@ -519,25 +625,94 @@ namespace TransApp.Tests.Controllers
                 videos.Add(new Video
                 {
                     ID = i,
-                    catID = i,
-                    videoName = "Hackers" + i.ToString(),
-                    videoTime = DateTime.Now.AddDays(i)
+                    videoCategory = "Hasar" + (i % 3).ToString(),
+                    videoTime = DateTime.Now.AddDays(i),
+                    videoName = "Video " + i.ToString()
                 });
             }
+
             var mockRepo = new Mocks.MockVideoRepository(videos);
-            var controller = new VideoController(mockRepo);
+            var controller = new MockVideoController(mockRepo);
 
             // Act:
-            var result = controller.GetVideoBySearchName("hackers");
+            var result = controller.GetVideoByCategory("Hasar1", null, "");
 
             // Assert:
             var viewResult = (ViewResult)result;
             List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
 
-           for(int i = 0; i < model.Count; i++)
-           {
-               Assert.IsTrue(model[i].videoName.Contains("Hackers"));
-           }
-        }*/
+            foreach(var item in model)
+            {
+                Assert.IsTrue(item.videoCategory == "Hasar1");
+            }
+        }
+
+        [TestMethod]
+        public void TestSearchingForExactName()
+        {
+            // Arrange:
+            List<Video> videos = new List<Video>();
+
+            for (int i = 0; i < 20; i++)
+            {
+                videos.Add(new Video
+                {
+                    ID = i,
+                    videoCategory = "Hasar" + (i % 3).ToString(),
+                    videoTime = DateTime.Now.AddDays(i),
+                    videoName = "Video " + (i % 3).ToString()
+                });
+            }
+
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var result = controller.SearchEngine("Video 1", "", null, "");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            foreach (var item in model)
+            {
+                Assert.IsTrue(item.videoName == "Video 1");
+            }
+        }
+
+        [TestMethod]
+        public void TestSearchingForUpperAndLowerCaseNames()
+        {
+            // Arrange:
+            List<Video> videos = new List<Video>();
+
+            for (int i = 0; i < 20; i++)
+            {
+                videos.Add(new Video
+                {
+                    ID = i,
+                    videoCategory = "Hasar" + (i % 3).ToString(),
+                    videoTime = DateTime.Now.AddDays(i),
+                    videoName = i % 2 == 0 ? "Hackers" : "hackers"
+
+                });
+            }
+
+            var mockRepo = new Mocks.MockVideoRepository(videos);
+            var controller = new MockVideoController(mockRepo);
+
+            // Act:
+            var result = controller.SearchEngine("hackers", "", null, "");
+
+            // Assert:
+            var viewResult = (ViewResult)result;
+            List<Video> model = (viewResult.Model as IEnumerable<Video>).ToList();
+
+            foreach (var item in model)
+            {
+                Assert.IsTrue(item.videoName.ToLower() == "hackers");
+            }
+        }
+
     }
 }
