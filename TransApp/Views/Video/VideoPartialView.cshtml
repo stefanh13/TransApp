@@ -48,8 +48,8 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
-                        <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
+                        <td>@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID, @class ="sverta" })</td>
+                        <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory, @class="svartur" })</td>
                         <td>@item.videoTime</td>
                     </tr>
                 }

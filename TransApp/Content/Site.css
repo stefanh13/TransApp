@@ -136,3 +136,8 @@ input[type="checkbox"].input-validation-error {
 {
     width: 20%;
 }
+
+tr a
+{
+    color: black;
+}
