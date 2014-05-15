@@ -24,19 +24,19 @@ namespace TransApp.Controllers
         TranslationRepository translationRepo = new TranslationRepository();
         CommentRepository commentRepo = new CommentRepository();
         
-        private readonly IVideoRepository repo;
-        private readonly ITranslationRepository repo2;
+        private readonly IVideoRepository videoTestRepo;
+        private readonly ITranslationRepository translationTestRepo;
        
         const int PAGESIZE = 10;
         
-        public VideoController(IVideoRepository rep)
+        public VideoController(IVideoRepository repo)
         {
-            repo = rep;
+            videoTestRepo = repo;
         }
         
-        public VideoController(ITranslationRepository reps)
+        public VideoController(ITranslationRepository repo)
         {
-            repo2 = reps;
+            translationTestRepo = repo;
         }
 
         public VideoController()
@@ -287,6 +287,10 @@ namespace TransApp.Controllers
                          orderby t.translationTime descending
                          select t).Take(10);*/
             pageNumber = pageNumber < 0 ? 1 : pageNumber;
+
+            /*var testTranslations = translations;
+
+            return View(testTranslations.ToPagedList(pageNumber, pageSize));           */ 
 
             return View(translations.ToPagedList(pageNumber, pageSize));
         }

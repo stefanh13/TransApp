@@ -30,6 +30,12 @@ namespace TransApp.Controllers
             
             var requests = (from req in userReqRepo.GetAllUserRequests()
                             select req);
+
+            if (Math.Ceiling(Convert.ToDouble(requests.Count()) / PAGESIZE) < page)
+            {
+                return View("NotFound");
+            }
+            
             switch (sortOrder)
             {
                 case "name_desc":
@@ -60,6 +66,8 @@ namespace TransApp.Controllers
 
             int pageSize = PAGESIZE;
             int pageNumber = (page ?? 1);
+
+            pageNumber = pageNumber < 0 ? 1 : pageNumber;
 
             return View(requests.ToPagedList(pageNumber, pageSize));
             
@@ -109,6 +117,12 @@ namespace TransApp.Controllers
         [HttpPost]    
         public ActionResult Like(int? id)
         {
+            
+            if(id == null)
+            {
+                return View("NotFound");
+            }
+            
             userReqRepo.UpdateLike(id);
 
             string returnUrl = "/GetUserRequestById/" + id.Value.ToString();
@@ -117,6 +131,11 @@ namespace TransApp.Controllers
         }
         public ActionResult GetUserRequestById(int? id)
         {
+            if(id == null)
+            {
+                return View("NotFound");
+            }
+            
             var model = (from l in userReqRepo.GetAllUserRequests()
                          where l.ID == id
                          select l).FirstOrDefault();
