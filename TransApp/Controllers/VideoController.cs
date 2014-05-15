@@ -75,6 +75,7 @@ namespace TransApp.Controllers
             categoryList.Add(new SelectListItem { Text = "Ævintýra", Value = "Ævintýra" });
             categoryList.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
             categoryList.Add(new SelectListItem { Text = "Gaman", Value = "Gaman" });
+            categoryList.Add(new SelectListItem { Text = "Hryllings", Value = "Hryllings" });
             ViewData["translationCategory"] = categoryList;
             
             return View(new Translation());
@@ -120,6 +121,7 @@ namespace TransApp.Controllers
             categoryList.Add(new SelectListItem { Text = "Ævintýra", Value = "Ævintýra" });
             categoryList.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
             categoryList.Add(new SelectListItem { Text = "Gaman", Value = "Gaman" });
+            categoryList.Add(new SelectListItem { Text = "Hryllings", Value = "Hryllings" });
             ViewData["translationCategory"] = categoryList;
             
             if(ModelState.IsValid)
