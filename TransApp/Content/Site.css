@@ -58,3 +58,40 @@ input[type="checkbox"].input-validation-error {
 {
     margin: 2em;
 }
+
+#TL1
+{
+    width : 50%;
+}
+#TL2
+{
+    width : 30%;
+}
+#TL3
+{
+    width : 20%;
+}
+#BL1
+{
+    width : 50%;
+}
+#BL2
+{
+    width : 15%;
+}
+#BL3
+{
+    width : 15%;
+}
+#BL4
+{
+    width : 10%;
+}
+#BL5
+{
+    width : 10%;
+}
+#ColCenter
+{
+    text-align:center;
+}
