@@ -54,6 +54,7 @@ namespace TransApp.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult AddTranslation()
         {
@@ -440,6 +441,7 @@ namespace TransApp.Controllers
             return View(tViewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult GetTranslationById(TranslationViewModel t, int? id)
         {
@@ -488,6 +490,7 @@ namespace TransApp.Controllers
             return View(returnUrl);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult AddComment(int? id, string commentText)
         {
