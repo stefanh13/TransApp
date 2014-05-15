@@ -71,11 +71,11 @@ namespace TransApp.Controllers
             List<SelectListItem> categoryList = new List<SelectListItem>();
 
             categoryList.Add(new SelectListItem { Text = "Veldu Flokk", Value = "" });
-            categoryList.Add(new SelectListItem { Text = "Hasar", Value = "Hasar" });
-            categoryList.Add(new SelectListItem { Text = "Ævintýra", Value = "Ævintýra" });
-            categoryList.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
             categoryList.Add(new SelectListItem { Text = "Gaman", Value = "Gaman" });
+            categoryList.Add(new SelectListItem { Text = "Hasar", Value = "Hasar" });
             categoryList.Add(new SelectListItem { Text = "Hryllings", Value = "Hryllings" });
+            categoryList.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+            categoryList.Add(new SelectListItem { Text = "Ævintýra", Value = "Ævintýra" });  
             ViewData["translationCategory"] = categoryList;
             
             return View(new Translation());
@@ -117,11 +117,11 @@ namespace TransApp.Controllers
             List<SelectListItem> categoryList = new List<SelectListItem>();
 
             categoryList.Add(new SelectListItem { Text = "Veldu Flokk", Value = "" });
-            categoryList.Add(new SelectListItem { Text = "Hasar", Value = "Hasar" });
-            categoryList.Add(new SelectListItem { Text = "Ævintýra", Value = "Ævintýra" });
-            categoryList.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
             categoryList.Add(new SelectListItem { Text = "Gaman", Value = "Gaman" });
+            categoryList.Add(new SelectListItem { Text = "Hasar", Value = "Hasar" });
             categoryList.Add(new SelectListItem { Text = "Hryllings", Value = "Hryllings" });
+            categoryList.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+            categoryList.Add(new SelectListItem { Text = "Ævintýra", Value = "Ævintýra" }); 
             ViewData["translationCategory"] = categoryList;
             
             if(ModelState.IsValid)
@@ -317,6 +317,7 @@ namespace TransApp.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
             ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewBag.CategorySortParm = sortOrder == "Category" ? "cat_desc" : "Category";
             
             var videos = from v in videoRepo.GetAllVideos()
                          select v;
@@ -331,11 +332,17 @@ namespace TransApp.Controllers
                 case "name_desc":
                     videos = videos.OrderByDescending(v => v.videoName);
                     break;
+                case "cat_desc":
+                    videos = videos.OrderByDescending(v => v.videoCategory);
+                    break;
                 case "Date":
                     videos = videos.OrderBy(v => v.videoTime);
                     break;
                 case "Name":
                     videos = videos.OrderBy(v => v.videoName);
+                    break;
+                case "Category":
+                    videos = videos.OrderBy(v => v.videoCategory);
                     break;
                 default:
                     videos = videos.OrderByDescending(v => v.videoTime);

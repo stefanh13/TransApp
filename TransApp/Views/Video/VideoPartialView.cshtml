@@ -22,10 +22,10 @@
 </div>
     <div class="row text-center">
         <ul class="nav nav-tabs nav-justified">
-            <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
-            <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
             <li>@Html.ActionLink("Gaman", "GetVideoByCategory", new { category = "Gaman" })</li>
+            <li>@Html.ActionLink("Hasar", "GetVideoByCategory", new { category = "Hasar" })</li>
             <li>@Html.ActionLink("Hryllings", "GetVideoByCategory", new { category = "Hryllings" })</li>
+            <li>@Html.ActionLink("Rómantík", "GetVideoByCategory", new { category = "Rómantík" })</li>
             <li>@Html.ActionLink("Ævintýra", "GetVideoByCategory", new { category = "Ævintýra" })</li>
         </ul>
     </div>
@@ -36,7 +36,7 @@
             <thead>
                 <tr>
                     <th>@Html.ActionLink("Nafn", "GetVideos", new { sortOrder = ViewBag.NameSortParm }, new { @class = "svartur" })</th>
-                    <th>Flokkur</th>
+                    <th>@Html.ActionLink("Flokkur", "GetVideos", new { sortOrder = ViewBag.CategorySortParm }, new { @class = "svartur" })</th>
                     <th>@Html.ActionLink("Dagsetning", "GetVideos", new { sortOrder = ViewBag.DateSortParm }, new { @class = "svartur" })</th>
                 </tr>
             </thead>
