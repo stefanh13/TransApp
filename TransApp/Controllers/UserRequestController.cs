@@ -117,8 +117,8 @@ namespace TransApp.Controllers
         [HttpPost]    
         public ActionResult Like(int? id)
         {
-            
-            if(id == null)
+
+            if (id == null || !userReqRepo.IsIdValid(id))
             {
                 return View("NotFound");
             }
@@ -131,7 +131,7 @@ namespace TransApp.Controllers
         }
         public ActionResult GetUserRequestById(int? id)
         {
-            if(id == null)
+            if(id == null || !userReqRepo.IsIdValid(id))
             {
                 return View("NotFound");
             }
