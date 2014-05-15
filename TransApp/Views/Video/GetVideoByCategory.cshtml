@@ -7,21 +7,19 @@
 <div class="row spacer">
     <div class="span4">&nbsp;</div>
     <div class="row text-center">
-        @Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { @class = "btn btn-default btn-lg active" })
+        @Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { id = "newTransLink", @class = "btn btn-default btn-lg active" })
     </div>
 </div>
 
-    @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get))
+<div id="FrontSearch" class="row text-center">
+    @using (Html.BeginForm("SearchEngine", "Video", FormMethod.Get, new { id = "SearchEngine2", @class = "navbar-form navbar-center" }))
     {
-        <div class="row spacer">
-            <div class="span4">&nbsp;</div>
-            <div class="row text-center">
-                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID" })
-                <input type="submit" id="SearchBtnID" value="Search" disabled="disabled" />
-            </div>
-            <div class="span4">&nbsp;</div>
+        <div class="form-group input-xlarge">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID", @class = "form-control input-xlarge", @placeholder = "Search" })
         </div>
+        <input type="submit" id="SearchBtnID" value="Search" class="btn btn-primary btn-large" disabled="disabled" />
     }
+</div>
 
     <div class="row text-center">
         <ul class="list-inline">

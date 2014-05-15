@@ -49,4 +49,12 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
+#newTransLink
+{
+    margin: 1em;
+}
 
+#SearchEngine2
+{
+    margin: 2em;
+}
