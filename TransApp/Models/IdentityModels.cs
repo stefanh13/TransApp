@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace TransApp.Models
 {
@@ -11,8 +12,13 @@ namespace TransApp.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("VideoContext")
         {
         }
+
+        public DbSet<Video> videos { get; set; }
+        public DbSet<Translation> translations { get; set; }
+        public DbSet<UserRequest> userRequest { get; set; }
+        public DbSet<Comment> comments { get; set; }
     }
 }

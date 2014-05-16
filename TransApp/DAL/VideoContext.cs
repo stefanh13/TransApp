@@ -8,7 +8,7 @@ using TransApp.Models;
 
 namespace TransApp.DAL
 {
-    public class VideoContext : DbContext
+   /* public class VideoContext : DbContext
     {
         public VideoContext() : base("VideoContext")
         {
@@ -22,5 +22,5 @@ namespace TransApp.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-    }
+    }*/
 }

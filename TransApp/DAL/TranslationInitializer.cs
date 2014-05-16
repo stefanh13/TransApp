@@ -6,7 +6,7 @@ using TransApp.Models;
 
 namespace TransApp.DAL
 {
-    public class TranslationInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<TranslationContext>
+    /*public class TranslationInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<TranslationContext>
     {
         protected override void Seed(TranslationContext context)
         {
@@ -83,5 +83,5 @@ namespace TransApp.DAL
             translations.ForEach(t => context.translations.Add(t));
             context.SaveChanges();
         }
-    }
+    }*/
 }

@@ -6,7 +6,7 @@ using TransApp.Models;
 
 namespace TransApp.DAL
 {
-    public class UserRequestInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<UserRequestContext>
+/*public class UserRequestInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<UserRequestContext>
     {
         protected override void Seed(UserRequestContext context)
         {
@@ -57,5 +57,5 @@ namespace TransApp.DAL
             req.ForEach(s => context.userRequest.Add(s));
             context.SaveChanges();
         }
-    }
+    }*/
 }

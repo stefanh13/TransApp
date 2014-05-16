@@ -6,7 +6,7 @@ using TransApp.Models;
 
 namespace TransApp.DAL
 {
-    public class CommentInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<CommentContext>
+   /* public class CommentInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<CommentContext>
     {
         protected override void Seed(CommentContext context)
         {
@@ -87,5 +87,5 @@ namespace TransApp.DAL
             comments.ForEach(c => context.comments.Add(c));
             context.SaveChanges();
         }
-    }
+    }*/
 }

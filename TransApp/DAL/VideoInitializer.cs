@@ -6,7 +6,7 @@ using TransApp.Models;
 
 namespace TransApp.DAL
 {
-    public class VideoInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<VideoContext>
+    /*public class VideoInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<VideoContext>
     {
         protected override void Seed(VideoContext context)
         {
@@ -107,5 +107,5 @@ namespace TransApp.DAL
             vids.ForEach(a => context.videos.Add(a));
             context.SaveChanges();
         }
-    }
+    }*/
 }

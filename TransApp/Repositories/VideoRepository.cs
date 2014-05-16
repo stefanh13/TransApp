@@ -10,7 +10,7 @@ namespace TransApp.Repositories
     public class VideoRepository
     {
 
-        VideoContext videoDb = new VideoContext();
+        ApplicationDbContext videoDb = new ApplicationDbContext();
 
         public IEnumerable<Video> GetAllVideos()
         {
