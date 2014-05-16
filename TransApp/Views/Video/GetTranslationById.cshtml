@@ -55,24 +55,28 @@
                 @Html.ValidationMessageFor(model => model.Translation.translationLanguage)
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Vista" class="btn btn-default" />
-            </div>
+        <div id="BtnWrapper">
+            <span>
+                <span>
+                    <input type="submit" value="Vista" class="btn btn-default" />
+                </span>
+            </span>
+            <span>
+                <span>
+                    @using (Html.BeginForm("Download", "Video", new { translation = Model.Translation.translationText, fileName = Model.Translation.translationName, id = Model.Translation.ID }))
+                    {
+                        <input type="submit" value="Sækja þýðingu" class="btn btn-default" />
+                    }
+                </span>
+            </span>
         </div>
     </div>
-
-    <p>Seinast vistað: @Model.Translation.translationTime</p>
+    
+    
+    
 }
+<p><span class="bolding">Seinast vistað: </span>@Model.Translation.translationTime</p>
 
-@using (Html.BeginForm("Download", "Video", new { translation = Model.Translation.translationText, fileName = Model.Translation.translationName, id = Model.Translation.ID }))
-{
-    <p>
-
-        <input type="submit" value="Sækja" />
-    </p>
-}
 
 @using (Html.BeginForm("UpdateVotes", "Video", new { id = Model.Translation.ID }))
 {
@@ -86,7 +90,7 @@
     </ul>
 
 }
-<p>Heildareinkunn: @Model.Translation.averageVotes af 5 </p>
+<p><span class="bolding">Heildareinkunn:</span> @Model.Translation.averageVotes af 5 </p>
 <p>@Model.Translation.voteCount atkvæði</p>
 
 <hr />

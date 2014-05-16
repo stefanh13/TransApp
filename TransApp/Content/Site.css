@@ -140,3 +140,23 @@ tr a
 {
     color: black;
 }
+.bolding
+{
+    font-weight: bold;
+}
+#BtnWrapper
+{
+    margin-left: 17%;
+}
+#TBC1
+{
+    width : 50%;
+}
+#TBC2
+{
+    width : 30%;
+}
+#TBC3
+{
+    width : 20%;
+}

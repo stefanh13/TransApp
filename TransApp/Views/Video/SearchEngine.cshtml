@@ -39,18 +39,18 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>@Html.ActionLink("Nafn", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.NameSortParm }, new { @class = "svartur" })</th>
-            <th>Flokkur</th>
-            <th>@Html.ActionLink("Dagsetning", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.DateSortParm }, new { @class = "svartur" })</th>
+            <th id="SL1">@Html.ActionLink("Nafn", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.NameSortParm }, new { @class = "svartur" })</th>
+            <th id="SL2">Flokkur</th>
+            <th id="SL3">@Html.ActionLink("Dagsetning", "SearchEngine", new { currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.DateSortParm }, new { @class = "svartur" })</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td id="SL1">@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
-                <td id="SL2">@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
-                <td id="SL3">@item.videoTime</td>
+                <td>@Html.ActionLink(item.videoName, "GetTranslationsByVideoId", new { id = item.ID })</td>
+                <td>@Html.ActionLink(item.videoCategory, "GetVideoByCategory", new { category = item.videoCategory })</td>
+                <td>@item.videoTime</td>
             </tr>
         }
     </tbody>

@@ -16,7 +16,7 @@
         @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.requestName, "Nafn", new { @class="control-lable col-md-2" })
+            @Html.LabelFor(model => model.requestName, "Nafn beiðni", new { @class="control-lable col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.requestName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.requestName)
@@ -46,6 +46,7 @@
                 @Html.ValidationMessageFor(model => model.requestLanguage)
             </div>
         </div>
+        
 
         <div class="form-group">
             <div class="col-md-offset-2">
