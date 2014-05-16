@@ -184,9 +184,13 @@ namespace TransApp.Controllers
         
         public ActionResult GetVideoByCategory(string category, int? page, string sortOrder)
         {
-            if(String.IsNullOrEmpty(category) || !videoRepo.ContainsCategory(category))
+            if (!videoRepo.ContainsCategory(category)|| String.IsNullOrEmpty(category))
             {
                 return View("NotFound");
+            }
+            if ()
+            {
+                return View("EmptyList");
             }
             
             ViewBag.CurrentSort = sortOrder;
