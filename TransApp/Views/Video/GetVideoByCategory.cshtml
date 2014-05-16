@@ -4,11 +4,12 @@
 @{
     ViewBag.Title = "GetVideoByCategory";
 }
+
 <div class="row spacer">
     <div class="span4">&nbsp;</div>
-    <div class="row text-center">
-        @Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { id = "newTransLink", @class = "btn btn-default btn-lg active" })
-    </div>
+        <div class="row text-center">
+            @Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { id = "newTransLink", @class = "btn btn-default btn-lg active" })
+        </div>
 </div>
 
 <div id="FrontSearch" class="row text-center">
@@ -17,7 +18,8 @@
         <div class="form-group input-xlarge">
             @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID", @class = "form-control input-xlarge", @placeholder = "Leita hér" })
         </div>
-    <input type="submit" id="SearchBtnID" value="Leita" class=" btn btn-default" disabled="disabled" />
+        
+        <input type="submit" id="SearchBtnID" value="Leita" class=" btn btn-default" disabled="disabled" />
     }
 </div>
 
@@ -55,7 +57,7 @@
         </tbody>
     </table>
 
-    <p>Síða @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount</p>
+ <p>Síða @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount</p>
 
 
     @Html.PagedListPager(Model, page => Url.Action("GetVideoByCategory", new { category = Model[0].videoCategory, page, sortOrder = ViewBag.CurrentSort }))

@@ -4,11 +4,12 @@
 @{
     ViewBag.Title = "GetVideos";
 }
+
 <div class="row spacer">
     <div class="span4">&nbsp;</div>
-    <div class="row text-center">
-        @Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { id="newTransLink", @class = "btn btn-default btn-lg active" })
-    </div>
+        <div class="row text-center">
+            @Html.ActionLink("Ný þýðing", "AddTranslation", "Video", new { id="newTransLink", @class = "btn btn-default btn-lg active" })
+        </div>
 </div>
 
 <div id="FrontSearch"class="row text-center">
@@ -17,9 +18,11 @@
         <div class="form-group input-xlarge">
             @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchID", @class = "form-control input-xlarge", @placeholder = "Leitið hér" })
         </div>
-    <input type="submit" id="SearchBtnID" value="Leita" class=" btn btn-default" disabled="disabled" />
+        
+        <input type="submit" id="SearchBtnID" value="Leita" class=" btn btn-default" disabled="disabled" />
     }
 </div>
+
     <div class="row text-center">
         <ul class="list-inline">
             <li>@Html.ActionLink("Gaman", "GetVideoByCategory", new { category = "Gaman" }, new { @class = "svartur" })</li>
