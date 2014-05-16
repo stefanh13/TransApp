@@ -8,6 +8,10 @@ using PagedList;
 
 namespace TransApp.Controllers
 {
+    /// <summary>
+    /// This class purpose is to be a copy of the VideoController. The reason for that is for the unit tests to run and make the code
+    /// that is in the real VideoController more readable because the unit tests use another repositories than the real database uses.
+    /// </summary>
     public class MockVideoController : Controller
     {
 
