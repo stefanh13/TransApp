@@ -184,11 +184,15 @@ namespace TransApp.Controllers
         
         public ActionResult GetVideoByCategory(string category, int? page, string sortOrder)
         {
+            
+            if(!videoRepo.ContainsCategory(category) && videoRepo.CategoryRepo(category))
+            {
+                return View("Error");
+            }
             if (!videoRepo.ContainsCategory(category)|| String.IsNullOrEmpty(category))
             {
                 return View("NotFound");
             }
-            
             
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
@@ -463,7 +467,8 @@ namespace TransApp.Controllers
             if(ModelState.IsValid)
             {
                 translationRepo.Update(t.Translation.translationText, id);
-                return RedirectToAction("/GetVideos");
+                string returnUrl = "/GetTranslationById/" + id.ToString();
+                return RedirectToAction(returnUrl);
             }
 
             return View(t);

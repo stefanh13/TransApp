@@ -71,5 +71,35 @@ namespace TransApp.Repositories
 
             return false;
         }
+
+        public bool CategoryRepo(string category)
+        {
+            if(category == "Gaman")
+            {
+                return true;
+            }
+
+            if (category == "Hasar")
+            {
+                return true;
+            }
+
+            if (category == "Ævintýra")
+            {
+                return true;
+            }
+
+            if (category == "Hryllings")
+            {
+                return true;
+            }
+
+            if (category == "Rómantík")
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
