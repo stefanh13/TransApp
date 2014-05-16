@@ -63,10 +63,7 @@
             </span>
             <span>
                 <span>
-                    @using (Html.BeginForm("Download", "Video", new { translation = Model.Translation.translationText, fileName = Model.Translation.translationName, id = Model.Translation.ID }))
-                    {
-                        <input type="submit" value="Sækja þýðingu" class="btn btn-default" />
-                    }
+                    @Html.ActionLink("Sækja þýðingu", "Download", new { id = Model.Translation.ID }, new { @class="btn btn-default"})
                 </span>
             </span>
         </div>
@@ -102,7 +99,7 @@
         <li class="list-group-item">
             <p>
                 <span class="glyphicon glyphicon-user"></span>
-                <span>@item.userName</span>
+                <span>@item.userName - </span>
                 <span>@item.commentText</span>
             </p>
             <p>

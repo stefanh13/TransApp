@@ -468,21 +468,23 @@ namespace TransApp.Controllers
             return View(t);
         }
 
-        public ActionResult Download(string translationText, string fileName, int? id)
+        public ActionResult Download(int? id)
         {
-            if(id == null || !translationRepo.isIdValid(id) || String.IsNullOrEmpty(fileName))
+            if(id == null || !translationRepo.isIdValid(id))
             {
                 return View("NotFound");
             }
+
+            var translation = translationRepo.GetTranslationById(id);
             
             MemoryStream mStream = new MemoryStream();
             TextWriter tWriter = new StreamWriter(mStream);
-            tWriter.WriteLine(translationText);
+            tWriter.WriteLine(translation.translationText);
             tWriter.Flush();
             byte[] bytes = mStream.ToArray();
             mStream.Close();
 
-            string enCodeFileName = Server.UrlEncode(fileName);
+            string enCodeFileName = Server.UrlEncode(translation.translationName);
 
             Response.Clear();
             Response.ContentType = "application/force-download";

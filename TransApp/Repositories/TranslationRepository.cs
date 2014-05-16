@@ -92,5 +92,20 @@ namespace TransApp.Repositories
                 }
             }
         }
+
+        public Translation GetTranslationById(int? id)
+        {
+            Translation t = null;
+            
+            foreach(var item in translationDb.translations.ToList())
+            {
+                if(item.ID == id)
+                {
+                    t = item;
+                }
+            }
+
+            return t;
+        }
     }
 }
