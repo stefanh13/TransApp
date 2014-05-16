@@ -8,7 +8,7 @@ using TransApp.Models;
 
 namespace TransApp.DAL
 {
-    public class UserRequestContext : DbContext
+   /* public class UserRequestContext : DbContext
     {
         public UserRequestContext()
             : base("UserRequestContext")
@@ -21,5 +21,5 @@ namespace TransApp.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-    }
+    }*/
 }

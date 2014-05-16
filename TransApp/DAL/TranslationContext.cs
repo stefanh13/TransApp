@@ -8,7 +8,7 @@ using TransApp.Models;
 
 namespace TransApp.DAL
 {
-    public class TranslationContext : DbContext
+   /* public class TranslationContext : DbContext
     {
         public TranslationContext() : base("TranslationContext")
         {
@@ -21,5 +21,5 @@ namespace TransApp.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-    }
+    }*/
 }

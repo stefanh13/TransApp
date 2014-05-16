@@ -9,7 +9,7 @@ namespace TransApp.Repositories
 {
     public class TranslationRepository
     {
-        TranslationContext translationDb = new TranslationContext();
+        ApplicationDbContext translationDb = new ApplicationDbContext();
 
         public IEnumerable<Translation> GetAllTranslations()
         {

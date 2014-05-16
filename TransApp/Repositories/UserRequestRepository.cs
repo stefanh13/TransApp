@@ -10,7 +10,7 @@ namespace TransApp.Repositories
 {
     public class UserRequestRepository
     {
-        UserRequestContext userRequestDb = new UserRequestContext();
+        ApplicationDbContext userRequestDb = new ApplicationDbContext();
 
         public IEnumerable<UserRequest> GetAllUserRequests()
         {

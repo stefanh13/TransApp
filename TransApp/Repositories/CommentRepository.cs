@@ -9,7 +9,7 @@ namespace TransApp.Repositories
 {
     public class CommentRepository
     {
-        CommentContext commentDb = new CommentContext();
+        ApplicationDbContext commentDb = new ApplicationDbContext();
 
         public IEnumerable<Comment> GetAllComments()
         {
