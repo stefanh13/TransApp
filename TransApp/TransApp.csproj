@@ -171,24 +171,14 @@
     <Compile Include="Controllers\MockVideoController.cs" />
     <Compile Include="Controllers\UserRequestController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
-    <Compile Include="DAL\CommentContext.cs" />
-    <Compile Include="DAL\CommentInitializer.cs" />
-    <Compile Include="DAL\TranslationContext.cs" />
-    <Compile Include="DAL\TranslationInitializer.cs" />
-    <Compile Include="DAL\UserRequestContext.cs" />
-    <Compile Include="DAL\UserRequestInitializer.cs" />
-    <Compile Include="DAL\VideoContext.cs" />
-    <Compile Include="DAL\VideoInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Translation.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRequest.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
