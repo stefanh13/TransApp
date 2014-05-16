@@ -6,25 +6,39 @@ using System.Web;
 
 namespace TransApp.Models
 {
+    /// <summary>
+    /// This class keeps hold of the videos translations.
+    /// </summary>
     public class Translation
     {
         public int ID { get; set; }
+        
         public int vID { get; set; }
+        
         [Required(ErrorMessage = "Vinsamlegast veldu flokk")]
         public string translationCategory { get; set; }
+        
         [Required(ErrorMessage = "Vinsamlegast veldur nafn")]
         public string translationName { get; set; }
+        
         [Required(ErrorMessage = "Vinsamlegast sláðu inn lýsingu")]
         public string translationDescription { get; set; }
         
         public string translationText { get; set; }
+        
         [Required(ErrorMessage = "Vinsamlegast veldu tungumál")]
         public string translationLanguage { get; set; }
+        
         public DateTime translationTime { get; set; }
+        
         public int overallVotes { get; set; }
+        
         public int voteCount { get; set; }
+        
         public double averageVotes { get; set; }
+        
         public int downloadCount { get; set; }
+        
         public Translation()
         {
             translationTime = DateTime.Now;

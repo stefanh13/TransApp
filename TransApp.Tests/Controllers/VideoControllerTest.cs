@@ -37,6 +37,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get the translations with vId == 2.
             var result = controller.GetTranslationByVideoId(2, null, "");
 
             // Assert:
@@ -74,6 +75,7 @@ namespace TransApp.Tests.Controllers
             var mockRepo = new Mocks.MockTranslationRepository(translations);
             var controller = new MockVideoController(mockRepo);
             // Act:
+            // Get translations with vId == 2.
             var result = controller.GetTranslationByVideoId(2, null, "");
             
             // Assert:
@@ -112,6 +114,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
         
             // Act:
+            // Get translations ordered by date descending.
             var result = controller.GetTranslationByVideoId(1, null, "");
 
             // Assert:
@@ -150,6 +153,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get translations ordered by date ascending.
             var resultAscending = controller.GetTranslationByVideoId(1, null, "Date");
 
             // Assert:
@@ -187,6 +191,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get translations ordered by language ascending.
             var resultAscending = controller.GetTranslationByVideoId(1, null, "Language");
 
             // Assert:
@@ -224,6 +229,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get translations ordered by language descending.
             var result = controller.GetTranslationByVideoId(1, null, "lang_desc");
 
             // Assert:
@@ -262,6 +268,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get translations ordered by count ascending.
             var resultAscending = controller.GetTranslationByVideoId(1, null, "Count");
 
             // Assert:
@@ -299,6 +306,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get translations ordered by count descending.
             var result = controller.GetTranslationByVideoId(1, null, "count_desc");
 
             // Assert:
@@ -336,6 +344,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get translations ordered by average votes ascending.
             var resultAscending = controller.GetTranslationByVideoId(1, null, "Average");
 
             // Assert:
@@ -373,6 +382,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get translations ordered by average votes descending.
             var result = controller.GetTranslationByVideoId(1, null, "aver_desc");
 
             // Assert:
@@ -410,6 +420,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get translation with id == 7.
             var result = controller.GetTranslationById(7);
 
             // Assert:
@@ -501,6 +512,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get videos ordered by date descending.
             var result = controller.GetVideos(null, "");
 
             // Assert:
@@ -534,6 +546,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get videos ordered by date ascending.
             var result = controller.GetVideos(null, "Date");
 
             // Assert:
@@ -567,6 +580,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get videos ordered by name descending.
             var result = controller.GetVideos(null, "name_desc");
 
             // Assert:
@@ -601,6 +615,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get videos ordered by name ascending.
             var result = controller.GetVideos(null, "Name");
 
             // Assert:
@@ -635,6 +650,7 @@ namespace TransApp.Tests.Controllers
             var controller = new MockVideoController(mockRepo);
 
             // Act:
+            // Get videos with category == Hasar1.
             var result = controller.GetVideoByCategory("Hasar1", null, "");
 
             // Assert:
