@@ -188,10 +188,7 @@ namespace TransApp.Controllers
             {
                 return View("NotFound");
             }
-            if ()
-            {
-                return View("EmptyList");
-            }
+            
             
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
