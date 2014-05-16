@@ -72,6 +72,8 @@
     
     
 }
+
+<hr />
 <p><span class="bolding">Seinast vistað: </span>@Model.Translation.translationTime</p>
 
 
@@ -99,8 +101,8 @@
         <li class="list-group-item">
             <p>
                 <span class="glyphicon glyphicon-user"></span>
-                <span>@item.userName - </span>
-                <span>@item.commentText</span>
+                <span id="userName">@item.userName </span>
+                <div>@item.commentText</div>
             </p>
             <p>
                 <span>@item.commentTime</span>
