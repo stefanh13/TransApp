@@ -67,15 +67,12 @@
                 </span>
             </span>
         </div>
-    </div>
-    
-    
-    
+    </div>    
 }
 
 <hr />
-<p><span class="bolding">Seinast vistað: </span>@Model.Translation.translationTime</p>
 
+<p><span class="bolding">Seinast vistað: </span>@Model.Translation.translationTime</p>
 
 @using (Html.BeginForm("UpdateVotes", "Video", new { id = Model.Translation.ID }))
 {
