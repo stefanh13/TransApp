@@ -3,19 +3,21 @@
 @{
         ViewBag.Title = "GetUserRequestById";
 }
-<h2>@Model.requestName</h2>
-<h4>@Model.requestLanguage</h4>
-<p>@Html.TextAreaFor(model => model.requestText, new { @readonly = "readonly", @cols = "80", @rows = "8" }) </p>
 
+<h2>@Model.requestName</h2>
+
+<h4>Eftirsótt þýðing: @Model.requestLanguage</h4>
+
+<p>@Html.TextAreaFor(model => model.requestText, new { @class = "form-control", @readonly = "readonly", @cols = "80", @rows = "8" }) </p>
 
     @using (Html.BeginForm("Like", "UserRequest", new { id = Model.ID }))
     {
-        //<input type="submit" value="Like" />
-
         <button type="submit" value="Like" class="btn btn-primary btn-sm">
             Gefa atkvæði
             <i class="glyphicon glyphicon-heart"></i>
         </button>
     }
+
+<p>Sett inn: @Model.requestTime</p>
 
     <h4>Fjöldi atkvæða: @Model.likes</h4>

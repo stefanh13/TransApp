@@ -9,7 +9,6 @@
 @using (Html.BeginForm("AddTranslation", "Video", FormMethod.Post, new { enctype = "multipart/form-data", id = "myform", @class="form-horizontal"}))
 {
     <fieldset>
-        <legend></legend>
     @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 

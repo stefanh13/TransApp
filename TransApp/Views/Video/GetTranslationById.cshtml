@@ -19,15 +19,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Translation.translationCategory, "Flokkur", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Translation.translationCategory)
+                @Html.TextBoxFor(model => model.Translation.translationCategory, new { @readonly = "readonly", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Translation.translationCategory)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Translation.translationName, "Nafn", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Translation.translationName, "Nafn myndar", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Translation.translationName)
+                @Html.TextBoxFor(model => model.Translation.translationName, new { @readonly = "readonly", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Translation.translationName)
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Translation.translationDescription, "Lýsing", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Translation.translationDescription)
+                @Html.TextAreaFor(model => model.Translation.translationDescription, new { @readonly = "readonly", @rows = "3", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Translation.translationDescription)
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Translation.translationLanguage, "Tungumál", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Translation.translationLanguage)
+                @Html.TextBoxFor(model => model.Translation.translationLanguage, new { @readonly = "readonly", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Translation.translationLanguage)
             </div>
         </div>
