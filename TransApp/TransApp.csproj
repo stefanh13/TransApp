@@ -271,6 +271,7 @@
     <Content Include="Views\Video\UploadTooLarge.cshtml" />
     <Content Include="Views\Video\CommonQuestions.cshtml" />
     <Content Include="Views\Video\WrongFileType.cshtml" />
+    <Content Include="Views\Video\EmptyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
