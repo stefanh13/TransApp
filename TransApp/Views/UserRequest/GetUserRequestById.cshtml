@@ -10,16 +10,16 @@
 
 <p>@Html.TextAreaFor(model => model.requestText, new { @class = "form-control", @readonly = "readonly", @cols = "80", @rows = "8" }) </p>
 
-    @using (Html.BeginForm("Like", "UserRequest", new { id = Model.ID }))
-    {
-        <button type="submit" value="Like" class="btn btn-primary btn-sm">
-            Gefa atkvæði
-            <i class="glyphicon glyphicon-heart"></i>
-        </button>
-    }
+@using (Html.BeginForm("Like", "UserRequest", new { id = Model.ID }))
+{
+    <button type="submit" value="Like" class="btn btn-primary btn-sm">
+        Gefa atkvæði
+        <i class="glyphicon glyphicon-heart"></i>
+    </button>
+}
 
 <p><span class="bolding">Sett inn: </span>@Model.requestTime</p>
 <p><span class="bolding">Notandi: </span>@Model.userName</p>
 
 
-    <h4>Fjöldi atkvæða: @Model.likes</h4>
+<h4>Fjöldi atkvæða: @Model.likes</h4>
